@@ -1,0 +1,8 @@
+{
+ "generated_at": null,
+ "source": "the-odds-api.com",
+ "note": "Placeholder. No live odds have been fetched yet. Set the ODDS_API_KEY repository secret and run the 'Refresh odds' workflow. This file is overwritten by scripts/fetch_odds.py — it deliberately contains no games rather than sample data, so the app can never display a bet that does not exist.",
+ "credits": {"used": null, "remaining": null},
+ "config": {},
+ "games": []
+}

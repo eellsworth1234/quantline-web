@@ -21,8 +21,9 @@
   body{font-size:13px;line-height:1.45;overflow-x:hidden}
   .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
   button{font-family:inherit}
+  code{font-family:var(--mono);font-size:.92em;background:#0a0d11;border:1px solid var(--line);
+    border-radius:3px;padding:1px 5px;color:var(--txt-dim)}
 
-  /* ---------- top bar ---------- */
   .topbar{display:flex;align-items:center;gap:13px;padding:0 18px;height:52px;
     border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0e1014,#0b0d10);
     position:sticky;top:0;z-index:60}
@@ -30,12 +31,19 @@
   .brand b{font-size:15px;letter-spacing:.14em;font-weight:650}
   .brand .q{color:var(--accent)}
   .brand span{font-family:var(--mono);font-size:10px;color:var(--txt-faint);letter-spacing:.08em}
-  .simbadge{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--accent);
-    background:var(--accent-soft);border:1px solid rgba(242,181,68,.28);border-radius:3px;
-    padding:3px 7px;white-space:nowrap}
+  .feed{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.09em;border-radius:3px;padding:3px 8px;white-space:nowrap}
+  .feed .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .feed.live{color:var(--pos);background:var(--pos-soft);border:1px solid rgba(61,220,151,.3)}
+  .feed.live .dot{background:var(--pos);animation:pulse 2.4s ease-in-out infinite}
+  .feed.stale{color:var(--accent);background:var(--accent-soft);border:1px solid rgba(242,181,68,.3)}
+  .feed.stale .dot{background:var(--accent)}
+  .feed.off{color:var(--txt-faint);background:#14171c;border:1px solid var(--line)}
+  .feed.off .dot{background:var(--txt-faint)}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
   .topbar .spacer{flex:1}
   .helpbtn{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--txt-dim);
-    background:#14171c;border:1px solid var(--line);border-radius:5px;padding:6px 11px;cursor:pointer;transition:.15s;white-space:nowrap}
+    background:#14171c;border:1px solid var(--line);border-radius:5px;padding:6px 11px;cursor:pointer;transition:.15s}
   .helpbtn:hover{border-color:#39404b;color:var(--txt)}
   .helpbtn b{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;
     border-radius:50%;background:var(--accent);color:#0a0b0d;font-size:10px;font-weight:700}
@@ -45,7 +53,6 @@
   .seg button:hover{color:var(--txt-dim)}
   .seg button.on{background:var(--accent);color:#0a0b0d;font-weight:650}
 
-  /* ---------- slate header ---------- */
   .slatehead{padding:22px 18px 18px;border-bottom:1px solid var(--line);
     background:linear-gradient(180deg,rgba(91,157,217,.05),transparent)}
   .slatehead h1{font-size:22px;font-weight:650;letter-spacing:-.015em;margin-bottom:6px}
@@ -58,9 +65,8 @@
   .tal b{font-family:var(--mono);font-size:15px;font-weight:650;color:var(--txt)}
   .tal.s b{color:var(--pos)} .tal.m b{color:var(--accent)} .tal.x b{color:var(--txt-faint)}
 
-  /* ---------- controls ---------- */
   .controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:11px 18px;
-    border-bottom:1px solid var(--line);background:var(--panel-2);position:sticky;top:52px;z-index:50}
+    border-bottom:1px solid var(--line);background:var(--panel-2)}
   .tabs{display:flex;gap:2px}
   .tabs button{font-family:var(--mono);font-size:11px;letter-spacing:.06em;background:transparent;
     border:1px solid transparent;border-radius:4px;color:var(--txt-faint);padding:5px 11px;cursor:pointer;transition:.15s}
@@ -80,32 +86,26 @@
   .toggle.on .sw{background:rgba(61,220,151,.25);border-color:rgba(61,220,151,.5)}
   .toggle.on .sw i{left:16px;background:var(--pos)}
 
-  /* ---------- slate grid ---------- */
   .slate{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:14px;padding:18px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:9px;overflow:hidden;
     display:flex;flex-direction:column;transition:border-color .15s}
-  .card.rec{border-color:#28323a}
-  .card.rec:hover{border-color:#38444e}
+  .card.rec{border-color:#28323a} .card.rec:hover{border-color:#38444e}
   .card.skip{opacity:.66}
-
   .chead{display:flex;align-items:center;gap:9px;padding:11px 15px;border-bottom:1px solid var(--line-soft);
     font-family:var(--mono);font-size:10px;color:var(--txt-faint);letter-spacing:.06em}
   .chead .lg{border:1px solid var(--line);border-radius:2px;padding:1px 5px;color:var(--txt-dim)}
-  .chead .vn{margin-left:auto;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
+  .chead .cd{margin-left:auto;text-align:right;white-space:nowrap}
+  .chead .cd.soon{color:var(--accent)}
   .teams{padding:12px 15px 4px}
   .team{display:flex;align-items:center;gap:10px;padding:6px 8px;margin:0 -8px;border-radius:5px}
   .team.pick{background:var(--pos-soft)}
   .team .nm{font-size:14.5px;font-weight:600;letter-spacing:-.01em}
   .team.pick .nm{color:var(--pos)}
-  .team .rec{font-family:var(--mono);font-size:10.5px;color:var(--txt-faint)}
   .team .ml{margin-left:auto;font-family:var(--mono);font-size:13px;color:var(--txt-dim);font-variant-numeric:tabular-nums}
   .team.pick .ml{color:var(--pos);font-weight:600}
   .at{font-family:var(--mono);font-size:9.5px;color:var(--txt-faint);letter-spacing:.1em;padding:1px 8px}
-  .lineup{padding:8px 15px 13px;font-size:11.5px;color:var(--txt-faint);line-height:1.5;
-    border-bottom:1px solid var(--line-soft)}
+  .books{padding:8px 15px 13px;font-size:11.5px;color:var(--txt-faint);border-bottom:1px solid var(--line-soft)}
 
-  /* recommendation block */
   .rblock{padding:14px 15px 15px;flex:1;display:flex;flex-direction:column}
   .rtop{display:flex;align-items:center;gap:9px;margin-bottom:10px}
   .rtag{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9.5px;
@@ -117,21 +117,17 @@
   .pill.s{color:var(--pos);background:var(--pos-soft);border:1px solid rgba(61,220,151,.3)}
   .pill.m{color:var(--accent);background:var(--accent-soft);border:1px solid rgba(242,181,68,.3)}
   .pill.l{color:var(--txt-dim);background:#171b21;border:1px solid var(--line)}
-
   .rbet{font-size:19px;font-weight:650;letter-spacing:-.02em;line-height:1.3;margin-bottom:3px}
   .rkind{font-size:11.5px;color:var(--txt-faint);margin-bottom:11px}
   .rprice{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:6px;
-    background:var(--panel-3);border:1px solid var(--line);margin-bottom:12px}
-  .rprice .odds{font-family:var(--mono);font-size:17px;font-weight:650;color:var(--txt);font-variant-numeric:tabular-nums}
+    background:var(--panel-3);border:1px solid var(--line);margin-bottom:12px;flex-wrap:wrap}
+  .rprice .odds{font-family:var(--mono);font-size:17px;font-weight:650;font-variant-numeric:tabular-nums}
   .rprice .at2{font-size:12px;color:var(--txt-dim)}
   .rprice .bk{font-size:12.5px;font-weight:600}
   .rprice .best{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.09em;
-    color:var(--txt-faint);border:1px solid var(--line);border-radius:2px;padding:2px 6px}
-
+    color:var(--txt-faint);border:1px solid var(--line);border-radius:2px;padding:2px 6px;white-space:nowrap}
   .rwhy{font-size:12.5px;line-height:1.62;color:var(--txt-dim);margin-bottom:13px}
-  .rwhy b{color:var(--txt);font-weight:600}
-  .rwhy .g{color:var(--pos);font-weight:600}
-
+  .rwhy b{color:var(--txt);font-weight:600} .rwhy .g{color:var(--pos);font-weight:600}
   .rfoot{display:flex;align-items:stretch;gap:10px;margin-top:auto}
   .rstat{flex:1;background:var(--panel-3);border:1px solid var(--line);border-radius:6px;padding:9px 11px}
   .rstat .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.11em;color:var(--txt-faint);text-transform:uppercase}
@@ -140,7 +136,6 @@
   .mathbtn{width:100%;margin-top:10px;background:transparent;border:1px solid var(--line);
     border-radius:5px;color:var(--txt-faint);font-size:11.5px;padding:8px;cursor:pointer;transition:.15s}
   .mathbtn:hover{border-color:#39404b;color:var(--txt-dim)}
-
   .math{margin-top:11px;padding:13px;border-radius:6px;background:#0a0d11;border:1px solid var(--line)}
   .math .mt{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--txt-faint);
     text-transform:uppercase;margin-bottom:10px}
@@ -157,7 +152,6 @@
     border:1px solid rgba(255,107,107,.18);font-size:11.5px;line-height:1.55;color:var(--txt-dim)}
   .caution b{color:#ffb3b3;font-weight:600}
 
-  /* no-bet block */
   .skipblock{padding:16px 15px;flex:1;display:flex;flex-direction:column;justify-content:center}
   .skiptag{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;
     letter-spacing:.11em;font-weight:650;color:var(--txt-faint);margin-bottom:8px}
@@ -166,7 +160,6 @@
   .skipblock h4{font-size:15px;font-weight:600;margin-bottom:6px}
   .skipblock p{font-size:12.5px;line-height:1.6;color:var(--txt-faint)}
 
-  /* locked */
   .lockblock{padding:22px 15px;flex:1;display:flex;flex-direction:column;align-items:center;
     justify-content:center;text-align:center;background:linear-gradient(180deg,rgba(242,181,68,.05),transparent)}
   .lockblock .ico{font-size:19px;margin-bottom:9px;opacity:.7}
@@ -176,27 +169,35 @@
     color:#0a0b0d;border:0;border-radius:4px;padding:9px 18px;cursor:pointer;transition:.15s}
   .btn-a:hover{filter:brightness(1.1)}
 
-  /* ---------- board (terminal) view ---------- */
-  .boardwrap{padding:0}
+  /* empty / setup states */
+  .state{max-width:660px;margin:44px auto;padding:0 18px;text-align:left}
+  .state .ic{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    font-size:18px;margin-bottom:15px;background:var(--accent-soft);border:1px solid rgba(242,181,68,.3)}
+  .state h2{font-size:19px;font-weight:650;margin-bottom:9px;letter-spacing:-.01em}
+  .state p{font-size:13.5px;line-height:1.68;color:var(--txt-dim);margin-bottom:12px}
+  .state p b{color:var(--txt);font-weight:600}
+  .state ol{margin:16px 0 16px 20px;font-size:13px;line-height:1.85;color:var(--txt-dim)}
+  .state ol li{margin-bottom:9px}
+  .state .why{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:14px 16px;
+    font-size:12.5px;line-height:1.65;color:var(--txt-faint);margin-top:18px}
+  .state .why b{color:var(--txt-dim)}
+
+  .boardwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
   table{width:100%;border-collapse:collapse;min-width:1040px}
   thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;font-weight:500;color:var(--txt-faint);
     text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel);
-    cursor:pointer;user-select:none;white-space:nowrap;position:sticky;top:104px;z-index:20}
-  thead th:hover{color:var(--txt-dim)}
-  thead th.r{text-align:right}
+    cursor:pointer;user-select:none;white-space:nowrap}
+  thead th:hover{color:var(--txt-dim)} thead th.r{text-align:right}
   thead th .ar{color:var(--accent);margin-left:4px}
   tbody td{padding:10px 12px;border-bottom:1px solid var(--line-soft);white-space:nowrap}
-  tbody tr:hover{background:#101318}
-  td.r{text-align:right}
+  tbody tr:hover{background:#101318} td.r{text-align:right}
   .evc{display:flex;align-items:center;justify-content:flex-end;gap:7px}
   .evbar{width:34px;height:3px;background:#1c2027;border-radius:2px;overflow:hidden;flex-shrink:0}
   .evbar i{display:block;height:100%;background:var(--pos)}
   .pos{color:var(--pos)} .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
   .dim{color:var(--txt-dim)} .faint{color:var(--txt-faint)}
   tr.lockrow .blur{filter:blur(4.5px);opacity:.5;user-select:none}
-  .empty{padding:52px 18px;text-align:center;color:var(--txt-faint);font-size:13px}
 
-  /* ---------- modal ---------- */
   .scrim{position:fixed;inset:0;background:rgba(4,5,7,.82);backdrop-filter:blur(3px);z-index:100;
     display:flex;align-items:center;justify-content:center;padding:20px}
   .scrim[hidden]{display:none}
@@ -228,7 +229,6 @@
   dl.gloss dd{font-size:12.5px;line-height:1.62;color:var(--txt-dim)}
   dl.gloss dd .ex2{display:block;margin-top:6px;font-size:12px;color:var(--txt-faint)}
 
-  /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line);background:var(--panel);padding:20px 18px 34px;margin-top:8px}
   .disc{max-width:900px;font-size:11px;line-height:1.6;color:var(--txt-faint)}
   .disc strong{color:var(--txt-dim);font-weight:600}
@@ -238,30 +238,20 @@
     letter-spacing:.05em;cursor:pointer;padding:0}
   .footrow button:hover{color:var(--txt-dim)}
 
-  @media (max-width:1120px){
-    .boardwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-    thead th{position:static}
-  }
   @media (max-width:860px){
-    .topbar{gap:9px;padding:0 12px}
-    .helpbtn span{display:none} .helpbtn{padding:6px 9px}
-    .controls{padding:10px 12px;gap:12px;position:static}
+    .topbar{gap:9px;padding:0 12px} .helpbtn span{display:none} .helpbtn{padding:6px 9px}
+    .controls{padding:10px 12px;gap:12px}
     .slate{grid-template-columns:1fr;padding:12px;gap:12px}
-    .slatehead{padding:18px 12px 15px}
-    .slatehead h1{font-size:19px}
+    .slatehead{padding:18px 12px 15px} .slatehead h1{font-size:19px}
   }
-  @media (max-width:520px){
-    .brand span{display:none}
-    .simbadge{font-size:8.5px;padding:2px 5px}
-    .rbet{font-size:17px}
-  }
+  @media (max-width:520px){ .brand span{display:none} .rbet{font-size:17px} }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="brand"><b><span class="q">QUANT</span>LINE</b><span>v0.2</span></div>
-  <div class="simbadge">SIMULATED FEED &middot; NOT LIVE ODDS</div>
+  <div class="brand"><b><span class="q">QUANT</span>LINE</b><span>v0.3</span></div>
+  <div class="feed off" id="feed"><span class="dot"></span><span id="feedTxt">CHECKING FEED</span></div>
   <div class="spacer"></div>
   <button class="helpbtn" id="btnHelp"><b>?</b><span>How this works</span></button>
   <div class="seg">
@@ -274,13 +264,13 @@
   </div>
 </div>
 
-<div class="slatehead">
+<div class="slatehead" id="slatehead" hidden>
   <h1 id="slateTitle">Today's games</h1>
   <p class="sum" id="slateSum"></p>
   <div class="tally" id="tally"></div>
 </div>
 
-<div class="controls">
+<div class="controls" id="controls" hidden>
   <div class="tabs" id="tabs"></div>
   <div class="ctl"><label>Bankroll</label><input class="bank num" id="bank" type="number" min="10" step="10" value="500" /></div>
   <div class="toggle" id="onlyRec"><div class="sw"><i></i></div><span>Only show games worth betting</span></div>
@@ -291,12 +281,12 @@
 <footer>
   <div class="disc">
     <strong>QuantLine is data utility software for educational tracking purposes only. It does not accept, place, or broker wagers, and it does not handle customer funds.</strong>
-    All figures shown are model outputs derived from publicly posted market prices. Expected value and Kelly fractions are statistical estimates, not predictions of outcome, and carry no guarantee of profit. Sports wagering is restricted or prohibited in many jurisdictions and is limited to adults of legal age where permitted &mdash; you are responsible for compliance with the laws that apply to you. Past model performance does not indicate future results.
+    All figures shown are derived from publicly posted market prices. Expected value and Kelly fractions are statistical estimates, not predictions of outcome, and carry no guarantee of profit. Sports wagering is restricted or prohibited in many jurisdictions and is limited to adults of legal age where permitted &mdash; you are responsible for compliance with the laws that apply to you. Past performance does not indicate future results.
     <br /><br />
     If gambling is affecting your life, help is available 24/7 at <strong>1-800-GAMBLER</strong>.
   </div>
   <div class="footrow">
-    <span>QUANTLINE &middot; STATIC PREVIEW BUILD</span>
+    <span id="footStamp">QUANTLINE</span>
     <button id="btnGloss">GLOSSARY</button>
     <span>LEDGER &middot; METHODOLOGY &middot; TERMS</span>
   </div>
@@ -306,408 +296,353 @@
 
 <script>
 /* ============================================================
-   QuantLine v0.2 — the slate
+   QuantLine v0.3 — live feed only
 
-   The board is no longer the product. The product is: here are
-   today's games, here is the one worth betting, here is what to
-   bet and how much, and here is why. A newcomer should be able
-   to act on this screen without learning anything first.
+   There is no sample data in this file, by design. Every game and
+   every price comes from data/slate.json, which is written by
+   scripts/fetch_odds.py from The Odds API. If that feed has not
+   run, the app says so and shows nothing. It must never be
+   possible for this page to display a bet that does not exist.
 
-   The dense terminal board still exists behind a toggle for
-   people who want to read the raw numbers.
+   Probabilities are NOT model output. They are the de-vigged
+   median consensus across the books pricing the same outcome,
+   excluding the book being evaluated. An "edge" here means one
+   book is paying better than the market's own average — which is
+   a real, checkable claim rather than an opinion.
    ============================================================ */
 
-/* ---------- engine (reference implementation for Component #2) ---------- */
-const toDecimal   = a => a > 0 ? (a / 100) + 1 : (100 / -a) + 1;
-const impliedProb = a => a > 0 ? 100 / (a + 100) : -a / (-a + 100);
-const evPerUnit   = (p, a) => p * toDecimal(a) - 1;
-const kellyFull   = (p, a) => { const b = toDecimal(a) - 1; return (p * b - (1 - p)) / b; };
+const KELLY_NOTE = 'quarter Kelly';
+let FEED = null;        // the parsed slate.json
+let SLATE = [];         // games that have not started yet
+let LOAD_ERR = null;
 
-const KELLY_FRACTION = 0.25;
-const BET_FLOOR      = 0.015;  // below this we tell you to skip the game
-const ALERT_THRESHOLD = 0.035; // Component #3 pushes at or above this
-
-/* Confidence is a plain-language wrapper around expected value.
-   Nobody new knows what "+4.2% EV" feels like; everybody knows
-   what "SOLID" versus "LEAN" means. */
-function confidence(ev) {
-  if (ev >= 0.05)  return {k:'STRONG', c:'s'};
-  if (ev >= 0.035) return {k:'SOLID',  c:'m'};
-  if (ev >= BET_FLOOR) return {k:'LEAN', c:'l'};
-  return null;
-}
-
-/* ---------- today's slate ----------
-   modelProb is the only assumed input per bet. Everything else
-   is derived at runtime. Player names are fictional. */
-const GAMES = [
-  {
-    id:'CHCLAD', sport:'MLB', lg:'MLB', time:'7:10 PM PT', venue:'Dodger Stadium',
-    away:{n:'Chicago Cubs', rec:'58-51', ml:+142}, home:{n:'Los Angeles Dodgers', rec:'64-45', ml:-168},
-    lineup:'RHP T. Vasquez (8-6, 3.41) vs LHP M. Reyes (11-4, 2.88)',
-    bets:[
-      {market:'Moneyline', kind:'Who wins the game', plain:'Cubs to win', side:'away',
-       sel:'Chicago Cubs', book:'FanDuel', odds:+142, modelProb:0.4430,
-       why:'Chicago has the best bullpen ERA in baseball over the last three weeks, and the market is still pricing them off a June slump. Los Angeles is also resting two regulars in the second game of a long homestand.'},
-      {market:'Total 8.5', kind:'Combined score', plain:'Under 8.5 total runs',
-       sel:'Under 8.5', book:'BetMGM', odds:-104, modelProb:0.5250,
-       why:'Both starters are averaging over six innings, and the marine layer at Dodger Stadium has suppressed scoring in evening games all season.'},
-    ],
-  },
-  {
-    id:'HOUSEA', sport:'MLB', lg:'MLB', time:'7:40 PM PT', venue:'T-Mobile Park',
-    away:{n:'Houston Astros', rec:'61-48', ml:-118}, home:{n:'Seattle Mariners', rec:'56-53', ml:+100},
-    lineup:'LHP A. Brennan (9-5, 3.02) vs RHP S. Nakamura (7-8, 3.77)',
-    bets:[
-      {market:'Total 8.5', kind:'Combined score', plain:'Under 8.5 total runs',
-       sel:'Under 8.5', book:'DraftKings', odds:-108, modelProb:0.5490,
-       why:'T-Mobile Park is the most run-suppressing venue in the league, and both offenses rank in the bottom third against left-handed pitching. The total opened at 9 and is still drifting down.'},
-    ],
-  },
-  {
-    id:'BALTOR', sport:'MLB', lg:'MLB', time:'4:07 PM PT', venue:'Rogers Centre',
-    away:{n:'Baltimore Orioles', rec:'49-60', ml:+245}, home:{n:'Toronto Blue Jays', rec:'63-46', ml:-290},
-    lineup:'RHP L. Ferreira (5-9, 4.55) vs RHP K. Osei (12-3, 2.64)',
-    bets:[
-      {market:'Run Line +1.5', kind:'Margin of victory', plain:'Baltimore to lose by 1, or win', side:'away',
-       sel:'Baltimore +1.5', book:'ESPN BET', odds:+215, modelProb:0.3320,
-       why:'The market has overcorrected on Toronto since the trade deadline. Baltimore has gone to extra innings or lost by one in five of its last eight road games, which is exactly the shape this bet needs.'},
-    ],
-  },
-  {
-    id:'ATLPHI', sport:'MLB', lg:'MLB', time:'4:05 PM PT', venue:'Citizens Bank Park',
-    away:{n:'Atlanta Braves', rec:'59-50', ml:+108}, home:{n:'Philadelphia Phillies', rec:'62-47', ml:-126},
-    lineup:'RHP T. Vasquez (10-4, 2.91) vs LHP D. Moreau (8-7, 3.98)',
-    bets:[
-      {market:'Strikeouts', kind:'One player’s stat line', plain:'Vasquez to record 7+ strikeouts',
-       sel:'T. Vasquez o6.5 K', book:'Caesars', odds:-145, modelProb:0.6180,
-       why:'Vasquez has cleared this number in seven straight starts. Philadelphia strikes out at the fourth-highest rate in the league against right-handers, and this line has not moved to reflect either fact.'},
-    ],
-  },
-  {
-    id:'DETNYG', sport:'NFL', lg:'NFL PRE', time:'4:00 PM PT', venue:'MetLife Stadium',
-    away:{n:'Detroit Lions', rec:'0-0', ml:-155}, home:{n:'New York Giants', rec:'0-0', ml:+130},
-    lineup:'Preseason Week 1 · Starters expected to play one series',
-    bets:[
-      {market:'Spread -3.5', kind:'Margin of victory', plain:'Detroit to win by 4+', side:'away',
-       sel:'Detroit -3.5', book:'FanDuel', odds:+180, modelProb:0.3720,
-       why:'Detroit is carrying the deeper second and third string, which is what actually decides preseason games. Public money is on the home side, pushing this price out past where the depth chart says it belongs.'},
-    ],
-  },
-  {
-    id:'LVNY', sport:'WNBA', lg:'WNBA', time:'4:00 PM PT', venue:'Barclays Center',
-    away:{n:'Las Vegas Aces', rec:'21-8', ml:-135}, home:{n:'New York Liberty', rec:'22-7', ml:+114},
-    lineup:'M. Calderón (21.4 PPG) vs A. Whitfield (19.8 PPG)',
-    bets:[
-      {market:'Player Points', kind:'One player’s stat line', plain:'Calderón to score 19+ points',
-       sel:'M. Calderón o18.5', book:'BetMGM', odds:+105, modelProb:0.5060,
-       why:'New York plays at the second-fastest pace in the league, and Calderón has averaged four extra shot attempts in games with a projected total this high. The number was set before her usage spiked.'},
-    ],
-  },
-  {
-    id:'SDSF', sport:'MLB', lg:'MLB', time:'6:45 PM PT', venue:'Oracle Park',
-    away:{n:'San Diego Padres', rec:'57-52', ml:-112}, home:{n:'San Francisco Giants', rec:'54-55', ml:-104},
-    lineup:'RHP J. Oduya (.288, 18 HR) leads the Padres order',
-    bets:[
-      {market:'Total Bases', kind:'One player’s stat line', plain:'Oduya to get 2+ total bases',
-       sel:'J. Oduya o1.5 TB', book:'Fanatics', odds:-125, modelProb:0.5750,
-       why:'Oduya has hit safely in eleven straight and draws a starter who has given up the third-most extra-base hits in the league this year.'},
-    ],
-  },
-  {
-    id:'SEAMIN', sport:'WNBA', lg:'WNBA', time:'5:00 PM PT', venue:'Target Center',
-    away:{n:'Seattle Storm', rec:'17-12', ml:+128}, home:{n:'Minnesota Lynx', rec:'20-9', ml:-152},
-    lineup:'R. Kimura (9.1 RPG) vs T. Osborne (8.4 RPG)',
-    bets:[
-      {market:'Rebounds', kind:'One player’s stat line', plain:'Kimura to grab 8+ rebounds',
-       sel:'R. Kimura o7.5 REB', book:'DraftKings', odds:-110, modelProb:0.5390,
-       why:'Minnesota’s starting center is listed as questionable, which would push Kimura into a much larger share of the defensive glass than this number assumes.'},
-    ],
-  },
-  {
-    id:'KCJAX', sport:'NFL', lg:'NFL PRE', time:'1:00 PM PT', venue:'EverBank Stadium',
-    away:{n:'Kansas City Chiefs', rec:'0-0', ml:+118}, home:{n:'Jacksonville Jaguars', rec:'0-0', ml:-140},
-    lineup:'Preseason Week 1 · Backup quarterbacks expected to play into the fourth',
-    bets:[
-      {market:'Pass Yards', kind:'One player’s stat line', plain:'Whitlock to throw for 125+ yards',
-       sel:'D. Whitlock o124.5', book:'Caesars', odds:+260, modelProb:0.2850,
-       why:'Whitlock is competing for the QB2 job and is expected to take most of the second-half snaps. The number is priced as though he plays a single quarter.'},
-    ],
-  },
-  {
-    id:'CLEDET', sport:'MLB', lg:'MLB', time:'4:10 PM PT', venue:'Comerica Park',
-    away:{n:'Cleveland Guardians', rec:'55-54', ml:+120}, home:{n:'Detroit Tigers', rec:'58-51', ml:-142},
-    lineup:'RHP P. Nyquist (7-7, 3.88) vs RHP C. Boudreau (9-6, 3.55)',
-    bets:[
-      {market:'Moneyline', kind:'Who wins the game', plain:'Cleveland to win',
-       sel:'Cleveland Guardians', book:'BetMGM', odds:+120, modelProb:0.4550,
-       why:'Our model and the market land within half a point of each other here.'},
-    ],
-  },
-  {
-    id:'BOSNYY', sport:'MLB', lg:'MLB', time:'4:05 PM PT', venue:'Yankee Stadium',
-    away:{n:'Boston Red Sox', rec:'56-53', ml:+158}, home:{n:'New York Yankees', rec:'65-44', ml:-190},
-    lineup:'LHP G. Whitaker (6-8, 4.22) vs RHP E. Solano (13-3, 2.41)',
-    bets:[
-      {market:'Moneyline', kind:'Who wins the game', plain:'Yankees to win',
-       sel:'New York Yankees', book:'ESPN BET', odds:-190, modelProb:0.6600,
-       why:'Sharp money has already moved this line to roughly where our model has it.'},
-    ],
-  },
-  {
-    id:'CONPHX', sport:'WNBA', lg:'WNBA', time:'7:00 PM PT', venue:'Footprint Center',
-    away:{n:'Connecticut Sun', rec:'15-14', ml:+136}, home:{n:'Phoenix Mercury', rec:'18-11', ml:-160},
-    lineup:'Both teams on the second night of a back-to-back',
-    bets:[
-      {market:'Total 164.5', kind:'Combined score', plain:'Over 164.5 combined points',
-       sel:'Over 164.5', book:'Fanatics', odds:-102, modelProb:0.5100,
-       why:'Fatigue cuts both ways here and the total is priced accordingly.'},
-    ],
-  },
-];
-
-/* derive every number, then pick each game's best bet */
-const SLATE = GAMES.map(g => {
-  const bets = g.bets.map(b => {
-    const implied = impliedProb(b.odds);
-    const ev      = evPerUnit(b.modelProb, b.odds);
-    return {...b, gameId:g.id, game:g.away.n + ' @ ' + g.home.n, sport:g.sport, lg:g.lg, time:g.time,
-            implied, edge:b.modelProb - implied, ev, kelly:kellyFull(b.modelProb, b.odds) * KELLY_FRACTION};
-  }).sort((x, y) => y.ev - x.ev);
-  const best = bets[0];
-  return {...g, bets, best, conf:confidence(best.ev)};
-});
-
-const ALL_BETS = SLATE.flatMap(g => g.bets).sort((a, b) => b.ev - a.ev);
-const SPORTS = ['ALL', ...new Set(SLATE.map(g => g.sport))];
-
-const state = {sport:'ALL', bank:500, pro:false, view:'slate', onlyRec:false, open:new Set(), sort:'ev', dir:-1};
+const state = {sport:'ALL', bank:500, pro:false, view:'slate', onlyRec:false,
+               open:new Set(), sort:'ev', dir:-1};
 
 /* ---------- formatters ---------- */
 const pct   = (v, d = 1) => (v * 100).toFixed(d) + '%';
 const spct  = (v, d = 2) => (v >= 0 ? '+' : '') + (v * 100).toFixed(d) + '%';
-const am    = a => (a > 0 ? '+' : '') + a;
-const money = v => '$' + v.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+const am    = a => a === null || a === undefined ? '—' : (a > 0 ? '+' : '') + a;
+const money = v => '$' + (v || 0).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
 const inN   = p => Math.round(p * 100);
+
+function ago(iso) {
+  if (!iso) return null;
+  const mins = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return mins + ' min ago';
+  const h = Math.floor(mins / 60);
+  if (h < 24) return h + (h === 1 ? ' hour ago' : ' hours ago');
+  const d = Math.floor(h / 24);
+  return d + (d === 1 ? ' day ago' : ' days ago');
+}
+
+function startsIn(iso) {
+  const mins = Math.floor((new Date(iso).getTime() - Date.now()) / 60000);
+  if (mins < 60) return {t:'starts in ' + mins + ' min', soon:true};
+  const h = Math.floor(mins / 60);
+  if (h < 24) return {t:'starts in ' + h + 'h ' + (mins % 60) + 'm', soon:h < 3};
+  return {t:new Date(iso).toLocaleString([], {weekday:'short', hour:'numeric', minute:'2-digit'}), soon:false};
+}
+
+function localTime(iso) {
+  return new Date(iso).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+}
+
+/* ---------- load ---------- */
+async function load() {
+  try {
+    const r = await fetch('data/slate.json?t=' + Date.now(), {cache:'no-store'});
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    FEED = await r.json();
+    // Second line of defence: even if the JSON is stale, never render a game
+    // that has already started.
+    const now = Date.now();
+    SLATE = (FEED.games || []).filter(g => new Date(g.commence_time).getTime() > now);
+  } catch (e) {
+    LOAD_ERR = e.message;
+  }
+  renderFeedBadge();
+  render();
+}
+
+function renderFeedBadge() {
+  const el = document.getElementById('feed'), txt = document.getElementById('feedTxt');
+  const stamp = FEED && FEED.generated_at;
+  if (LOAD_ERR || !stamp) {
+    el.className = 'feed off'; txt.textContent = 'NO FEED';
+  } else {
+    const hrs = (Date.now() - new Date(stamp).getTime()) / 3.6e6;
+    el.className = 'feed ' + (hrs > 12 ? 'stale' : 'live');
+    txt.textContent = (hrs > 12 ? 'STALE · ' : 'LIVE · ') + ago(stamp).toUpperCase();
+  }
+  document.getElementById('footStamp').textContent =
+    stamp ? 'ODDS: THE ODDS API · ' + new Date(stamp).toUTCString() : 'QUANTLINE';
+}
+
+/* ---------- filtering ---------- */
+function sports() { return ['ALL', ...new Set(SLATE.map(g => g.sport))]; }
 
 function games() {
   let g = SLATE.filter(x => state.sport === 'ALL' || x.sport === state.sport);
-  if (state.onlyRec) g = g.filter(x => x.conf);
-  // recommendations first, strongest at the top; skips fall to the bottom
-  return g.sort((a, b) => (b.conf ? b.best.ev : -1) - (a.conf ? a.best.ev : -1));
+  if (state.onlyRec) g = g.filter(x => x.confidence);
+  return g.sort((a, b) => (b.confidence ? b.best.ev : -1) - (a.confidence ? a.best.ev : -1));
 }
 
-/* ---------- slate header ---------- */
+function allBets() {
+  return SLATE.flatMap(g => (g.bets || []).map(b => ({...b, game:g.away.name + ' @ ' + g.home.name, sport:g.sport})))
+              .sort((a, b) => b.ev - a.ev);
+}
+
+/* ---------- empty / setup states ---------- */
+function setupState() {
+  const noFeed = LOAD_ERR || !FEED || !FEED.generated_at;
+  document.getElementById('slatehead').hidden = true;
+  document.getElementById('controls').hidden = true;
+
+  if (noFeed) {
+    return '<div class="state"><div class="ic">&#9889;</div>' +
+      '<h2>The live odds feed has not run yet</h2>' +
+      '<p>There is <b>no sample data in this app</b>. Until the feed runs, there is nothing to show &mdash; ' +
+      'which is the correct behaviour. A betting tool that invents games when its data source is down is ' +
+      'worse than one that shows an empty screen.</p>' +
+      '<p>To bring it online:</p>' +
+      '<ol>' +
+        '<li>Get an API key at <b>the-odds-api.com</b> (the free tier is 500 credits/month).</li>' +
+        '<li>Add it to this repository as a secret named <code>ODDS_API_KEY</code>. ' +
+            'Settings → Secrets and variables → Actions → New repository secret.</li>' +
+        '<li>Run the <b>Refresh odds</b> workflow from the Actions tab.</li>' +
+      '</ol>' +
+      '<div class="why"><b>What the feed actually does.</b> It pulls every posted price across US books for ' +
+      'each upcoming game, strips the vig out of each book&rsquo;s numbers, takes the median across books to ' +
+      'get a consensus probability, then flags any single book paying better than that consensus. ' +
+      'No predictions, no proprietary model &mdash; just arithmetic on prices that are publicly posted right now.' +
+      (LOAD_ERR ? '<br><br><b>Loader error:</b> ' + LOAD_ERR : '') + '</div></div>';
+  }
+
+  return '<div class="state"><div class="ic">&#128338;</div>' +
+    '<h2>No games are currently open for betting</h2>' +
+    '<p>The feed ran <b>' + ago(FEED.generated_at) + '</b> and found no games starting within the next ' +
+    ((FEED.config && FEED.config.window_hours) || 36) + ' hours that have not already begun.</p>' +
+    '<p>This is normal between slates and overnight. Games already in progress are deliberately excluded &mdash; ' +
+    'the prices we track are pregame prices, and they stop being valid the moment a game starts.</p></div>';
+}
+
+/* ---------- header ---------- */
 function renderHead() {
   const g = SLATE.filter(x => state.sport === 'ALL' || x.sport === state.sport);
-  const rec  = g.filter(x => x.conf);
-  const strong = g.filter(x => x.conf && x.conf.c === 's').length;
-  const solid  = g.filter(x => x.conf && x.conf.c === 'm').length;
-  const lean   = g.filter(x => x.conf && x.conf.c === 'l').length;
-  const skip   = g.length - rec.length;
-  const top    = rec[0];
+  const rec = g.filter(x => x.confidence);
+  const n = c => g.filter(x => x.confidence && x.confidence.c === c).length;
+  const skip = g.length - rec.length;
+  const top = rec[0];
 
   document.getElementById('slateTitle').textContent =
-    state.view === 'board' ? 'All tracked prices' : 'Today’s games';
+    state.view === 'board' ? 'Every price we are tracking' : 'Games open for betting';
 
   document.getElementById('slateSum').innerHTML = rec.length
-    ? 'We looked at <b>' + g.length + ' games</b> and found <b>' + rec.length + ' worth betting</b>. ' +
-      'The strongest is <b class="g">' + top.best.plain + '</b> at <b>' + am(top.best.odds) + '</b> on ' + top.best.book +
-      '. The other <b>' + skip + '</b> are priced correctly &mdash; skip them.'
-    : 'No games on this slate have an edge worth betting. That is a normal result, and skipping is the correct move.';
+    ? 'We are tracking <b>' + g.length + ' upcoming games</b> and found <b>' + rec.length + ' worth betting</b>. ' +
+      'The strongest is <b class="g">' + top.best.plain + '</b> at <b>' + am(top.best.odds) + '</b> on ' +
+      top.best.book + '. The other <b>' + skip + '</b> are priced correctly &mdash; skip them.'
+    : 'We are tracking <b>' + g.length + ' upcoming games</b> and <b>none of them</b> is priced badly enough ' +
+      'to bet right now. That is a completely normal result, and sitting out is the correct move.';
 
   document.getElementById('tally').innerHTML =
-    '<div class="tal s"><b>' + strong + '</b> strong</div>' +
-    '<div class="tal m"><b>' + solid + '</b> solid</div>' +
-    '<div class="tal"><b>' + lean + '</b> lean</div>' +
+    '<div class="tal s"><b>' + n('s') + '</b> strong</div>' +
+    '<div class="tal m"><b>' + n('m') + '</b> solid</div>' +
+    '<div class="tal"><b>' + n('l') + '</b> lean</div>' +
     '<div class="tal x"><b>' + skip + '</b> skip</div>';
 }
 
-/* ---------- one game card ---------- */
+/* ---------- card ---------- */
 function card(g, locked) {
-  const b = g.best, isOpen = state.open.has(g.id);
-  const pickSide = b.side;
+  const b = g.best, isOpen = state.open.has(g.id), conf = g.confidence;
+  const pickName = b ? b.selection : null;
 
-  const team = (t, which) =>
-    '<div class="team ' + (g.conf && pickSide === which ? 'pick' : '') + '">' +
-      '<span class="nm">' + t.n + '</span><span class="rec">' + t.rec + '</span>' +
-      '<span class="ml">' + am(t.ml) + '</span></div>';
+  const team = t =>
+    '<div class="team ' + (conf && pickName === t.name ? 'pick' : '') + '">' +
+      '<span class="nm">' + t.name + '</span><span class="ml">' + am(t.price) + '</span></div>';
 
   let block;
-
   if (locked) {
-    block =
-      '<div class="lockblock"><div class="ico">&#128274;</div>' +
-      '<h4>' + g.conf.k.charAt(0) + g.conf.k.slice(1).toLowerCase() + ' pick available</h4>' +
+    block = '<div class="lockblock"><div class="ico">&#128274;</div>' +
+      '<h4>' + conf.k.charAt(0) + conf.k.slice(1).toLowerCase() + ' pick available</h4>' +
       '<p>QuantLine Pro shows the bet, the price, the reasoning and how much to stake.</p>' +
       '<button class="btn-a unlock">UNLOCK THIS PICK</button></div>';
-  } else if (!g.conf) {
-    block =
-      '<div class="skipblock">' +
-        '<div class="skiptag"><span class="x">&times;</span>NO BET</div>' +
-        '<h4>Nothing worth betting here</h4>' +
-        '<p>Our model and the sportsbooks agree on this game, so there is no advantage to take. ' +
-          'The best price we found is worth only ' + spct(b.ev) + ' &mdash; below the ' + pct(BET_FLOOR, 1) +
-          ' floor we require. Sitting out is a decision, and on most games it is the right one.</p>' +
-      '</div>';
+  } else if (!conf) {
+    const floor = (FEED.config && FEED.config.bet_floor) || 0.01;
+    block = '<div class="skipblock"><div class="skiptag"><span class="x">&times;</span>NO BET</div>' +
+      '<h4>Nothing worth betting here</h4>' +
+      '<p>Every book is within a normal margin of the market consensus on this game, so there is no ' +
+      'advantage to take.' + (b ? ' The best price we found is worth only ' + spct(b.ev) + ' — below the ' +
+      pct(floor, 1) + ' floor we require.' : '') +
+      ' Sitting out is a decision, and on most games it is the right one.</p></div>';
   } else {
     const stake = b.kelly * state.bank;
-    block =
-      '<div class="rblock">' +
-        '<div class="rtop"><div class="rtag"><span class="tick">&#10003;</span>RECOMMENDED BET</div>' +
-          '<span class="pill ' + g.conf.c + '">' + g.conf.k + '</span></div>' +
-        '<div class="rbet">' + b.plain + '</div>' +
-        '<div class="rkind">' + b.kind + ' &middot; ' + b.market + '</div>' +
-        '<div class="rprice"><span class="odds">' + am(b.odds) + '</span>' +
-          '<span class="at2">at</span><span class="bk">' + b.book + '</span>' +
-          '<span class="best">BEST OF 6 BOOKS</span></div>' +
-        '<div class="rwhy"><b>Why:</b> ' + b.why + ' Our model gives this <b class="g">' + inN(b.modelProb) +
-          ' chances in 100</b>; the price only implies <b>' + inN(b.implied) + ' in 100</b>.</div>' +
-        '<div class="rfoot">' +
-          '<div class="rstat"><div class="l">Bet this much</div><div class="v a">' + money(stake) + '</div></div>' +
-          '<div class="rstat"><div class="l">Expected return</div><div class="v p">' + spct(b.ev) + '</div></div>' +
-        '</div>' +
-        '<button class="mathbtn">' + (isOpen ? 'Hide the math' : 'Show me the math') + '</button>' +
-        (isOpen ? mathBlock(b) : '') +
-      '</div>';
+    block = '<div class="rblock">' +
+      '<div class="rtop"><div class="rtag"><span class="tick">&#10003;</span>RECOMMENDED BET</div>' +
+        '<span class="pill ' + conf.c + '">' + conf.k + '</span></div>' +
+      '<div class="rbet">' + b.plain + '</div>' +
+      '<div class="rkind">' + b.kind + ' &middot; ' + b.market_label + '</div>' +
+      '<div class="rprice"><span class="odds">' + am(b.odds) + '</span>' +
+        '<span class="at2">at</span><span class="bk">' + b.book + '</span>' +
+        '<span class="best">BEST OF ' + b.n_books + ' BOOKS</span></div>' +
+      '<div class="rwhy"><b>Why:</b> ' + b.why + ' That works out to <b class="g">' + inN(b.consensus_prob) +
+        ' chances in 100</b> against a price that only needs <b>' + inN(b.implied) + ' in 100</b> to break even.</div>' +
+      '<div class="rfoot">' +
+        '<div class="rstat"><div class="l">Bet this much</div><div class="v a">' + money(stake) + '</div></div>' +
+        '<div class="rstat"><div class="l">Expected return</div><div class="v p">' + spct(b.ev) + '</div></div>' +
+      '</div>' +
+      '<button class="mathbtn">' + (isOpen ? 'Hide the math' : 'Show me the math') + '</button>' +
+      (isOpen ? mathBlock(b) : '') + '</div>';
   }
 
-  return '<div class="card ' + (g.conf ? 'rec' : 'skip') + '" data-id="' + g.id + '">' +
-    '<div class="chead"><span class="lg">' + g.lg + '</span><span>' + g.time + '</span>' +
-      '<span class="vn">' + g.venue + '</span></div>' +
-    '<div class="teams">' + team(g.away, 'away') + '<div class="at">AT</div>' + team(g.home, 'home') + '</div>' +
-    '<div class="lineup">' + g.lineup + '</div>' + block + '</div>';
+  const si = startsIn(g.commence_time);
+  return '<div class="card ' + (conf ? 'rec' : 'skip') + '" data-id="' + g.id + '">' +
+    '<div class="chead"><span class="lg">' + g.sport + '</span><span>' + localTime(g.commence_time) + '</span>' +
+      '<span class="cd ' + (si.soon ? 'soon' : '') + '">' + si.t + '</span></div>' +
+    '<div class="teams">' + team(g.away) + '<div class="at">AT</div>' + team(g.home) + '</div>' +
+    '<div class="books">' + g.book_count + ' sportsbooks pricing this game</div>' + block + '</div>';
 }
 
 function mathBlock(b) {
-  const lose = 100 - inN(b.modelProb);
-  return '<div class="math">' +
-    '<div class="mt">Where the edge comes from</div>' +
-    '<div class="cmprow"><div class="cmphead"><span>' + b.book + '’s estimate</span><span>' + pct(b.implied) + '</span></div>' +
-      '<div class="track"><i class="b" style="width:' + (b.implied * 100).toFixed(1) + '%"></i></div></div>' +
-    '<div class="cmprow"><div class="cmphead"><span>QuantLine model</span><span class="pos">' + pct(b.modelProb) + '</span></div>' +
-      '<div class="track"><i class="m" style="width:' + (b.modelProb * 100).toFixed(1) + '%"></i></div></div>' +
-    '<div class="mnote">A price of <b>' + am(b.odds) + '</b> only pays off if this happens about <b>' + inN(b.implied) +
-      ' times in 100</b>. We think it happens <b>' + inN(b.modelProb) + '</b>. Staking <b>$100</b> here returns ' +
-      '<b>' + money(Math.abs(b.ev * 100)) + '</b> on average across many repeats &mdash; that is the ' + spct(b.ev) + '.</div>' +
-    '<div class="caution">This bet still <b>loses ' + lose + ' times out of 100</b>. Losing runs are normal even when ' +
-      'every bet has an edge, which is why the suggested stake is a small slice of your bankroll.</div>' +
-  '</div>';
+  const lose = 100 - inN(b.consensus_prob);
+  return '<div class="math"><div class="mt">Where the edge comes from</div>' +
+    '<div class="cmprow"><div class="cmphead"><span>' + b.book + '&rsquo;s price implies</span><span>' +
+      pct(b.implied) + '</span></div><div class="track"><i class="b" style="width:' +
+      (b.implied * 100).toFixed(1) + '%"></i></div></div>' +
+    '<div class="cmprow"><div class="cmphead"><span>Market consensus, vig removed</span><span class="pos">' +
+      pct(b.consensus_prob) + '</span></div><div class="track"><i class="m" style="width:' +
+      (b.consensus_prob * 100).toFixed(1) + '%"></i></div></div>' +
+    '<div class="mnote">A price of <b>' + am(b.odds) + '</b> only breaks even if this happens about <b>' +
+      inN(b.implied) + ' times in 100</b>. The other books collectively say it happens <b>' +
+      inN(b.consensus_prob) + '</b>. Staking <b>$100</b> returns <b>' + money(Math.abs(b.ev * 100)) +
+      '</b> on average across many repeats &mdash; that is the ' + spct(b.ev) + '. Suggested stake is ' +
+      KELLY_NOTE + ' at ' + (b.kelly * 100).toFixed(2) + '% of bankroll.</div>' +
+    '<div class="caution">This bet still <b>loses about ' + lose + ' times out of 100</b>. Losing runs are ' +
+      'normal even when every bet has an edge, which is why the stake is a small slice of your bankroll.</div></div>';
 }
 
-/* ---------- board (terminal) ---------- */
+/* ---------- board ---------- */
 const COLS = [
-  {k:'game', t:'GAME'}, {k:'market', t:'MARKET'}, {k:'sel', t:'SELECTION'}, {k:'book', t:'BOOK'},
-  {k:'odds', t:'ODDS', r:1}, {k:'modelProb', t:'MODEL', r:1}, {k:'implied', t:'IMPLIED', r:1},
+  {k:'game', t:'GAME'}, {k:'market_label', t:'MARKET'}, {k:'plain', t:'BET'}, {k:'book', t:'BOOK'},
+  {k:'odds', t:'BEST ODDS', r:1}, {k:'consensus_prob', t:'CONSENSUS', r:1}, {k:'implied', t:'IMPLIED', r:1},
   {k:'edge', t:'EDGE', r:1}, {k:'ev', t:'EV', r:1}, {k:'kelly', t:'¼ KELLY', r:1},
 ];
 
 function renderBoard() {
-  let rows = ALL_BETS.filter(b => state.sport === 'ALL' || b.sport === state.sport);
-  if (state.onlyRec) rows = rows.filter(b => b.ev >= BET_FLOOR);
-  rows = rows.slice().sort((a, x) => {
+  let rows = allBets().filter(b => state.sport === 'ALL' || b.sport === state.sport);
+  if (!rows.length) return '<div class="state"><h2>No priced edges right now</h2>' +
+    '<p>Every tracked outcome is within a normal margin of the consensus.</p></div>';
+
+  rows = rows.sort((a, x) => {
     const av = a[state.sort], xv = x[state.sort];
     return (typeof av === 'string' ? av.localeCompare(xv) : av - xv) * state.dir;
   });
-  if (!rows.length) return '<div class="empty">No prices match the current filters.</div>';
-
   const maxEv = Math.max(...rows.map(r => r.ev));
-  const head = COLS.map(c =>
-    '<th class="' + (c.r ? 'r' : '') + '" data-sort="' + c.k + '">' + c.t +
+  const head = COLS.map(c => '<th class="' + (c.r ? 'r' : '') + '" data-sort="' + c.k + '">' + c.t +
     (state.sort === c.k ? '<span class="ar">' + (state.dir === -1 ? '▼' : '▲') + '</span>' : '') + '</th>').join('');
-
   const body = rows.map((b, i) => {
     const locked = !state.pro && i > 0, bl = locked ? ' blur' : '';
     return '<tr class="' + (locked ? 'lockrow' : '') + '">' +
-      '<td>' + b.game + '</td><td class="mono faint">' + b.market + '</td>' +
-      '<td class="' + bl.trim() + '">' + b.sel + '</td><td class="mono dim' + bl + '">' + b.book + '</td>' +
+      '<td>' + b.game + '</td><td class="mono faint">' + b.market_label + '</td>' +
+      '<td class="' + bl.trim() + '">' + b.plain + '</td><td class="mono dim' + bl + '">' + b.book + '</td>' +
       '<td class="r mono' + bl + '">' + am(b.odds) + '</td>' +
-      '<td class="r mono' + bl + '">' + pct(b.modelProb) + '</td>' +
+      '<td class="r mono' + bl + '">' + pct(b.consensus_prob) + '</td>' +
       '<td class="r mono dim' + bl + '">' + pct(b.implied) + '</td>' +
       '<td class="r mono dim' + bl + '">' + spct(b.edge, 1) + '</td>' +
       '<td class="r">' + (locked ? '<span class="faint">&#128274;</span>' :
-        '<div class="evc"><div class="evbar"><i style="width:' + Math.max(0, Math.round(b.ev / maxEv * 100)) + '%"></i></div>' +
-        '<span class="mono pos" style="font-weight:600">' + spct(b.ev) + '</span></div>') + '</td>' +
+        '<div class="evc"><div class="evbar"><i style="width:' + Math.max(0, Math.round(b.ev / maxEv * 100)) +
+        '%"></i></div><span class="mono pos" style="font-weight:600">' + spct(b.ev) + '</span></div>') + '</td>' +
       '<td class="r mono dim' + bl + '">' + money(b.kelly * state.bank) + '</td></tr>';
   }).join('');
-
   return '<div class="boardwrap"><table><thead><tr>' + head + '</tr></thead><tbody>' + body + '</tbody></table></div>';
 }
 
 /* ---------- render ---------- */
 function render() {
-  renderHead();
   const view = document.getElementById('view');
+
+  if (!SLATE.length) { view.innerHTML = setupState(); return; }
+
+  document.getElementById('slatehead').hidden = false;
+  document.getElementById('controls').hidden = false;
+  buildTabs();
+  renderHead();
 
   if (state.view === 'board') { view.innerHTML = renderBoard(); wireBoard(); return; }
 
   const gs = games();
-  if (!gs.length) { view.innerHTML = '<div class="empty">No games match the current filters.</div>'; return; }
+  if (!gs.length) { view.innerHTML = '<div class="state"><h2>No games match these filters</h2></div>'; return; }
 
-  // Free tier: the single best pick on the slate is visible; the rest are gated.
-  // "No bet" verdicts are never gated — telling you to sit out is free.
+  // Free tier shows the single best pick. "No bet" verdicts are never gated —
+  // telling someone to sit out should not cost money.
   let shown = 0;
   view.innerHTML = '<div class="slate">' + gs.map(g => {
-    const locked = !state.pro && !!g.conf && shown++ > 0;
+    const locked = !state.pro && !!g.confidence && shown++ > 0;
     return card(g, locked);
   }).join('') + '</div>';
-  wireSlate();
-}
 
-function wireSlate() {
-  document.querySelectorAll('.mathbtn').forEach(btn =>
-    btn.onclick = () => {
-      const id = btn.closest('.card').dataset.id;
-      state.open.has(id) ? state.open.delete(id) : state.open.add(id);
-      render();
-    });
+  document.querySelectorAll('.mathbtn').forEach(btn => btn.onclick = () => {
+    const id = btn.closest('.card').dataset.id;
+    state.open.has(id) ? state.open.delete(id) : state.open.add(id);
+    render();
+  });
   document.querySelectorAll('.unlock').forEach(b => b.onclick = () => setTier(true));
 }
 
 function wireBoard() {
-  document.querySelectorAll('thead th[data-sort]').forEach(th =>
-    th.onclick = () => {
-      const k = th.dataset.sort;
-      state.dir = state.sort === k ? -state.dir : -1;
-      state.sort = k; render();
-    });
+  document.querySelectorAll('thead th[data-sort]').forEach(th => th.onclick = () => {
+    const k = th.dataset.sort;
+    state.dir = state.sort === k ? -state.dir : -1;
+    state.sort = k; render();
+  });
 }
 
 /* ---------- walkthrough ---------- */
 const STEPS = [
   {t:'Start here', h:'We read every game so you do not have to',
-   b:'<p>Each card below is one of today’s games. QuantLine compares what the sportsbooks are charging against what our model thinks should happen, then tells you one of two things:</p>' +
-     '<div class="ex"><b class="g">&#10003; RECOMMENDED BET</b> &mdash; there is a real advantage here. We name the exact bet, the best price, which sportsbook has it, and how much to put on it.<br><br>' +
-     '<b>&times; NO BET</b> &mdash; the price is fair. There is nothing to win by betting it. Skip the game.</div>' +
+   b:'<p>Each card is one upcoming game. QuantLine compares what every sportsbook is charging against what ' +
+     'the market as a whole believes, then tells you one of two things:</p>' +
+     '<div class="ex"><b class="g">&#10003; RECOMMENDED BET</b> &mdash; one book is paying more than the others. ' +
+     'We name the exact bet, the price, which book has it, and how much to stake.<br><br>' +
+     '<b>&times; NO BET</b> &mdash; the price is fair. Nothing to win. Skip the game.</div>' +
      '<p>Most games are a <b>no bet</b>, and that is the point. The discipline is in what you do not bet.</p>'},
-  {t:'What the confidence tag means', h:'Strong, solid, lean',
-   b:'<p>Every recommendation carries a tag telling you how large the advantage is. It is a plain-English translation of a number called expected value.</p>' +
-     '<div class="ex"><b class="g">STRONG</b> &mdash; a big pricing mistake. These are rare.<br>' +
-     '<b>SOLID</b> &mdash; a clear advantage. This is what most good bets look like.<br>' +
-     '<b>LEAN</b> &mdash; a small edge. Real, but thin.</div>' +
-     '<p>A stronger tag does not mean the bet is more likely to win. It means you are getting paid better relative to the real odds.</p>'},
+  {t:'Where the numbers come from', h:'Not a prediction. Arithmetic.',
+   b:'<p>Every sportsbook builds a profit margin into its prices &mdash; the <b>vig</b>. Strip that margin out ' +
+     'and you are left with what that book actually believes.</p>' +
+     '<div class="ex">Do that for every book pricing the same outcome and take the middle number. That is the ' +
+     '<b>market consensus</b>, and it is a far better probability estimate than any one book.<br><br>' +
+     'If a single book is then paying <b class="g">more than the consensus says it should</b>, that gap is a ' +
+     'real edge &mdash; not an opinion about who plays better tonight.</div>' +
+     '<p>Nothing here forecasts a game. We are comparing prices against each other, live.</p>'},
   {t:'How much to bet', h:'The stake matters as much as the pick',
-   b:'<p>Bet too much and one normal cold streak wipes you out before the math has a chance to work. So we do the sizing for you.</p>' +
-     '<div class="ex">Enter your <b>bankroll</b> at the top &mdash; the total you have set aside for this. Every recommendation then shows a real dollar figure, usually a small one.<br><br>' +
-     'On a <b>$500 bankroll</b>, even our strongest pick today is about a <b>$6 bet</b>. That is not us being timid. That is the math.</div>'},
+   b:'<p>Bet too much and one normal cold streak wipes you out before the math can work. So we size it for you.</p>' +
+     '<div class="ex">Enter your <b>bankroll</b> at the top &mdash; the total you have set aside. Every ' +
+     'recommendation then shows a real dollar figure, usually a small one.<br><br>' +
+     'Edges found this way are genuinely small, so the stakes are small. That is not timidity. That is the math.</div>'},
   {t:'Read this part carefully', h:'This is math, not a crystal ball',
-   b:'<p>A recommended bet still loses, often. Our strongest pick today wins about <b>44 times out of 100</b> &mdash; meaning it <b>loses 56</b>. It is still a good bet, because the price pays more than those odds deserve.</p>' +
-     '<p>The advantage only shows up across <b>hundreds</b> of bets. Anyone promising you locks is selling something else.</p>' +
-     '<div class="ex">QuantLine is <b>tracking and analysis software</b>. We do not accept bets, hold money, or place anything for you. Every number here is an estimate, and all data on this preview page is <b>simulated</b>.</div>'},
+   b:'<p>A recommended bet still loses, often. An edge means you are getting <b>paid better than the odds ' +
+     'deserve</b> &mdash; not that the outcome is likely.</p>' +
+     '<p>The advantage only shows up across <b>hundreds</b> of bets, which is why stake discipline is the ' +
+     'entire game. Anyone promising you locks is selling something else.</p>' +
+     '<div class="ex">QuantLine is <b>tracking and analysis software</b>. We do not accept bets, hold money, or ' +
+     'place anything for you. Prices move constantly &mdash; always confirm the number at the book before acting, ' +
+     'because the edge disappears if the price has changed.</div>'},
 ];
 
 const GLOSSARY = [
-  ['Recommended bet','the pick','A game where our model thinks the sportsbook has mispriced something by enough to be worth betting. We show the exact bet, the best available price, and the stake.'],
-  ['No bet','the skip','Our model and the market agree, so there is no advantage. Most games land here. Skipping them is the whole discipline.'],
-  ['Strong / Solid / Lean','confidence','How big the pricing advantage is. <span class="ex2">Strong is a rare, large mistake. Solid is a clear edge. Lean is thin but real. None of these describe how likely the bet is to win — only how well it pays relative to the true odds.</span>'],
-  ['Expected return','what you make long-run','Average profit per dollar staked if the same situation repeated many times. <span class="ex2">+5.00% means about $5 per $100 staked, on average, across many bets — never on any single one.</span>'],
+  ['Recommended bet','the pick','A game where one sportsbook is paying meaningfully more than every other book on the same outcome. We show the exact bet, the price, the book, and the stake.'],
+  ['No bet','the skip','All books agree within a normal margin, so there is no advantage. Most games land here. Skipping them is the whole discipline.'],
+  ['Vig','the house margin','The profit margin built into every posted price. It is why the two sides of a bet add up to more than 100%. <span class="ex2">Removing it is the first step in working out what a book actually believes.</span>'],
+  ['Market consensus','what the books agree on','The median de-vigged probability across every book pricing the same outcome. <span class="ex2">We deliberately exclude the book being evaluated, so one outlier cannot vote for its own edge.</span>'],
+  ['Strong / Solid / Lean','confidence','How large the pricing gap is. None of these describe how likely the bet is to win — only how well it pays relative to the consensus.'],
+  ['Expected return','what you make long-run','Average profit per dollar staked if the same situation repeated many times. <span class="ex2">+2.00% means about $2 per $100 staked, on average, across many bets — never on any single one.</span>'],
   ['Bankroll','your budget','The total set aside for this. Every stake we suggest is a small percentage of it, never a fixed sum.'],
   ['American odds','the price','Positive numbers show profit on a $100 risk (+142 wins $142). Negative numbers show what you must risk to win $100 (-190 risks $190 to win $100).'],
-  ['Kelly criterion','stake sizing','The formula behind our suggested stake. It risks more when the edge is large, less when it is thin. <span class="ex2">We show quarter Kelly — the formula’s answer divided by four — because the full version swings far too hard for most people.</span>'],
+  ['Kelly criterion','stake sizing','The formula behind our suggested stake. It risks more when the edge is large, less when it is thin. <span class="ex2">We show quarter Kelly — the formula&rsquo;s answer divided by four — because the full version swings far too hard for most people.</span>'],
   ['Moneyline','who wins','A bet on which team wins outright, with no adjustment for margin.'],
   ['Spread / run line','margin of victory','A bet on the winning margin. &ldquo;Detroit -3.5&rdquo; needs Detroit to win by 4 or more.'],
-  ['Total (over/under)','combined score','A bet on both teams’ combined score. &ldquo;Under 8.5&rdquo; needs 8 or fewer total runs.'],
-  ['Player prop','one player’s stat line','A bet on an individual’s performance rather than the result of the game.'],
+  ['Total (over/under)','combined score','A bet on both teams&rsquo; combined score.'],
 ];
 
 let step = 0;
@@ -715,12 +650,12 @@ function openWalk(i) {
   step = i;
   const s = STEPS[step];
   document.getElementById('modal').innerHTML =
-    '<div class="mhead"><div class="step">' + s.t.toUpperCase() + ' &middot; ' + (step + 1) + ' OF ' + STEPS.length + '</div>' +
-    '<h2>' + s.h + '</h2></div><div class="mbody">' + s.b + '</div>' +
+    '<div class="mhead"><div class="step">' + s.t.toUpperCase() + ' &middot; ' + (step + 1) + ' OF ' + STEPS.length +
+    '</div><h2>' + s.h + '</h2></div><div class="mbody">' + s.b + '</div>' +
     '<div class="mfoot"><div class="dots">' + STEPS.map((_, j) => '<i class="' + (j === step ? 'on' : '') + '"></i>').join('') +
     '</div><div class="r">' +
       (step > 0 ? '<button class="btn-g" id="wBack">Back</button>' : '<button class="btn-g" id="wSkip">Skip</button>') +
-      '<button class="btn-a" id="wNext">' + (step === STEPS.length - 1 ? 'SHOW ME TODAY’S GAMES' : 'Next') + '</button>' +
+      '<button class="btn-a" id="wNext">' + (step === STEPS.length - 1 ? 'SHOW ME THE GAMES' : 'Next') + '</button>' +
     '</div></div>';
   document.getElementById('scrim').hidden = false;
   const m = document.getElementById('modal');
@@ -732,8 +667,9 @@ function openWalk(i) {
 function openGloss() {
   document.getElementById('modal').innerHTML =
     '<div class="mhead"><div class="step">REFERENCE</div><h2>Every term on this page, in plain English</h2></div>' +
-    '<dl class="gloss">' + GLOSSARY.map(g => '<div><dt>' + g[0] + '<span>' + g[1] + '</span></dt><dd>' + g[2] + '</dd></div>').join('') +
-    '</dl><div class="mfoot"><div class="dots"></div><div class="r"><button class="btn-a" id="gClose">DONE</button></div></div>';
+    '<dl class="gloss">' + GLOSSARY.map(g => '<div><dt>' + g[0] + '<span>' + g[1] + '</span></dt><dd>' + g[2] +
+    '</dd></div>').join('') + '</dl><div class="mfoot"><div class="dots"></div><div class="r">' +
+    '<button class="btn-a" id="gClose">DONE</button></div></div>';
   document.getElementById('scrim').hidden = false;
   document.getElementById('modal').querySelector('#gClose').onclick = closeModal;
 }
@@ -757,16 +693,18 @@ function setView(v) {
   render();
 }
 function buildTabs() {
-  document.getElementById('tabs').innerHTML = SPORTS.map(s =>
+  const ss = sports();
+  if (!ss.includes(state.sport)) state.sport = 'ALL';
+  document.getElementById('tabs').innerHTML = ss.map(s =>
     '<button data-sport="' + s + '" class="' + (s === state.sport ? 'on' : '') + '">' + s + '</button>').join('');
   document.querySelectorAll('#tabs button').forEach(b =>
-    b.onclick = () => { state.sport = b.dataset.sport; buildTabs(); render(); });
+    b.onclick = () => { state.sport = b.dataset.sport; render(); });
 }
 
-document.getElementById('tPro').onclick   = () => setTier(true);
-document.getElementById('tFree').onclick  = () => setTier(false);
-document.getElementById('vSlate').onclick = () => setView('slate');
-document.getElementById('vBoard').onclick = () => setView('board');
+document.getElementById('tPro').onclick    = () => setTier(true);
+document.getElementById('tFree').onclick   = () => setTier(false);
+document.getElementById('vSlate').onclick  = () => setView('slate');
+document.getElementById('vBoard').onclick  = () => setView('board');
 document.getElementById('btnHelp').onclick = () => openWalk(0);
 document.getElementById('btnGloss').onclick = openGloss;
 document.getElementById('scrim').onclick = e => { if (e.target.id === 'scrim') closeModal(); };
@@ -782,7 +720,18 @@ document.getElementById('onlyRec').onclick = () => {
   render();
 };
 
-buildTabs(); render();
+load();
+
+/* Games start and prices move; re-filter every minute so a started game
+   cannot linger on screen. */
+setInterval(() => {
+  if (!FEED) return;
+  const now = Date.now();
+  const before = SLATE.length;
+  SLATE = (FEED.games || []).filter(g => new Date(g.commence_time).getTime() > now);
+  renderFeedBadge();
+  if (SLATE.length !== before) render();
+}, 60000);
 
 let seen = false;
 try { seen = localStorage.getItem('ql_seen') === '1'; } catch (e) {}

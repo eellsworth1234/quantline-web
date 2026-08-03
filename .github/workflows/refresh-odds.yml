@@ -1,0 +1,54 @@
+name: Refresh odds
+
+# Credit budget matters here. The Odds API charges one credit per market per
+# region per request. The defaults below cost 2 sports x 3 markets = 6 credits
+# per run. Twice a day is ~372 credits/month, which fits inside the 500-credit
+# free tier with headroom for manual runs.
+#
+# On a paid plan (20k credits) change the cron to '*/15 * * * *' for a genuinely
+# live board. Nothing else needs to change.
+
+on:
+  schedule:
+    - cron: '0 13 * * *'   # 13:00 UTC — before US day games
+    - cron: '0 23 * * *'   # 23:00 UTC — before US night games
+  workflow_dispatch:        # run on demand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-odds
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch odds and rebuild the slate
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          SPORTS: baseball_mlb,basketball_wnba
+          MARKETS: h2h,spreads,totals
+          REGIONS: us
+          WINDOW_HOURS: '36'
+          MIN_BOOKS: '4'
+        run: python scripts/fetch_odds.py
+
+      - name: Commit the new slate
+        run: |
+          git config user.name  "quantline-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/slate.json
+          if git diff --staged --quiet; then
+            echo "No change in the slate."
+          else
+            git commit -m "chore: refresh odds $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
