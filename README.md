@@ -126,6 +126,51 @@ what they are looking at, and know what to do — without being told.**
 - **The downside is stated as loudly as the upside.** Every expanded card says how
   often the bet is expected to lose and that losing runs are normal.
 
+## Free vs Pro — $39/month
+
+The paywall gates **analytics, not picks**. A free user can see *what* we like.
+They cannot see *why*, *how good it is*, or *how much to stake*.
+
+| | Free | Pro — $39/mo |
+|---|---|---|
+| Every upcoming game and its odds | ✓ | ✓ |
+| Every **NO BET** verdict | ✓ | ✓ |
+| Which bet we recommend, at what price and book | ✓ | ✓ |
+| Full analysis on **one** bet per refresh | ✓ | ✓ |
+| Reasoning behind the *other* picks | — | ✓ |
+| Confidence rating (STRONG/SOLID/LEAN) | — | ✓ |
+| Consensus probability, implied, edge, EV | — | ✓ |
+| Stake sizing in dollars | — | ✓ |
+| Full data board | — | ✓ |
+
+Gated cards keep the bet, the price, the book and the book count in plain sight,
+then replace the analysis with a compact upgrade panel. The board view follows the
+same rule: the bet-identity columns stay readable, the five analytics columns blur.
+
+Two deliberate choices:
+
+- **"No bet" is never paywalled.** Telling someone to sit out should not cost
+  money, and most games are skips. Gating them would invert the product's ethics
+  and make the free tier feel like a tease rather than a service.
+- **The free bet is labelled `FREE ANALYSIS`.** The funnel is legible instead of
+  sneaky — the user can see exactly what the subscription adds.
+
+`FREE_SHOWS_PICK = true` in `index.html` controls this. Set it to `false` to hide
+the pick entirely on gated cards (the older, harder paywall) — everything else
+is unchanged.
+
+**Known tension:** showing the pick for free means a free user can act on it
+without paying. The counter-argument is that the pick alone is half-usable — no
+EV means you cannot tell a 1% edge from a 6% one, and no stake sizing is how
+people blow up bankrolls. If conversion is weak, flipping `FREE_SHOWS_PICK` is a
+one-line change.
+
+## Refresh cadence
+
+Picks refresh **twice a day** — 13:00 and 23:00 UTC, set by the cron in
+`.github/workflows/refresh-odds.yml`. The app shows feed age in the header, a
+countdown to the next refresh, and warns that prices move between runs.
+
 ## Positioning caveat
 
 Recommendation language ("recommended bet," confidence tags) reads closer to a

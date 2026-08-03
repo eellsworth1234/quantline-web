@@ -152,6 +152,32 @@
     border:1px solid rgba(255,107,107,.18);font-size:11.5px;line-height:1.55;color:var(--txt-dim)}
   .caution b{color:#ffb3b3;font-weight:600}
 
+  /* Free-tier analytics gate. The pick itself stays visible; the analysis does
+     not. A free user can see WHAT we like, never WHY or HOW MUCH. */
+  .freetag{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;font-weight:700;
+    color:var(--blue);background:rgba(91,157,217,.12);border:1px solid rgba(91,157,217,.32);
+    border-radius:3px;padding:3px 7px;white-space:nowrap}
+  .gatebox{margin-top:auto;padding:13px 14px;border-radius:7px;
+    background:linear-gradient(180deg,rgba(242,181,68,.07),rgba(242,181,68,.02));
+    border:1px solid rgba(242,181,68,.25)}
+  .gatebox .gt{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9px;
+    letter-spacing:.11em;font-weight:700;color:var(--accent);margin-bottom:9px}
+  .gatelist{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px}
+  .gatelist span{font-family:var(--mono);font-size:9.5px;color:var(--txt-faint);
+    border:1px solid var(--line);border-radius:3px;padding:3px 7px;background:#0d1014;white-space:nowrap}
+  .gatebox p{font-size:12px;line-height:1.6;color:var(--txt-faint);margin-bottom:11px}
+  .gatebox p b{color:var(--txt-dim)}
+  .gatebox .btn-a{width:100%}
+  .refreshline{margin-top:12px;font-size:11.5px;color:var(--txt-faint);line-height:1.6}
+  .refreshline b{color:var(--txt-dim)}
+  .price{display:flex;align-items:baseline;gap:8px;margin:2px 0 16px}
+  .price .amt{font-family:var(--mono);font-size:30px;font-weight:650;color:var(--accent);letter-spacing:-.02em}
+  .price .per{font-size:13px;color:var(--txt-faint)}
+  .plan{display:grid;gap:9px;margin:6px 0 4px}
+  .plan div{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--txt-dim);line-height:1.55}
+  .plan .ck{color:var(--pos);font-weight:700;flex-shrink:0}
+  .plan .no{color:var(--txt-faint);flex-shrink:0}
+
   .skipblock{padding:16px 15px;flex:1;display:flex;flex-direction:column;justify-content:center}
   .skiptag{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;
     letter-spacing:.11em;font-weight:650;color:var(--txt-faint);margin-bottom:8px}
@@ -260,7 +286,7 @@
   </div>
   <div class="seg">
     <button id="tFree" class="on">FREE</button>
-    <button id="tPro">PRO</button>
+    <button id="tPro">PRO $39</button>
   </div>
 </div>
 
@@ -268,6 +294,7 @@
   <h1 id="slateTitle">Today's games</h1>
   <p class="sum" id="slateSum"></p>
   <div class="tally" id="tally"></div>
+  <p class="refreshline" id="refreshLine"></p>
 </div>
 
 <div class="controls" id="controls" hidden>
@@ -312,6 +339,16 @@
    ============================================================ */
 
 const KELLY_NOTE = 'quarter Kelly';
+const PRICE = 39;                 // USD / month
+
+/* Free tier: one bet gets the full analysis. Every other recommended bet stays
+   VISIBLE but stripped of analytics — no reasoning, no consensus, no expected
+   return, no stake, no confidence rating.
+   Set this to false to hide the pick entirely instead of just its analysis. */
+const FREE_SHOWS_PICK = true;
+
+/* Matches the cron in .github/workflows/refresh-odds.yml */
+const REFRESH_HOURS_UTC = [13, 23];
 let FEED = null;        // the parsed slate.json
 let SLATE = [];         // games that have not started yet
 let LOAD_ERR = null;
@@ -451,6 +488,25 @@ function renderHead() {
     '<div class="tal m"><b>' + n('m') + '</b> solid</div>' +
     '<div class="tal"><b>' + n('l') + '</b> lean</div>' +
     '<div class="tal x"><b>' + skip + '</b> skip</div>';
+
+  const nxt = nextRefresh();
+  const mins = Math.max(0, Math.round((nxt - Date.now()) / 60000));
+  const inTxt = mins < 60 ? mins + ' min' : Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm';
+  document.getElementById('refreshLine').innerHTML =
+    'Picks refresh <b>twice a day</b>. Last updated <b>' + ago(FEED.generated_at) + '</b>, next in <b>' +
+    inTxt + '</b>. Prices move between refreshes &mdash; always confirm the number at the sportsbook ' +
+    'before betting, because the edge is gone if the price has changed.';
+}
+
+/* Next scheduled fetch, derived from the workflow cron. */
+function nextRefresh() {
+  const now = new Date();
+  const times = REFRESH_HOURS_UTC.map(h => {
+    const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, 0, 0));
+    if (d <= now) d.setUTCDate(d.getUTCDate() + 1);
+    return d.getTime();
+  });
+  return new Date(Math.min.apply(null, times));
 }
 
 /* ---------- card ---------- */
@@ -463,11 +519,29 @@ function card(g, locked) {
       '<span class="nm">' + t.name + '</span><span class="ml">' + am(t.price) + '</span></div>';
 
   let block;
-  if (locked) {
+  if (locked && FREE_SHOWS_PICK) {
+    // The bet, the price and the book stay in plain sight. Everything that tells
+    // you whether it is worth taking — and how much to risk — is the product.
+    block = '<div class="rblock">' +
+      '<div class="rtop"><div class="rtag"><span class="tick">&#10003;</span>RECOMMENDED BET</div>' +
+        '<span class="pill l">&#128274; RATING LOCKED</span></div>' +
+      '<div class="rbet">' + b.plain + '</div>' +
+      '<div class="rkind">' + b.kind + ' &middot; ' + b.market_label + '</div>' +
+      '<div class="rprice"><span class="odds">' + am(b.odds) + '</span><span class="at2">at</span>' +
+        '<span class="bk">' + b.book + '</span>' +
+        '<span class="best">BEST OF ' + b.n_books + ' BOOKS</span></div>' +
+      '<div class="gatebox"><div class="gt"><span>&#128274;</span>ANALYTICS LOCKED</div>' +
+        '<div class="gatelist"><span>Why it is +EV</span><span>Consensus probability</span>' +
+          '<span>Expected return</span><span>Stake size</span><span>Confidence rating</span></div>' +
+        '<p>You can see the bet. Pro tells you <b>whether it is actually worth taking, and how much to ' +
+          'put on it</b> &mdash; which is the part that decides whether you make money.</p>' +
+        '<button class="btn-a upgrade">UNLOCK ANALYTICS &middot; $' + PRICE + '/MO</button></div>' +
+    '</div>';
+  } else if (locked) {
     block = '<div class="lockblock"><div class="ico">&#128274;</div>' +
       '<h4>' + conf.k.charAt(0) + conf.k.slice(1).toLowerCase() + ' pick available</h4>' +
       '<p>QuantLine Pro shows the bet, the price, the reasoning and how much to stake.</p>' +
-      '<button class="btn-a unlock">UNLOCK THIS PICK</button></div>';
+      '<button class="btn-a upgrade">UNLOCK &middot; $' + PRICE + '/MO</button></div>';
   } else if (!conf) {
     const floor = (FEED.config && FEED.config.bet_floor) || 0.01;
     block = '<div class="skipblock"><div class="skiptag"><span class="x">&times;</span>NO BET</div>' +
@@ -480,7 +554,8 @@ function card(g, locked) {
     const stake = b.kelly * state.bank;
     block = '<div class="rblock">' +
       '<div class="rtop"><div class="rtag"><span class="tick">&#10003;</span>RECOMMENDED BET</div>' +
-        '<span class="pill ' + conf.c + '">' + conf.k + '</span></div>' +
+        '<span class="pill ' + conf.c + '">' + conf.k + '</span>' +
+        (state.pro ? '' : '<span class="freetag">FREE ANALYSIS</span>') + '</div>' +
       '<div class="rbet">' + b.plain + '</div>' +
       '<div class="rkind">' + b.kind + ' &middot; ' + b.market_label + '</div>' +
       '<div class="rprice"><span class="odds">' + am(b.odds) + '</span>' +
@@ -541,12 +616,14 @@ function renderBoard() {
   const maxEv = Math.max(...rows.map(r => r.ev));
   const head = COLS.map(c => '<th class="' + (c.r ? 'r' : '') + '" data-sort="' + c.k + '">' + c.t +
     (state.sort === c.k ? '<span class="ar">' + (state.dir === -1 ? '▼' : '▲') + '</span>' : '') + '</th>').join('');
+  // Same rule as the cards: the bet identity is public, the analytics columns
+  // (consensus, implied, edge, EV, stake) are the paid product.
   const body = rows.map((b, i) => {
     const locked = !state.pro && i > 0, bl = locked ? ' blur' : '';
     return '<tr class="' + (locked ? 'lockrow' : '') + '">' +
       '<td>' + b.game + '</td><td class="mono faint">' + b.market_label + '</td>' +
-      '<td class="' + bl.trim() + '">' + b.plain + '</td><td class="mono dim' + bl + '">' + b.book + '</td>' +
-      '<td class="r mono' + bl + '">' + am(b.odds) + '</td>' +
+      '<td>' + b.plain + '</td><td class="mono dim">' + b.book + '</td>' +
+      '<td class="r mono">' + am(b.odds) + '</td>' +
       '<td class="r mono' + bl + '">' + pct(b.consensus_prob) + '</td>' +
       '<td class="r mono dim' + bl + '">' + pct(b.implied) + '</td>' +
       '<td class="r mono dim' + bl + '">' + spct(b.edge, 1) + '</td>' +
@@ -587,7 +664,7 @@ function render() {
     state.open.has(id) ? state.open.delete(id) : state.open.add(id);
     render();
   });
-  document.querySelectorAll('.unlock').forEach(b => b.onclick = () => setTier(true));
+  document.querySelectorAll('.upgrade').forEach(b => b.onclick = openUpgrade);
 }
 
 function wireBoard() {
@@ -606,7 +683,9 @@ const STEPS = [
      '<div class="ex"><b class="g">&#10003; RECOMMENDED BET</b> &mdash; one book is paying more than the others. ' +
      'We name the exact bet, the price, which book has it, and how much to stake.<br><br>' +
      '<b>&times; NO BET</b> &mdash; the price is fair. Nothing to win. Skip the game.</div>' +
-     '<p>Most games are a <b>no bet</b>, and that is the point. The discipline is in what you do not bet.</p>'},
+     '<p>Most games are a <b>no bet</b>, and that is the point. The discipline is in what you do not bet.</p>' +
+     '<p>Free shows you <b>every pick and every skip</b>, plus the full analysis on one bet each refresh. ' +
+     'Pro explains the rest and sizes them. The board updates <b>twice a day</b>.</p>'},
   {t:'Where the numbers come from', h:'Not a prediction. Arithmetic.',
    b:'<p>Every sportsbook builds a profit margin into its prices &mdash; the <b>vig</b>. Strip that margin out ' +
      'and you are left with what that book actually believes.</p>' +
@@ -664,6 +743,40 @@ function openWalk(i) {
   const skip = m.querySelector('#wSkip'); if (skip) skip.onclick = closeModal;
 }
 
+function openUpgrade() {
+  const total = SLATE.filter(g => g.confidence).length;
+  document.getElementById('modal').innerHTML =
+    '<div class="mhead"><div class="step">QUANTLINE PRO</div>' +
+    '<h2>See why, not just what</h2></div>' +
+    '<div class="mbody">' +
+      '<div class="price"><span class="amt">$' + PRICE + '</span><span class="per">per month</span></div>' +
+      '<p>The free tier shows you <b>every bet we like</b> and gives you the <b>full analysis on one of ' +
+        'them</b> each refresh. What it does not tell you is whether the rest are worth taking.</p>' +
+      '<div class="plan">' +
+        '<div><span class="ck">&#10003;</span><span><b>The reasoning behind every pick</b> &mdash; which books ' +
+          'are off, by how much, and against what consensus.</span></div>' +
+        '<div><span class="ck">&#10003;</span><span><b>Expected return and confidence rating</b> on all ' +
+          (total || 'the') + ' recommended bets, not just one.</span></div>' +
+        '<div><span class="ck">&#10003;</span><span><b>Stake sizing in real dollars</b>, scaled to your ' +
+          'bankroll with quarter-Kelly.</span></div>' +
+        '<div><span class="ck">&#10003;</span><span><b>The full data board</b> &mdash; every tracked price, ' +
+          'consensus probability and edge.</span></div>' +
+        '<div><span class="no">&mdash;</span><span>Free forever: the games, the picks, and every ' +
+          '<b>&ldquo;no bet&rdquo;</b> verdict. Telling you to sit out will never cost money.</span></div>' +
+      '</div>' +
+      '<div class="ex" style="margin-top:18px">This is a <b>preview build with no payment processing ' +
+        'connected</b>. The button below just switches the app into Pro so you can see exactly what a ' +
+        'subscriber gets. Nothing is charged and no account is created.</div>' +
+    '</div>' +
+    '<div class="mfoot"><div class="dots"></div><div class="r">' +
+      '<button class="btn-g" id="uNo">Not now</button>' +
+      '<button class="btn-a" id="uYes">PREVIEW PRO</button></div></div>';
+  document.getElementById('scrim').hidden = false;
+  const m = document.getElementById('modal');
+  m.querySelector('#uNo').onclick = closeModal;
+  m.querySelector('#uYes').onclick = () => { closeModal(); setTier(true); };
+}
+
 function openGloss() {
   document.getElementById('modal').innerHTML =
     '<div class="mhead"><div class="step">REFERENCE</div><h2>Every term on this page, in plain English</h2></div>' +
@@ -701,7 +814,7 @@ function buildTabs() {
     b.onclick = () => { state.sport = b.dataset.sport; render(); });
 }
 
-document.getElementById('tPro').onclick    = () => setTier(true);
+document.getElementById('tPro').onclick    = () => state.pro ? setTier(true) : openUpgrade();
 document.getElementById('tFree').onclick   = () => setTier(false);
 document.getElementById('vSlate').onclick  = () => setView('slate');
 document.getElementById('vBoard').onclick  = () => setView('board');
