@@ -36,7 +36,8 @@ from statistics import median
 
 API_BASE = "https://api.the-odds-api.com/v4"
 
-KEY = os.environ.get("ODDS_API_KEY", "").strip()
+RAW_KEY = os.environ.get("ODDS_API_KEY", "")
+KEY = RAW_KEY.strip()
 SPORTS = [s.strip() for s in os.environ.get("SPORTS", "baseball_mlb,basketball_wnba").split(",") if s.strip()]
 MARKETS = os.environ.get("MARKETS", "h2h,spreads,totals").strip()
 REGIONS = os.environ.get("REGIONS", "us").strip()
@@ -163,6 +164,33 @@ def confidence(ev):
     if ev >= LEAN:
         return {"k": "LEAN", "c": "l"}
     return None
+
+
+def key_shape():
+    """Describe the supplied key WITHOUT revealing it, so a bad paste can be
+    diagnosed from a public Actions log. Reports length and character class
+    only — never any actual characters."""
+    import re
+    notes = []
+    if not RAW_KEY:
+        return "empty"
+    if RAW_KEY != KEY:
+        notes.append("has leading/trailing whitespace or a newline")
+    if re.fullmatch(r"[0-9a-fA-F]+", KEY):
+        notes.append("all hexadecimal (correct shape)")
+    else:
+        notes.append("contains characters outside 0-9a-f")
+    if " " in KEY:
+        notes.append("contains a space in the middle")
+    if any(c in KEY for c in "'\"`"):
+        notes.append("contains quote marks")
+    if "@" in KEY:
+        notes.append("looks like an email address, not a key")
+    if KEY.lower().startswith("http"):
+        notes.append("looks like a URL, not a key")
+    if KEY.lower().startswith("apikey") or "=" in KEY:
+        notes.append("looks like a whole query string rather than just the key")
+    return "%d characters; %s" % (len(KEY), "; ".join(notes))
 
 
 # ---------------------------------------------------------------- build ----
@@ -299,6 +327,27 @@ def main():
             detail = e.read().decode("utf-8", "replace")[:400]
             sys.stderr.write("HTTP %s fetching %s: %s\n" % (e.code, sport, detail))
             if e.code in (401, 403):
+                sys.stderr.write(
+                    "\n"
+                    "-------------------------------------------------------------\n"
+                    "The API rejected the key.\n"
+                    "  What was supplied: %s\n"
+                    "  Expected:          32 characters, all hexadecimal (0-9, a-f)\n"
+                    "\n"
+                    "Most common causes, in order:\n"
+                    "  1. The confirmation code from the signup form was pasted\n"
+                    "     instead of the API key from the follow-up email.\n"
+                    "  2. Extra text came along with the key (a label, a URL,\n"
+                    "     or 'apiKey=' from an example request).\n"
+                    "  3. Part of the key was missed when copying.\n"
+                    "\n"
+                    "Test a candidate key locally before saving it again:\n"
+                    "  curl -s 'https://api.the-odds-api.com/v4/sports/?apiKey=YOUR_KEY' | head -c 200\n"
+                    "A list of sports means it works. Then re-save it at:\n"
+                    "  Settings -> Secrets and variables -> Actions -> ODDS_API_KEY\n"
+                    "-------------------------------------------------------------\n"
+                    % key_shape()
+                )
                 return 1          # bad key: fail loudly, do not publish
             continue              # one dead sport should not kill the run
         except Exception as e:
