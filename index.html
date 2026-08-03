@@ -3,23 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>QuantLine Terminal</title>
+<title>QuantLine — Today's Slate</title>
 <meta name="description" content="QuantLine — data utility software for educational tracking of sports betting markets." />
 <style>
   :root{
-    --bg:#08090b;
-    --panel:#0e1014;
-    --panel-2:#12151a;
-    --panel-3:#161a20;
-    --line:#1c2027;
-    --line-soft:#171a20;
-    --txt:#e7e9ec;
-    --txt-dim:#9aa1ac;
-    --txt-faint:#646b76;
-    --pos:#3ddc97;
-    --neg:#ff6b6b;
-    --accent:#f2b544;
-    --accent-soft:rgba(242,181,68,.12);
+    --bg:#08090b; --panel:#0e1014; --panel-2:#12151a; --panel-3:#161a20;
+    --card:#0f1216; --line:#1c2027; --line-soft:#171a20;
+    --txt:#e7e9ec; --txt-dim:#9aa1ac; --txt-faint:#646b76;
+    --pos:#3ddc97; --pos-soft:rgba(61,220,151,.1);
+    --neg:#ff6b6b; --accent:#f2b544; --accent-soft:rgba(242,181,68,.12);
     --blue:#5b9dd9;
     --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
@@ -27,275 +19,254 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:var(--bg);color:var(--txt);font-family:var(--sans);-webkit-font-smoothing:antialiased}
   body{font-size:13px;line-height:1.45;overflow-x:hidden}
-  .num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
   button{font-family:inherit}
 
-  /* ---------------- top bar ---------------- */
-  .topbar{
-    display:flex;align-items:center;gap:14px;
-    padding:0 18px;height:52px;
-    border-bottom:1px solid var(--line);
-    background:linear-gradient(180deg,#0e1014,#0b0d10);
-    position:sticky;top:0;z-index:60;
-  }
+  /* ---------- top bar ---------- */
+  .topbar{display:flex;align-items:center;gap:13px;padding:0 18px;height:52px;
+    border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0e1014,#0b0d10);
+    position:sticky;top:0;z-index:60}
   .brand{display:flex;align-items:baseline;gap:9px;flex-shrink:0}
   .brand b{font-size:15px;letter-spacing:.14em;font-weight:650}
   .brand .q{color:var(--accent)}
   .brand span{font-family:var(--mono);font-size:10px;color:var(--txt-faint);letter-spacing:.08em}
-  .simbadge{
-    font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
-    color:var(--accent);background:var(--accent-soft);
-    border:1px solid rgba(242,181,68,.28);border-radius:3px;
-    padding:3px 7px;white-space:nowrap;
-  }
+  .simbadge{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--accent);
+    background:var(--accent-soft);border:1px solid rgba(242,181,68,.28);border-radius:3px;
+    padding:3px 7px;white-space:nowrap}
   .topbar .spacer{flex:1}
-  .helpbtn{
-    display:flex;align-items:center;gap:6px;
-    font-size:11.5px;color:var(--txt-dim);
-    background:#14171c;border:1px solid var(--line);border-radius:5px;
-    padding:6px 11px;cursor:pointer;transition:.15s;white-space:nowrap;
-  }
+  .helpbtn{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--txt-dim);
+    background:#14171c;border:1px solid var(--line);border-radius:5px;padding:6px 11px;cursor:pointer;transition:.15s;white-space:nowrap}
   .helpbtn:hover{border-color:#39404b;color:var(--txt)}
-  .helpbtn b{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:14px;height:14px;border-radius:50%;
-    background:var(--accent);color:#0a0b0d;font-size:10px;font-weight:700;
-  }
+  .helpbtn b{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;
+    border-radius:50%;background:var(--accent);color:#0a0b0d;font-size:10px;font-weight:700}
   .seg{display:flex;border:1px solid var(--line);border-radius:5px;overflow:hidden;flex-shrink:0}
-  .seg button{
-    font-family:var(--mono);font-size:10px;letter-spacing:.07em;
-    background:transparent;color:var(--txt-faint);border:0;cursor:pointer;
-    padding:6px 11px;transition:.15s;white-space:nowrap;
-  }
+  .seg button{font-family:var(--mono);font-size:10px;letter-spacing:.07em;background:transparent;
+    color:var(--txt-faint);border:0;cursor:pointer;padding:6px 11px;transition:.15s;white-space:nowrap}
   .seg button:hover{color:var(--txt-dim)}
   .seg button.on{background:var(--accent);color:#0a0b0d;font-weight:650}
 
-  /* ---------------- explainer banner ---------------- */
-  .explain{
-    display:flex;align-items:flex-start;gap:14px;
-    padding:14px 18px;border-bottom:1px solid var(--line);
-    background:linear-gradient(180deg,rgba(91,157,217,.07),transparent);
-  }
-  .explain .ic{
-    flex-shrink:0;width:22px;height:22px;border-radius:50%;
-    background:rgba(91,157,217,.15);border:1px solid rgba(91,157,217,.35);
-    color:var(--blue);display:flex;align-items:center;justify-content:center;
-    font-size:12px;font-weight:700;margin-top:1px;
-  }
-  .explain p{font-size:12.5px;color:var(--txt-dim);max-width:74ch;line-height:1.6}
-  .explain p b{color:var(--txt);font-weight:600}
-  .explain a{color:var(--blue);text-decoration:none;border-bottom:1px solid rgba(91,157,217,.4);cursor:pointer}
+  /* ---------- slate header ---------- */
+  .slatehead{padding:22px 18px 18px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(91,157,217,.05),transparent)}
+  .slatehead h1{font-size:22px;font-weight:650;letter-spacing:-.015em;margin-bottom:6px}
+  .slatehead .sum{font-size:13.5px;color:var(--txt-dim);max-width:76ch;line-height:1.6}
+  .slatehead .sum b{color:var(--txt);font-weight:600}
+  .slatehead .sum .g{color:var(--pos);font-weight:600}
+  .tally{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+  .tal{display:flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);
+    border-radius:6px;padding:7px 12px;font-size:12px;color:var(--txt-dim)}
+  .tal b{font-family:var(--mono);font-size:15px;font-weight:650;color:var(--txt)}
+  .tal.s b{color:var(--pos)} .tal.m b{color:var(--accent)} .tal.x b{color:var(--txt-faint)}
 
-  /* ---------------- kpi strip ---------------- */
-  .kpis{
-    display:grid;grid-template-columns:repeat(5,1fr);
-    border-bottom:1px solid var(--line);background:var(--panel);
-  }
-  .kpi{padding:13px 18px;border-right:1px solid var(--line-soft);min-width:0}
-  .kpi:last-child{border-right:0}
-  .kpi .k{font-size:10px;letter-spacing:.09em;color:var(--txt-faint);margin-bottom:5px;text-transform:uppercase;font-family:var(--mono)}
-  .kpi .v{font-family:var(--mono);font-size:20px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-  .kpi .s{font-size:10.5px;color:var(--txt-faint);margin-top:3px;line-height:1.35}
-  .v.pos{color:var(--pos)} .v.acc{color:var(--accent)}
-
-  /* ---------------- controls ---------------- */
-  .controls{
-    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-    padding:11px 18px;border-bottom:1px solid var(--line);background:var(--panel-2);
-  }
+  /* ---------- controls ---------- */
+  .controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:11px 18px;
+    border-bottom:1px solid var(--line);background:var(--panel-2);position:sticky;top:52px;z-index:50}
   .tabs{display:flex;gap:2px}
-  .tabs button{
-    font-family:var(--mono);font-size:11px;letter-spacing:.06em;
-    background:transparent;border:1px solid transparent;border-radius:4px;
-    color:var(--txt-faint);padding:5px 11px;cursor:pointer;transition:.15s;
-  }
+  .tabs button{font-family:var(--mono);font-size:11px;letter-spacing:.06em;background:transparent;
+    border:1px solid transparent;border-radius:4px;color:var(--txt-faint);padding:5px 11px;cursor:pointer;transition:.15s}
   .tabs button:hover{color:var(--txt);background:#171a20}
   .tabs button.on{color:var(--txt);background:#1b1f26;border-color:var(--line)}
   .ctl{display:flex;align-items:center;gap:8px}
-  .ctl label{font-size:10px;letter-spacing:.1em;color:var(--txt-faint);white-space:nowrap;font-family:var(--mono);text-transform:uppercase}
-  .chips{display:flex;gap:5px;flex-wrap:wrap}
-  .chip{
-    font-family:var(--mono);font-size:10px;
-    border:1px solid var(--line);background:#14171c;color:var(--txt-faint);
-    border-radius:3px;padding:4px 8px;cursor:pointer;transition:.15s;white-space:nowrap;
-  }
-  .chip:hover{border-color:#2a2f38;color:var(--txt-dim)}
-  .chip.on{background:#20252d;border-color:#39404b;color:var(--txt)}
-  input[type=range]{-webkit-appearance:none;appearance:none;width:96px;height:3px;background:var(--line);border-radius:2px;outline:0;cursor:pointer}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid #0b0d10}
-  .thresh{font-family:var(--mono);font-size:11px;color:var(--accent);min-width:38px}
-  .search,.bank{
-    font-family:var(--mono);font-size:11px;
-    background:#14171c;border:1px solid var(--line);border-radius:4px;
-    color:var(--txt);padding:6px 10px;outline:0;
-  }
-  .search{width:150px} .bank{width:82px}
-  .search:focus,.bank:focus{border-color:#39404b}
-  .search::placeholder{color:var(--txt-faint)}
+  .ctl label{font-size:10px;letter-spacing:.1em;color:var(--txt-faint);white-space:nowrap;
+    font-family:var(--mono);text-transform:uppercase}
+  .bank{font-family:var(--mono);font-size:11px;background:#14171c;border:1px solid var(--line);
+    border-radius:4px;color:var(--txt);padding:6px 10px;width:84px;outline:0}
+  .bank:focus{border-color:#39404b}
+  .toggle{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:11.5px;color:var(--txt-dim);user-select:none}
+  .toggle .sw{width:32px;height:17px;border-radius:9px;background:#22262e;border:1px solid var(--line);
+    position:relative;transition:.18s;flex-shrink:0}
+  .toggle .sw i{position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;
+    background:var(--txt-faint);transition:.18s}
+  .toggle.on .sw{background:rgba(61,220,151,.25);border-color:rgba(61,220,151,.5)}
+  .toggle.on .sw i{left:16px;background:var(--pos)}
 
-  /* ---------------- table ---------------- */
-  .tablewrap{overflow:visible}
-  table{width:100%;border-collapse:collapse;min-width:1080px}
-  thead th{
-    font-size:10px;letter-spacing:.08em;font-weight:600;
-    color:var(--txt-dim);text-align:left;
-    padding:9px 12px;border-bottom:1px solid var(--line);
-    background:var(--panel);position:sticky;top:52px;z-index:20;
-    cursor:pointer;user-select:none;white-space:nowrap;
-    font-family:var(--mono);text-transform:uppercase;
-  }
-  thead th:hover{color:var(--txt)}
-  thead th.r{text-align:right}
-  thead th .ar{color:var(--accent);margin-left:4px}
-  thead th .sub{
-    display:block;font-family:var(--sans);text-transform:none;
-    font-size:10px;letter-spacing:0;font-weight:400;
-    color:var(--txt-faint);margin-top:3px;
-  }
-  tbody td{padding:10px 12px;border-bottom:1px solid var(--line-soft);white-space:nowrap;vertical-align:middle}
-  tbody tr.edge{transition:background .12s;cursor:pointer}
-  tbody tr.edge:hover{background:#101318}
-  tbody tr.open{background:#12161c}
-  td.r{text-align:right}
+  /* ---------- slate grid ---------- */
+  .slate{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:14px;padding:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:9px;overflow:hidden;
+    display:flex;flex-direction:column;transition:border-color .15s}
+  .card.rec{border-color:#28323a}
+  .card.rec:hover{border-color:#38444e}
+  .card.skip{opacity:.66}
 
-  .ev{display:flex;align-items:center;justify-content:flex-end;gap:7px}
-  .evbar{width:34px;height:3px;background:#1c2027;border-radius:2px;overflow:hidden;flex-shrink:0}
-  .evbar i{display:block;height:100%;background:var(--pos)}
-  .evnum{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums}
-  .pos{color:var(--pos)} .neg{color:var(--neg)}
-  .ev-event{font-weight:550;font-size:12.5px;display:flex;align-items:center;gap:7px}
-  .caret{color:var(--txt-faint);font-size:9px;transition:transform .15s;display:inline-block}
-  tr.open .caret{transform:rotate(90deg);color:var(--accent)}
-  .ev-time{font-family:var(--mono);font-size:10px;color:var(--txt-faint);margin-top:2px}
-  .sel{font-size:12.5px}
-  .mkt,.book{font-family:var(--mono);font-size:10.5px;color:var(--txt-dim)}
-  .lg{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--txt-faint);border:1px solid var(--line);border-radius:2px;padding:1px 4px;margin-right:6px}
-  .alert{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;font-weight:650;color:var(--accent);background:var(--accent-soft);border:1px solid rgba(242,181,68,.3);border-radius:2px;padding:2px 5px}
-  .spark{display:block}
-  tr.locked .blur{filter:blur(4.5px);opacity:.5;user-select:none;pointer-events:none}
-  .lockicon{color:var(--txt-faint);font-size:11px}
+  .chead{display:flex;align-items:center;gap:9px;padding:11px 15px;border-bottom:1px solid var(--line-soft);
+    font-family:var(--mono);font-size:10px;color:var(--txt-faint);letter-spacing:.06em}
+  .chead .lg{border:1px solid var(--line);border-radius:2px;padding:1px 5px;color:var(--txt-dim)}
+  .chead .vn{margin-left:auto;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-  /* ---------------- expanded row ---------------- */
-  tr.detail td{padding:0;border-bottom:1px solid var(--line)}
-  .dwrap{padding:18px 20px 20px 32px;background:#0b0e12;border-left:2px solid var(--accent)}
-  .dgrid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px;align-items:start}
-  .dtitle{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;color:var(--txt-faint);margin-bottom:9px;text-transform:uppercase}
-  .dsent{font-size:13px;line-height:1.72;color:var(--txt-dim);max-width:70ch}
-  .dsent b{color:var(--txt);font-weight:600}
-  .dsent .g{color:var(--pos);font-weight:600}
-  .dsent+.dsent{margin-top:11px}
-  .caution{
-    margin-top:13px;padding:10px 12px;border-radius:5px;
-    background:rgba(255,107,107,.06);border:1px solid rgba(255,107,107,.18);
-    font-size:12px;line-height:1.6;color:var(--txt-dim);max-width:70ch;
-  }
-  .caution b{color:#ffb3b3;font-weight:600}
+  .teams{padding:12px 15px 4px}
+  .team{display:flex;align-items:center;gap:10px;padding:6px 8px;margin:0 -8px;border-radius:5px}
+  .team.pick{background:var(--pos-soft)}
+  .team .nm{font-size:14.5px;font-weight:600;letter-spacing:-.01em}
+  .team.pick .nm{color:var(--pos)}
+  .team .rec{font-family:var(--mono);font-size:10.5px;color:var(--txt-faint)}
+  .team .ml{margin-left:auto;font-family:var(--mono);font-size:13px;color:var(--txt-dim);font-variant-numeric:tabular-nums}
+  .team.pick .ml{color:var(--pos);font-weight:600}
+  .at{font-family:var(--mono);font-size:9.5px;color:var(--txt-faint);letter-spacing:.1em;padding:1px 8px}
+  .lineup{padding:8px 15px 13px;font-size:11.5px;color:var(--txt-faint);line-height:1.5;
+    border-bottom:1px solid var(--line-soft)}
 
-  .cmp{margin-bottom:16px}
-  .cmprow{margin-bottom:11px}
-  .cmphead{display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px}
+  /* recommendation block */
+  .rblock{padding:14px 15px 15px;flex:1;display:flex;flex-direction:column}
+  .rtop{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+  .rtag{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.11em;font-weight:650;color:var(--pos)}
+  .rtag .tick{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;
+    border-radius:50%;background:var(--pos);color:#08090b;font-size:9px;font-weight:800}
+  .pill{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.1em;font-weight:700;
+    border-radius:3px;padding:3px 7px}
+  .pill.s{color:var(--pos);background:var(--pos-soft);border:1px solid rgba(61,220,151,.3)}
+  .pill.m{color:var(--accent);background:var(--accent-soft);border:1px solid rgba(242,181,68,.3)}
+  .pill.l{color:var(--txt-dim);background:#171b21;border:1px solid var(--line)}
+
+  .rbet{font-size:19px;font-weight:650;letter-spacing:-.02em;line-height:1.3;margin-bottom:3px}
+  .rkind{font-size:11.5px;color:var(--txt-faint);margin-bottom:11px}
+  .rprice{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:6px;
+    background:var(--panel-3);border:1px solid var(--line);margin-bottom:12px}
+  .rprice .odds{font-family:var(--mono);font-size:17px;font-weight:650;color:var(--txt);font-variant-numeric:tabular-nums}
+  .rprice .at2{font-size:12px;color:var(--txt-dim)}
+  .rprice .bk{font-size:12.5px;font-weight:600}
+  .rprice .best{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.09em;
+    color:var(--txt-faint);border:1px solid var(--line);border-radius:2px;padding:2px 6px}
+
+  .rwhy{font-size:12.5px;line-height:1.62;color:var(--txt-dim);margin-bottom:13px}
+  .rwhy b{color:var(--txt);font-weight:600}
+  .rwhy .g{color:var(--pos);font-weight:600}
+
+  .rfoot{display:flex;align-items:stretch;gap:10px;margin-top:auto}
+  .rstat{flex:1;background:var(--panel-3);border:1px solid var(--line);border-radius:6px;padding:9px 11px}
+  .rstat .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.11em;color:var(--txt-faint);text-transform:uppercase}
+  .rstat .v{font-family:var(--mono);font-size:17px;font-weight:650;margin-top:3px;font-variant-numeric:tabular-nums}
+  .rstat .v.a{color:var(--accent)} .rstat .v.p{color:var(--pos)}
+  .mathbtn{width:100%;margin-top:10px;background:transparent;border:1px solid var(--line);
+    border-radius:5px;color:var(--txt-faint);font-size:11.5px;padding:8px;cursor:pointer;transition:.15s}
+  .mathbtn:hover{border-color:#39404b;color:var(--txt-dim)}
+
+  .math{margin-top:11px;padding:13px;border-radius:6px;background:#0a0d11;border:1px solid var(--line)}
+  .math .mt{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--txt-faint);
+    text-transform:uppercase;margin-bottom:10px}
+  .cmprow{margin-bottom:10px}
+  .cmphead{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
   .cmphead span:first-child{color:var(--txt-dim)}
   .cmphead span:last-child{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums}
   .track{height:7px;background:#15181e;border-radius:4px;overflow:hidden}
   .track i{display:block;height:100%;border-radius:4px}
-  .track i.b{background:#3a4048}
-  .track i.m{background:var(--pos)}
-  .stake{
-    margin-top:14px;padding:13px 14px;border-radius:6px;
-    background:var(--panel-3);border:1px solid var(--line);
-  }
-  .stake .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--txt-faint);text-transform:uppercase}
-  .stake .amt{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--accent);margin:5px 0 4px;font-variant-numeric:tabular-nums}
-  .stake .note{font-size:11.5px;color:var(--txt-faint);line-height:1.55}
+  .track i.b{background:#3a4048} .track i.m{background:var(--pos)}
+  .mnote{font-size:11.5px;line-height:1.6;color:var(--txt-faint);margin-top:11px}
+  .mnote b{color:var(--txt-dim)}
+  .caution{margin-top:10px;padding:9px 11px;border-radius:5px;background:rgba(255,107,107,.06);
+    border:1px solid rgba(255,107,107,.18);font-size:11.5px;line-height:1.55;color:var(--txt-dim)}
+  .caution b{color:#ffb3b3;font-weight:600}
 
-  .gate{border-bottom:1px solid var(--line-soft);background:linear-gradient(180deg,rgba(242,181,68,.05),transparent)}
-  .gate td{padding:18px;text-align:center}
-  .gate h4{font-size:13px;font-weight:600;margin-bottom:5px}
-  .gate p{font-size:12px;color:var(--txt-dim);margin-bottom:12px}
-  .btn-a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;font-weight:650;background:var(--accent);color:#0a0b0d;border:0;border-radius:4px;padding:9px 20px;cursor:pointer;transition:.15s}
+  /* no-bet block */
+  .skipblock{padding:16px 15px;flex:1;display:flex;flex-direction:column;justify-content:center}
+  .skiptag{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.11em;font-weight:650;color:var(--txt-faint);margin-bottom:8px}
+  .skiptag .x{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;
+    border-radius:50%;background:#242932;color:var(--txt-faint);font-size:9px;font-weight:800}
+  .skipblock h4{font-size:15px;font-weight:600;margin-bottom:6px}
+  .skipblock p{font-size:12.5px;line-height:1.6;color:var(--txt-faint)}
+
+  /* locked */
+  .lockblock{padding:22px 15px;flex:1;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;background:linear-gradient(180deg,rgba(242,181,68,.05),transparent)}
+  .lockblock .ico{font-size:19px;margin-bottom:9px;opacity:.7}
+  .lockblock h4{font-size:14px;font-weight:600;margin-bottom:5px}
+  .lockblock p{font-size:12px;color:var(--txt-faint);margin-bottom:13px;max-width:34ch;line-height:1.55}
+  .btn-a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;font-weight:650;background:var(--accent);
+    color:#0a0b0d;border:0;border-radius:4px;padding:9px 18px;cursor:pointer;transition:.15s}
   .btn-a:hover{filter:brightness(1.1)}
-  .empty{padding:44px 18px;text-align:center;color:var(--txt-faint);font-family:var(--mono);font-size:11.5px}
 
-  /* ---------------- modal ---------------- */
-  .scrim{
-    position:fixed;inset:0;background:rgba(4,5,7,.82);backdrop-filter:blur(3px);
-    z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;
-  }
+  /* ---------- board (terminal) view ---------- */
+  .boardwrap{padding:0}
+  table{width:100%;border-collapse:collapse;min-width:1040px}
+  thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;font-weight:500;color:var(--txt-faint);
+    text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel);
+    cursor:pointer;user-select:none;white-space:nowrap;position:sticky;top:104px;z-index:20}
+  thead th:hover{color:var(--txt-dim)}
+  thead th.r{text-align:right}
+  thead th .ar{color:var(--accent);margin-left:4px}
+  tbody td{padding:10px 12px;border-bottom:1px solid var(--line-soft);white-space:nowrap}
+  tbody tr:hover{background:#101318}
+  td.r{text-align:right}
+  .evc{display:flex;align-items:center;justify-content:flex-end;gap:7px}
+  .evbar{width:34px;height:3px;background:#1c2027;border-radius:2px;overflow:hidden;flex-shrink:0}
+  .evbar i{display:block;height:100%;background:var(--pos)}
+  .pos{color:var(--pos)} .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .dim{color:var(--txt-dim)} .faint{color:var(--txt-faint)}
+  tr.lockrow .blur{filter:blur(4.5px);opacity:.5;user-select:none}
+  .empty{padding:52px 18px;text-align:center;color:var(--txt-faint);font-size:13px}
+
+  /* ---------- modal ---------- */
+  .scrim{position:fixed;inset:0;background:rgba(4,5,7,.82);backdrop-filter:blur(3px);z-index:100;
+    display:flex;align-items:center;justify-content:center;padding:20px}
   .scrim[hidden]{display:none}
-  .modal{
-    background:var(--panel);border:1px solid #262b34;border-radius:10px;
-    max-width:660px;width:100%;max-height:86vh;overflow-y:auto;
-    box-shadow:0 24px 70px rgba(0,0,0,.6);
-  }
+  .modal{background:var(--panel);border:1px solid #262b34;border-radius:10px;max-width:660px;width:100%;
+    max-height:86vh;overflow-y:auto;box-shadow:0 24px 70px rgba(0,0,0,.6)}
   .mhead{padding:22px 26px 0}
   .mhead .step{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--accent);margin-bottom:9px}
   .mhead h2{font-size:19px;font-weight:650;letter-spacing:-.01em;margin-bottom:9px}
   .mbody{padding:0 26px 4px}
   .mbody p{font-size:13.5px;line-height:1.68;color:var(--txt-dim);margin-bottom:12px}
   .mbody p b{color:var(--txt);font-weight:600}
-  .mbody .ex{
-    background:#0b0e12;border:1px solid var(--line);border-radius:6px;
-    padding:13px 15px;margin:14px 0;font-size:12.5px;line-height:1.65;color:var(--txt-dim);
-  }
+  .mbody .ex{background:#0b0e12;border:1px solid var(--line);border-radius:6px;padding:13px 15px;margin:14px 0;
+    font-size:12.5px;line-height:1.65;color:var(--txt-dim)}
   .mbody .ex b{color:var(--txt)} .mbody .ex .g{color:var(--pos);font-weight:600}
-  .mfoot{
-    display:flex;align-items:center;gap:10px;justify-content:space-between;
-    padding:16px 26px 22px;border-top:1px solid var(--line-soft);margin-top:14px;
-  }
+  .mfoot{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:16px 26px 22px;
+    border-top:1px solid var(--line-soft);margin-top:14px}
   .dots{display:flex;gap:6px}
   .dots i{width:6px;height:6px;border-radius:50%;background:#2a2f38;display:block;transition:.2s}
   .dots i.on{background:var(--accent);width:16px;border-radius:3px}
   .mfoot .r{display:flex;gap:9px}
-  .btn-g{font-size:12px;background:transparent;border:1px solid var(--line);border-radius:5px;color:var(--txt-dim);padding:8px 15px;cursor:pointer;transition:.15s}
+  .btn-g{font-size:12px;background:transparent;border:1px solid var(--line);border-radius:5px;
+    color:var(--txt-dim);padding:8px 15px;cursor:pointer;transition:.15s}
   .btn-g:hover{border-color:#39404b;color:var(--txt)}
-
   dl.gloss{padding:0 26px 22px}
   dl.gloss div{padding:13px 0;border-bottom:1px solid var(--line-soft)}
   dl.gloss div:last-child{border-bottom:0}
   dl.gloss dt{font-size:13px;font-weight:600;margin-bottom:4px}
   dl.gloss dt span{font-family:var(--mono);font-size:10.5px;color:var(--txt-faint);font-weight:400;margin-left:8px}
   dl.gloss dd{font-size:12.5px;line-height:1.62;color:var(--txt-dim)}
-  dl.gloss dd .ex{display:block;margin-top:6px;font-size:12px;color:var(--txt-faint)}
+  dl.gloss dd .ex2{display:block;margin-top:6px;font-size:12px;color:var(--txt-faint)}
 
-  /* ---------------- footer ---------------- */
-  footer{border-top:1px solid var(--line);background:var(--panel);padding:20px 18px 34px}
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);background:var(--panel);padding:20px 18px 34px;margin-top:8px}
   .disc{max-width:900px;font-size:11px;line-height:1.6;color:var(--txt-faint)}
   .disc strong{color:var(--txt-dim);font-weight:600}
-  .footrow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;max-width:900px;margin-top:14px;font-family:var(--mono);font-size:10px;color:var(--txt-faint);letter-spacing:.05em}
-  .footrow button{background:none;border:0;color:var(--txt-faint);font-family:var(--mono);font-size:10px;letter-spacing:.05em;cursor:pointer;padding:0}
+  .footrow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;max-width:900px;margin-top:14px;
+    font-family:var(--mono);font-size:10px;color:var(--txt-faint);letter-spacing:.05em}
+  .footrow button{background:none;border:0;color:var(--txt-faint);font-family:var(--mono);font-size:10px;
+    letter-spacing:.05em;cursor:pointer;padding:0}
   .footrow button:hover{color:var(--txt-dim)}
 
   @media (max-width:1120px){
-    .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .boardwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
     thead th{position:static}
-    .dgrid{grid-template-columns:1fr;gap:20px}
-    .dwrap{padding:16px 16px 18px 20px}
   }
   @media (max-width:860px){
-    .kpis{grid-template-columns:repeat(2,1fr)}
-    .kpi:nth-child(5){display:none}
     .topbar{gap:9px;padding:0 12px}
-    .controls{padding:10px 12px;gap:12px}
-    .helpbtn span{display:none}
-    .helpbtn{padding:6px 9px}
+    .helpbtn span{display:none} .helpbtn{padding:6px 9px}
+    .controls{padding:10px 12px;gap:12px;position:static}
+    .slate{grid-template-columns:1fr;padding:12px;gap:12px}
+    .slatehead{padding:18px 12px 15px}
+    .slatehead h1{font-size:19px}
   }
   @media (max-width:520px){
     .brand span{display:none}
     .simbadge{font-size:8.5px;padding:2px 5px}
-    .explain{padding:12px}
+    .rbet{font-size:17px}
   }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="brand"><b><span class="q">QUANT</span>LINE</b><span>TERMINAL v0.1</span></div>
+  <div class="brand"><b><span class="q">QUANT</span>LINE</b><span>v0.2</span></div>
   <div class="simbadge">SIMULATED FEED &middot; NOT LIVE ODDS</div>
   <div class="spacer"></div>
   <button class="helpbtn" id="btnHelp"><b>?</b><span>How this works</span></button>
   <div class="seg">
-    <button id="mGuided" class="on">PLAIN ENGLISH</button>
-    <button id="mTerminal">TERMINAL</button>
+    <button id="vSlate" class="on">TODAY'S GAMES</button>
+    <button id="vBoard">DATA BOARD</button>
   </div>
   <div class="seg">
     <button id="tFree" class="on">FREE</button>
@@ -303,34 +274,19 @@
   </div>
 </div>
 
-<div class="explain" id="explainBar">
-  <div class="ic">i</div>
-  <p><b>Every row below is one price that looks wrong.</b> A sportsbook posts odds for something happening. Those odds imply how often the book thinks it will happen. We estimate the same thing separately &mdash; and when our number is meaningfully higher than theirs, the difference is called an <b>edge</b>. <b>Click any row</b> to read it in plain English, or <a id="openHelp">start with the 60-second walkthrough</a>.</p>
+<div class="slatehead">
+  <h1 id="slateTitle">Today's games</h1>
+  <p class="sum" id="slateSum"></p>
+  <div class="tally" id="tally"></div>
 </div>
-
-<div class="kpis" id="kpis"></div>
 
 <div class="controls">
   <div class="tabs" id="tabs"></div>
-  <div class="ctl"><label>Sportsbook</label><div class="chips" id="books"></div></div>
-  <div class="ctl">
-    <label id="minEvLabel">Min return</label>
-    <input type="range" id="minEv" min="0" max="6" step="0.25" value="0" />
-    <span class="thresh num" id="minEvVal">0.00%</span>
-  </div>
-  <div class="ctl">
-    <label>Bankroll</label>
-    <input class="bank num" id="bank" type="number" min="10" step="10" value="500" />
-  </div>
-  <div class="ctl"><input class="search" id="q" type="text" placeholder="filter games…" /></div>
+  <div class="ctl"><label>Bankroll</label><input class="bank num" id="bank" type="number" min="10" step="10" value="500" /></div>
+  <div class="toggle" id="onlyRec"><div class="sw"><i></i></div><span>Only show games worth betting</span></div>
 </div>
 
-<div class="tablewrap">
-  <table>
-    <thead><tr id="head"></tr></thead>
-    <tbody id="rows"></tbody>
-  </table>
-</div>
+<div id="view"></div>
 
 <footer>
   <div class="disc">
@@ -350,358 +306,434 @@
 
 <script>
 /* ============================================================
-   QuantLine — static preview (Component #1)
+   QuantLine v0.2 — the slate
 
-   Design rule for this file: a person who has never placed a bet
-   should be able to land here cold and understand what they are
-   looking at without being told. Plain English is the DEFAULT;
-   the dense terminal view is the opt-in.
+   The board is no longer the product. The product is: here are
+   today's games, here is the one worth betting, here is what to
+   bet and how much, and here is why. A newcomer should be able
+   to act on this screen without learning anything first.
+
+   The dense terminal board still exists behind a toggle for
+   people who want to read the raw numbers.
    ============================================================ */
 
-/* ---------- the engine (reference implementation for Component #2) ---------- */
-const toDecimal  = a => a > 0 ? (a / 100) + 1 : (100 / -a) + 1;
+/* ---------- engine (reference implementation for Component #2) ---------- */
+const toDecimal   = a => a > 0 ? (a / 100) + 1 : (100 / -a) + 1;
 const impliedProb = a => a > 0 ? 100 / (a + 100) : -a / (-a + 100);
-const evPerUnit  = (p, a) => p * toDecimal(a) - 1;
-const kellyFull  = (p, a) => { const b = toDecimal(a) - 1; return (p * b - (1 - p)) / b; };
+const evPerUnit   = (p, a) => p * toDecimal(a) - 1;
+const kellyFull   = (p, a) => { const b = toDecimal(a) - 1; return (p * b - (1 - p)) / b; };
 
-const ALERT_THRESHOLD = 0.035;   // Component #3 pushes anything at or above this
-const KELLY_FRACTION  = 0.25;    // quarter Kelly
+const KELLY_FRACTION = 0.25;
+const BET_FLOOR      = 0.015;  // below this we tell you to skip the game
+const ALERT_THRESHOLD = 0.035; // Component #3 pushes at or above this
 
-/* modelProb is the only assumed input; everything else is derived */
-const EDGES = [
-  {sport:'MLB', lg:'MLB', event:'CHC @ LAD', time:'19:10 PT', market:'Moneyline',     plain:'Cubs win the game',                 sel:'Chicago Cubs',       book:'FanDuel',   odds:+142, modelProb:0.4430, ticks:[134,136,138,137,140,142,142]},
-  {sport:'MLB', lg:'MLB', event:'HOU @ SEA', time:'19:40 PT', market:'Total 8.5',     plain:'Both teams score 8 runs or fewer combined', sel:'Under 8.5',  book:'DraftKings',odds:-108, modelProb:0.5490, ticks:[-102,-104,-104,-106,-108,-108,-108]},
-  {sport:'WNBA',lg:'WNBA',event:'LV @ NY',   time:'16:00 PT', market:'Player Points', plain:'Calderón scores 19 or more points',  sel:'M. Calderón o18.5', book:'BetMGM',    odds:+105, modelProb:0.5060, ticks:[118,115,112,110,108,105,105]},
-  {sport:'MLB', lg:'MLB', event:'ATL @ PHI', time:'16:05 PT', market:'Strikeouts',    plain:'Vasquez records 7 or more strikeouts', sel:'T. Vasquez o6.5', book:'Caesars',   odds:-145, modelProb:0.6180, ticks:[-132,-136,-138,-140,-142,-145,-145]},
-  {sport:'MLB', lg:'MLB', event:'BAL @ TOR', time:'16:07 PT', market:'Run Line +1.5', plain:'Baltimore loses by 1 run, or wins',  sel:'Baltimore +1.5',    book:'ESPN BET',  odds:+215, modelProb:0.3320, ticks:[228,225,222,220,218,215,215]},
-  {sport:'NFL', lg:'NFL PRE',event:'DET @ NYG',time:'16:00 PT',market:'Spread -3.5',  plain:'Detroit wins by 4 points or more',   sel:'Detroit -3.5',      book:'FanDuel',   odds:+180, modelProb:0.3720, ticks:[195,192,188,186,184,180,180]},
-  {sport:'MLB', lg:'MLB', event:'SD @ SF',   time:'18:45 PT', market:'Total Bases',   plain:'Oduya gets 2 or more total bases',   sel:'J. Oduya o1.5',     book:'Fanatics',  odds:-125, modelProb:0.5750, ticks:[-118,-120,-122,-122,-124,-125,-125]},
-  {sport:'WNBA',lg:'WNBA',event:'SEA @ MIN', time:'17:00 PT', market:'Rebounds',      plain:'Kimura grabs 8 or more rebounds',    sel:'R. Kimura o7.5',    book:'DraftKings',odds:-110, modelProb:0.5390, ticks:[-104,-106,-108,-108,-110,-110,-110]},
-  {sport:'MLB', lg:'MLB', event:'CLE @ DET', time:'16:10 PT', market:'First 5 ML',    plain:'Cleveland leads after 5 innings',    sel:'Cleveland',         book:'BetMGM',    odds:+120, modelProb:0.4630, ticks:[128,126,124,122,120,120,120]},
-  {sport:'NFL', lg:'NFL PRE',event:'KC @ JAX',time:'13:00 PT',market:'Pass Yards',    plain:'Whitlock throws for 125+ yards',     sel:'D. Whitlock o124.5',book:'Caesars',   odds:+260, modelProb:0.2850, ticks:[275,272,268,265,262,260,260]},
-  {sport:'MLB', lg:'MLB', event:'BOS @ NYY', time:'16:05 PT', market:'Moneyline',     plain:'Yankees win the game',              sel:'New York Yankees',  book:'ESPN BET',  odds:-190, modelProb:0.6650, ticks:[-180,-182,-185,-188,-190,-190,-190]},
-  {sport:'WNBA',lg:'WNBA',event:'CON @ PHX', time:'19:00 PT', market:'Total 164.5',   plain:'Both teams score 165+ combined',     sel:'Over 164.5',        book:'Fanatics',  odds:-102, modelProb:0.5100, ticks:[-108,-106,-105,-104,-102,-102,-102]},
+/* Confidence is a plain-language wrapper around expected value.
+   Nobody new knows what "+4.2% EV" feels like; everybody knows
+   what "SOLID" versus "LEAN" means. */
+function confidence(ev) {
+  if (ev >= 0.05)  return {k:'STRONG', c:'s'};
+  if (ev >= 0.035) return {k:'SOLID',  c:'m'};
+  if (ev >= BET_FLOOR) return {k:'LEAN', c:'l'};
+  return null;
+}
+
+/* ---------- today's slate ----------
+   modelProb is the only assumed input per bet. Everything else
+   is derived at runtime. Player names are fictional. */
+const GAMES = [
+  {
+    id:'CHCLAD', sport:'MLB', lg:'MLB', time:'7:10 PM PT', venue:'Dodger Stadium',
+    away:{n:'Chicago Cubs', rec:'58-51', ml:+142}, home:{n:'Los Angeles Dodgers', rec:'64-45', ml:-168},
+    lineup:'RHP T. Vasquez (8-6, 3.41) vs LHP M. Reyes (11-4, 2.88)',
+    bets:[
+      {market:'Moneyline', kind:'Who wins the game', plain:'Cubs to win', side:'away',
+       sel:'Chicago Cubs', book:'FanDuel', odds:+142, modelProb:0.4430,
+       why:'Chicago has the best bullpen ERA in baseball over the last three weeks, and the market is still pricing them off a June slump. Los Angeles is also resting two regulars in the second game of a long homestand.'},
+      {market:'Total 8.5', kind:'Combined score', plain:'Under 8.5 total runs',
+       sel:'Under 8.5', book:'BetMGM', odds:-104, modelProb:0.5250,
+       why:'Both starters are averaging over six innings, and the marine layer at Dodger Stadium has suppressed scoring in evening games all season.'},
+    ],
+  },
+  {
+    id:'HOUSEA', sport:'MLB', lg:'MLB', time:'7:40 PM PT', venue:'T-Mobile Park',
+    away:{n:'Houston Astros', rec:'61-48', ml:-118}, home:{n:'Seattle Mariners', rec:'56-53', ml:+100},
+    lineup:'LHP A. Brennan (9-5, 3.02) vs RHP S. Nakamura (7-8, 3.77)',
+    bets:[
+      {market:'Total 8.5', kind:'Combined score', plain:'Under 8.5 total runs',
+       sel:'Under 8.5', book:'DraftKings', odds:-108, modelProb:0.5490,
+       why:'T-Mobile Park is the most run-suppressing venue in the league, and both offenses rank in the bottom third against left-handed pitching. The total opened at 9 and is still drifting down.'},
+    ],
+  },
+  {
+    id:'BALTOR', sport:'MLB', lg:'MLB', time:'4:07 PM PT', venue:'Rogers Centre',
+    away:{n:'Baltimore Orioles', rec:'49-60', ml:+245}, home:{n:'Toronto Blue Jays', rec:'63-46', ml:-290},
+    lineup:'RHP L. Ferreira (5-9, 4.55) vs RHP K. Osei (12-3, 2.64)',
+    bets:[
+      {market:'Run Line +1.5', kind:'Margin of victory', plain:'Baltimore to lose by 1, or win', side:'away',
+       sel:'Baltimore +1.5', book:'ESPN BET', odds:+215, modelProb:0.3320,
+       why:'The market has overcorrected on Toronto since the trade deadline. Baltimore has gone to extra innings or lost by one in five of its last eight road games, which is exactly the shape this bet needs.'},
+    ],
+  },
+  {
+    id:'ATLPHI', sport:'MLB', lg:'MLB', time:'4:05 PM PT', venue:'Citizens Bank Park',
+    away:{n:'Atlanta Braves', rec:'59-50', ml:+108}, home:{n:'Philadelphia Phillies', rec:'62-47', ml:-126},
+    lineup:'RHP T. Vasquez (10-4, 2.91) vs LHP D. Moreau (8-7, 3.98)',
+    bets:[
+      {market:'Strikeouts', kind:'One player’s stat line', plain:'Vasquez to record 7+ strikeouts',
+       sel:'T. Vasquez o6.5 K', book:'Caesars', odds:-145, modelProb:0.6180,
+       why:'Vasquez has cleared this number in seven straight starts. Philadelphia strikes out at the fourth-highest rate in the league against right-handers, and this line has not moved to reflect either fact.'},
+    ],
+  },
+  {
+    id:'DETNYG', sport:'NFL', lg:'NFL PRE', time:'4:00 PM PT', venue:'MetLife Stadium',
+    away:{n:'Detroit Lions', rec:'0-0', ml:-155}, home:{n:'New York Giants', rec:'0-0', ml:+130},
+    lineup:'Preseason Week 1 · Starters expected to play one series',
+    bets:[
+      {market:'Spread -3.5', kind:'Margin of victory', plain:'Detroit to win by 4+', side:'away',
+       sel:'Detroit -3.5', book:'FanDuel', odds:+180, modelProb:0.3720,
+       why:'Detroit is carrying the deeper second and third string, which is what actually decides preseason games. Public money is on the home side, pushing this price out past where the depth chart says it belongs.'},
+    ],
+  },
+  {
+    id:'LVNY', sport:'WNBA', lg:'WNBA', time:'4:00 PM PT', venue:'Barclays Center',
+    away:{n:'Las Vegas Aces', rec:'21-8', ml:-135}, home:{n:'New York Liberty', rec:'22-7', ml:+114},
+    lineup:'M. Calderón (21.4 PPG) vs A. Whitfield (19.8 PPG)',
+    bets:[
+      {market:'Player Points', kind:'One player’s stat line', plain:'Calderón to score 19+ points',
+       sel:'M. Calderón o18.5', book:'BetMGM', odds:+105, modelProb:0.5060,
+       why:'New York plays at the second-fastest pace in the league, and Calderón has averaged four extra shot attempts in games with a projected total this high. The number was set before her usage spiked.'},
+    ],
+  },
+  {
+    id:'SDSF', sport:'MLB', lg:'MLB', time:'6:45 PM PT', venue:'Oracle Park',
+    away:{n:'San Diego Padres', rec:'57-52', ml:-112}, home:{n:'San Francisco Giants', rec:'54-55', ml:-104},
+    lineup:'RHP J. Oduya (.288, 18 HR) leads the Padres order',
+    bets:[
+      {market:'Total Bases', kind:'One player’s stat line', plain:'Oduya to get 2+ total bases',
+       sel:'J. Oduya o1.5 TB', book:'Fanatics', odds:-125, modelProb:0.5750,
+       why:'Oduya has hit safely in eleven straight and draws a starter who has given up the third-most extra-base hits in the league this year.'},
+    ],
+  },
+  {
+    id:'SEAMIN', sport:'WNBA', lg:'WNBA', time:'5:00 PM PT', venue:'Target Center',
+    away:{n:'Seattle Storm', rec:'17-12', ml:+128}, home:{n:'Minnesota Lynx', rec:'20-9', ml:-152},
+    lineup:'R. Kimura (9.1 RPG) vs T. Osborne (8.4 RPG)',
+    bets:[
+      {market:'Rebounds', kind:'One player’s stat line', plain:'Kimura to grab 8+ rebounds',
+       sel:'R. Kimura o7.5 REB', book:'DraftKings', odds:-110, modelProb:0.5390,
+       why:'Minnesota’s starting center is listed as questionable, which would push Kimura into a much larger share of the defensive glass than this number assumes.'},
+    ],
+  },
+  {
+    id:'KCJAX', sport:'NFL', lg:'NFL PRE', time:'1:00 PM PT', venue:'EverBank Stadium',
+    away:{n:'Kansas City Chiefs', rec:'0-0', ml:+118}, home:{n:'Jacksonville Jaguars', rec:'0-0', ml:-140},
+    lineup:'Preseason Week 1 · Backup quarterbacks expected to play into the fourth',
+    bets:[
+      {market:'Pass Yards', kind:'One player’s stat line', plain:'Whitlock to throw for 125+ yards',
+       sel:'D. Whitlock o124.5', book:'Caesars', odds:+260, modelProb:0.2850,
+       why:'Whitlock is competing for the QB2 job and is expected to take most of the second-half snaps. The number is priced as though he plays a single quarter.'},
+    ],
+  },
+  {
+    id:'CLEDET', sport:'MLB', lg:'MLB', time:'4:10 PM PT', venue:'Comerica Park',
+    away:{n:'Cleveland Guardians', rec:'55-54', ml:+120}, home:{n:'Detroit Tigers', rec:'58-51', ml:-142},
+    lineup:'RHP P. Nyquist (7-7, 3.88) vs RHP C. Boudreau (9-6, 3.55)',
+    bets:[
+      {market:'Moneyline', kind:'Who wins the game', plain:'Cleveland to win',
+       sel:'Cleveland Guardians', book:'BetMGM', odds:+120, modelProb:0.4550,
+       why:'Our model and the market land within half a point of each other here.'},
+    ],
+  },
+  {
+    id:'BOSNYY', sport:'MLB', lg:'MLB', time:'4:05 PM PT', venue:'Yankee Stadium',
+    away:{n:'Boston Red Sox', rec:'56-53', ml:+158}, home:{n:'New York Yankees', rec:'65-44', ml:-190},
+    lineup:'LHP G. Whitaker (6-8, 4.22) vs RHP E. Solano (13-3, 2.41)',
+    bets:[
+      {market:'Moneyline', kind:'Who wins the game', plain:'Yankees to win',
+       sel:'New York Yankees', book:'ESPN BET', odds:-190, modelProb:0.6600,
+       why:'Sharp money has already moved this line to roughly where our model has it.'},
+    ],
+  },
+  {
+    id:'CONPHX', sport:'WNBA', lg:'WNBA', time:'7:00 PM PT', venue:'Footprint Center',
+    away:{n:'Connecticut Sun', rec:'15-14', ml:+136}, home:{n:'Phoenix Mercury', rec:'18-11', ml:-160},
+    lineup:'Both teams on the second night of a back-to-back',
+    bets:[
+      {market:'Total 164.5', kind:'Combined score', plain:'Over 164.5 combined points',
+       sel:'Over 164.5', book:'Fanatics', odds:-102, modelProb:0.5100,
+       why:'Fatigue cuts both ways here and the total is priced accordingly.'},
+    ],
+  },
 ];
 
-const DATA = EDGES.map((e, i) => {
-  const implied = impliedProb(e.odds);
-  const ev      = evPerUnit(e.modelProb, e.odds);
-  const kelly   = kellyFull(e.modelProb, e.odds) * KELLY_FRACTION;
-  return {...e, id:'E-' + (1100 + i * 7), implied, edge:e.modelProb - implied, ev, kelly, alert:ev >= ALERT_THRESHOLD};
+/* derive every number, then pick each game's best bet */
+const SLATE = GAMES.map(g => {
+  const bets = g.bets.map(b => {
+    const implied = impliedProb(b.odds);
+    const ev      = evPerUnit(b.modelProb, b.odds);
+    return {...b, gameId:g.id, game:g.away.n + ' @ ' + g.home.n, sport:g.sport, lg:g.lg, time:g.time,
+            implied, edge:b.modelProb - implied, ev, kelly:kellyFull(b.modelProb, b.odds) * KELLY_FRACTION};
+  }).sort((x, y) => y.ev - x.ev);
+  const best = bets[0];
+  return {...g, bets, best, conf:confidence(best.ev)};
 });
 
-const SPORTS = ['ALL', ...new Set(DATA.map(d => d.sport))];
-const BOOKS  = [...new Set(DATA.map(d => d.book))];
+const ALL_BETS = SLATE.flatMap(g => g.bets).sort((a, b) => b.ev - a.ev);
+const SPORTS = ['ALL', ...new Set(SLATE.map(g => g.sport))];
 
-const state = {
-  sport:'ALL', books:new Set(BOOKS), minEv:0, q:'',
-  sort:'ev', dir:-1, pro:false, guided:true, bank:500, open:null,
-};
+const state = {sport:'ALL', bank:500, pro:false, view:'slate', onlyRec:false, open:new Set(), sort:'ev', dir:-1};
 
 /* ---------- formatters ---------- */
-const pct  = (v, d = 1) => (v * 100).toFixed(d) + '%';
-const spct = (v, d = 2) => (v >= 0 ? '+' : '') + (v * 100).toFixed(d) + '%';
-const am   = a => (a > 0 ? '+' : '') + a;
+const pct   = (v, d = 1) => (v * 100).toFixed(d) + '%';
+const spct  = (v, d = 2) => (v >= 0 ? '+' : '') + (v * 100).toFixed(d) + '%';
+const am    = a => (a > 0 ? '+' : '') + a;
 const money = v => '$' + v.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
 const inN   = p => Math.round(p * 100);
 
-function sparkline(ticks) {
-  const w = 56, h = 16, pad = 2;
-  const lo = Math.min(...ticks), hi = Math.max(...ticks), span = (hi - lo) || 1;
-  const pts = ticks.map((t, i) => {
-    const x = pad + (i / (ticks.length - 1)) * (w - pad * 2);
-    const y = h - pad - ((t - lo) / span) * (h - pad * 2);
-    return x.toFixed(1) + ',' + y.toFixed(1);
-  }).join(' ');
-  const col = ticks[ticks.length - 1] >= ticks[0] ? 'var(--pos)' : 'var(--neg)';
-  return '<svg class="spark" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '" aria-hidden="true">' +
-    '<polyline points="' + pts + '" fill="none" stroke="' + col + '" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/></svg>';
+function games() {
+  let g = SLATE.filter(x => state.sport === 'ALL' || x.sport === state.sport);
+  if (state.onlyRec) g = g.filter(x => x.conf);
+  // recommendations first, strongest at the top; skips fall to the bottom
+  return g.sort((a, b) => (b.conf ? b.best.ev : -1) - (a.conf ? a.best.ev : -1));
 }
 
-/* ---------- column definitions ----------
-   Terminal label, plain label, and the one-line subtitle that only
-   appears in plain-English mode. Same columns either way — we change
-   the words, never the data. */
+/* ---------- slate header ---------- */
+function renderHead() {
+  const g = SLATE.filter(x => state.sport === 'ALL' || x.sport === state.sport);
+  const rec  = g.filter(x => x.conf);
+  const strong = g.filter(x => x.conf && x.conf.c === 's').length;
+  const solid  = g.filter(x => x.conf && x.conf.c === 'm').length;
+  const lean   = g.filter(x => x.conf && x.conf.c === 'l').length;
+  const skip   = g.length - rec.length;
+  const top    = rec[0];
+
+  document.getElementById('slateTitle').textContent =
+    state.view === 'board' ? 'All tracked prices' : 'Today’s games';
+
+  document.getElementById('slateSum').innerHTML = rec.length
+    ? 'We looked at <b>' + g.length + ' games</b> and found <b>' + rec.length + ' worth betting</b>. ' +
+      'The strongest is <b class="g">' + top.best.plain + '</b> at <b>' + am(top.best.odds) + '</b> on ' + top.best.book +
+      '. The other <b>' + skip + '</b> are priced correctly &mdash; skip them.'
+    : 'No games on this slate have an edge worth betting. That is a normal result, and skipping is the correct move.';
+
+  document.getElementById('tally').innerHTML =
+    '<div class="tal s"><b>' + strong + '</b> strong</div>' +
+    '<div class="tal m"><b>' + solid + '</b> solid</div>' +
+    '<div class="tal"><b>' + lean + '</b> lean</div>' +
+    '<div class="tal x"><b>' + skip + '</b> skip</div>';
+}
+
+/* ---------- one game card ---------- */
+function card(g, locked) {
+  const b = g.best, isOpen = state.open.has(g.id);
+  const pickSide = b.side;
+
+  const team = (t, which) =>
+    '<div class="team ' + (g.conf && pickSide === which ? 'pick' : '') + '">' +
+      '<span class="nm">' + t.n + '</span><span class="rec">' + t.rec + '</span>' +
+      '<span class="ml">' + am(t.ml) + '</span></div>';
+
+  let block;
+
+  if (locked) {
+    block =
+      '<div class="lockblock"><div class="ico">&#128274;</div>' +
+      '<h4>' + g.conf.k.charAt(0) + g.conf.k.slice(1).toLowerCase() + ' pick available</h4>' +
+      '<p>QuantLine Pro shows the bet, the price, the reasoning and how much to stake.</p>' +
+      '<button class="btn-a unlock">UNLOCK THIS PICK</button></div>';
+  } else if (!g.conf) {
+    block =
+      '<div class="skipblock">' +
+        '<div class="skiptag"><span class="x">&times;</span>NO BET</div>' +
+        '<h4>Nothing worth betting here</h4>' +
+        '<p>Our model and the sportsbooks agree on this game, so there is no advantage to take. ' +
+          'The best price we found is worth only ' + spct(b.ev) + ' &mdash; below the ' + pct(BET_FLOOR, 1) +
+          ' floor we require. Sitting out is a decision, and on most games it is the right one.</p>' +
+      '</div>';
+  } else {
+    const stake = b.kelly * state.bank;
+    block =
+      '<div class="rblock">' +
+        '<div class="rtop"><div class="rtag"><span class="tick">&#10003;</span>RECOMMENDED BET</div>' +
+          '<span class="pill ' + g.conf.c + '">' + g.conf.k + '</span></div>' +
+        '<div class="rbet">' + b.plain + '</div>' +
+        '<div class="rkind">' + b.kind + ' &middot; ' + b.market + '</div>' +
+        '<div class="rprice"><span class="odds">' + am(b.odds) + '</span>' +
+          '<span class="at2">at</span><span class="bk">' + b.book + '</span>' +
+          '<span class="best">BEST OF 6 BOOKS</span></div>' +
+        '<div class="rwhy"><b>Why:</b> ' + b.why + ' Our model gives this <b class="g">' + inN(b.modelProb) +
+          ' chances in 100</b>; the price only implies <b>' + inN(b.implied) + ' in 100</b>.</div>' +
+        '<div class="rfoot">' +
+          '<div class="rstat"><div class="l">Bet this much</div><div class="v a">' + money(stake) + '</div></div>' +
+          '<div class="rstat"><div class="l">Expected return</div><div class="v p">' + spct(b.ev) + '</div></div>' +
+        '</div>' +
+        '<button class="mathbtn">' + (isOpen ? 'Hide the math' : 'Show me the math') + '</button>' +
+        (isOpen ? mathBlock(b) : '') +
+      '</div>';
+  }
+
+  return '<div class="card ' + (g.conf ? 'rec' : 'skip') + '" data-id="' + g.id + '">' +
+    '<div class="chead"><span class="lg">' + g.lg + '</span><span>' + g.time + '</span>' +
+      '<span class="vn">' + g.venue + '</span></div>' +
+    '<div class="teams">' + team(g.away, 'away') + '<div class="at">AT</div>' + team(g.home, 'home') + '</div>' +
+    '<div class="lineup">' + g.lineup + '</div>' + block + '</div>';
+}
+
+function mathBlock(b) {
+  const lose = 100 - inN(b.modelProb);
+  return '<div class="math">' +
+    '<div class="mt">Where the edge comes from</div>' +
+    '<div class="cmprow"><div class="cmphead"><span>' + b.book + '’s estimate</span><span>' + pct(b.implied) + '</span></div>' +
+      '<div class="track"><i class="b" style="width:' + (b.implied * 100).toFixed(1) + '%"></i></div></div>' +
+    '<div class="cmprow"><div class="cmphead"><span>QuantLine model</span><span class="pos">' + pct(b.modelProb) + '</span></div>' +
+      '<div class="track"><i class="m" style="width:' + (b.modelProb * 100).toFixed(1) + '%"></i></div></div>' +
+    '<div class="mnote">A price of <b>' + am(b.odds) + '</b> only pays off if this happens about <b>' + inN(b.implied) +
+      ' times in 100</b>. We think it happens <b>' + inN(b.modelProb) + '</b>. Staking <b>$100</b> here returns ' +
+      '<b>' + money(Math.abs(b.ev * 100)) + '</b> on average across many repeats &mdash; that is the ' + spct(b.ev) + '.</div>' +
+    '<div class="caution">This bet still <b>loses ' + lose + ' times out of 100</b>. Losing runs are normal even when ' +
+      'every bet has an edge, which is why the suggested stake is a small slice of your bankroll.</div>' +
+  '</div>';
+}
+
+/* ---------- board (terminal) ---------- */
 const COLS = [
-  {key:'event',    t:'EVENT',    g:'GAME',            sub:'Who is playing'},
-  {key:'market',   t:'MARKET',   g:'BET TYPE',        sub:'What kind of bet'},
-  {key:'sel',      t:'SELECTION',g:'THE BET',         sub:'What has to happen'},
-  {key:'book',     t:'BOOK',     g:'SPORTSBOOK',      sub:'Who is offering it'},
-  {key:'odds',     t:'ODDS',     g:'PRICE',           sub:'The posted odds', r:1},
-  {key:'modelProb',t:'MODEL',    g:'OUR ESTIMATE',    sub:'How often we think it happens', r:1},
-  {key:'implied',  t:'IMPLIED',  g:"BOOK'S ESTIMATE", sub:'How often they think so', r:1},
-  {key:'edge',     t:'EDGE',     g:'THE GAP',         sub:'How much we disagree', r:1},
-  {key:'ev',       t:'EV',       g:'EXPECTED RETURN', sub:'Per $1, over the long run', r:1},
-  {key:'kelly',    t:'¼ KELLY',  g:'SUGGESTED STAKE', sub:'Sized to your bankroll', r:1},
-  {key:null,       t:'TICK 6H',  g:'PRICE MOVING',    sub:'Last 6 hours', r:1},
+  {k:'game', t:'GAME'}, {k:'market', t:'MARKET'}, {k:'sel', t:'SELECTION'}, {k:'book', t:'BOOK'},
+  {k:'odds', t:'ODDS', r:1}, {k:'modelProb', t:'MODEL', r:1}, {k:'implied', t:'IMPLIED', r:1},
+  {k:'edge', t:'EDGE', r:1}, {k:'ev', t:'EV', r:1}, {k:'kelly', t:'¼ KELLY', r:1},
 ];
 
-function buildHead() {
-  document.getElementById('head').innerHTML = COLS.map(c => {
-    const label = state.guided ? c.g : c.t;
-    const arrow = c.key && state.sort === c.key ? '<span class="ar">' + (state.dir === -1 ? '▼' : '▲') + '</span>' : '';
-    const sub   = state.guided ? '<span class="sub">' + c.sub + '</span>' : '';
-    return '<th class="' + (c.r ? 'r' : '') + '"' + (c.key ? ' data-sort="' + c.key + '"' : '') + '>' + label + arrow + sub + '</th>';
-  }).join('');
-  document.querySelectorAll('#head th[data-sort]').forEach(th =>
-    th.onclick = () => {
-      const k = th.dataset.sort;
-      state.dir = state.sort === k ? -state.dir : -1;
-      state.sort = k;
-      buildHead(); render();
-    });
-}
-
-function buildKpis() {
-  const avg   = DATA.reduce((s, d) => s + d.ev, 0) / DATA.length;
-  const top   = DATA.reduce((m, d) => d.ev > m.ev ? d : m, DATA[0]);
-  const nAlrt = DATA.filter(d => d.alert).length;
-  const g = state.guided;
-  const cards = [
-    {k:g ? 'Opportunities found' : 'EDGES LIVE',       v:DATA.length,   c:'',    s:g ? 'Prices our model disagrees with right now' : 'across ' + new Set(DATA.map(d => d.market)).size + ' markets'},
-    {k:g ? 'Average return'      : 'AVG EXPECTED VALUE',v:spct(avg),    c:'pos', s:g ? 'Expected profit per $1 staked, long run'   : 'per unit staked'},
-    {k:g ? 'Best opportunity'    : 'TOP EDGE',          v:spct(top.ev), c:'pos', s:g ? top.plain : top.sel},
-    {k:g ? 'Strong enough to alert' : 'ALERT THRESHOLD',v:nAlrt,        c:'acc', s:g ? 'We only notify you above +3.50%' : 'edges ≥ 3.50%'},
-    {k:g ? 'Sportsbooks compared': 'BOOKS SCANNED',     v:6,            c:'',    s:g ? 'We shop every price and keep the best' : 'FD / DK / MGM / CZR / ESPN / FAN'},
-  ];
-  document.getElementById('kpis').innerHTML = cards.map(c =>
-    '<div class="kpi"><div class="k">' + c.k + '</div><div class="v ' + c.c + '">' + c.v + '</div><div class="s">' + c.s + '</div></div>'
-  ).join('');
-}
-
-function buildTabs() {
-  document.getElementById('tabs').innerHTML = SPORTS.map(s =>
-    '<button data-sport="' + s + '" class="' + (s === state.sport ? 'on' : '') + '">' + s + '</button>').join('');
-  document.querySelectorAll('#tabs button').forEach(b =>
-    b.onclick = () => { state.sport = b.dataset.sport; state.open = null; buildTabs(); render(); });
-}
-
-function buildBooks() {
-  document.getElementById('books').innerHTML = BOOKS.map(b =>
-    '<button class="chip ' + (state.books.has(b) ? 'on' : '') + '" data-book="' + b + '">' + b + '</button>').join('');
-  document.querySelectorAll('#books .chip').forEach(c =>
-    c.onclick = () => {
-      const b = c.dataset.book;
-      state.books.has(b) ? state.books.delete(b) : state.books.add(b);
-      if (!state.books.size) BOOKS.forEach(x => state.books.add(x));  // never filter to nothing
-      state.open = null; buildBooks(); render();
-    });
-}
-
-function visible() {
-  const q = state.q.trim().toLowerCase();
-  const rows = DATA.filter(d =>
-    (state.sport === 'ALL' || d.sport === state.sport) &&
-    state.books.has(d.book) && d.ev >= state.minEv &&
-    (!q || (d.event + ' ' + d.sel + ' ' + d.market + ' ' + d.book + ' ' + d.plain).toLowerCase().includes(q)));
-  const k = state.sort;
-  return rows.sort((a, b) => {
-    const av = a[k], bv = b[k];
-    return (typeof av === 'string' ? av.localeCompare(bv) : av - bv) * state.dir;
+function renderBoard() {
+  let rows = ALL_BETS.filter(b => state.sport === 'ALL' || b.sport === state.sport);
+  if (state.onlyRec) rows = rows.filter(b => b.ev >= BET_FLOOR);
+  rows = rows.slice().sort((a, x) => {
+    const av = a[state.sort], xv = x[state.sort];
+    return (typeof av === 'string' ? av.localeCompare(xv) : av - xv) * state.dir;
   });
-}
+  if (!rows.length) return '<div class="empty">No prices match the current filters.</div>';
 
-/* ---------- the plain-English translation of a single row ----------
-   This is the feature that makes the board legible to a newcomer:
-   the same numbers, restated as a sentence anyone can follow. */
-function detailRow(d) {
-  const stake  = d.kelly * state.bank;
-  const per100 = d.ev * 100;
-  const win    = inN(d.modelProb);
-  const lose   = 100 - win;
+  const maxEv = Math.max(...rows.map(r => r.ev));
+  const head = COLS.map(c =>
+    '<th class="' + (c.r ? 'r' : '') + '" data-sort="' + c.k + '">' + c.t +
+    (state.sort === c.k ? '<span class="ar">' + (state.dir === -1 ? '▼' : '▲') + '</span>' : '') + '</th>').join('');
 
-  return '<tr class="detail"><td colspan="' + COLS.length + '"><div class="dwrap"><div class="dgrid">' +
-    '<div>' +
-      '<div class="dtitle">What this row says</div>' +
-      '<p class="dsent"><b>' + d.book + '</b> is offering this at <b>' + am(d.odds) + '</b>. ' +
-        'At that price, the sportsbook is effectively saying &ldquo;' + d.plain + '&rdquo; happens about ' +
-        '<b>' + inN(d.implied) + ' times out of 100</b>. Our model puts it closer to <b>' + win + ' out of 100</b>. ' +
-        'That disagreement of <b>' + (d.edge * 100).toFixed(1) + ' percentage points</b> is the edge.</p>' +
-      '<p class="dsent">If you staked <b>$100</b> on this exact situation over and over, you would expect to come out ' +
-        '<b class="g">' + money(Math.abs(per100)) + ' ahead</b> on average each time &mdash; that is what ' +
-        '<b>' + spct(d.ev) + ' expected return</b> means. It is an average across many repetitions, ' +
-        'not a forecast of tonight.</p>' +
-      '<div class="caution">Even so, this bet is expected to <b>lose ' + lose + ' times out of 100</b>. ' +
-        'Losing runs are completely normal when every bet you place has an edge &mdash; that is exactly why the ' +
-        'suggested stake is a small slice of your bankroll rather than a large one.</div>' +
-    '</div>' +
-    '<div>' +
-      '<div class="dtitle">Who thinks what</div>' +
-      '<div class="cmp">' +
-        '<div class="cmprow"><div class="cmphead"><span>' + d.book + '&rsquo;s estimate</span><span>' + pct(d.implied) + '</span></div>' +
-          '<div class="track"><i class="b" style="width:' + (d.implied * 100).toFixed(1) + '%"></i></div></div>' +
-        '<div class="cmprow"><div class="cmphead"><span>QuantLine model</span><span class="pos">' + pct(d.modelProb) + '</span></div>' +
-          '<div class="track"><i class="m" style="width:' + (d.modelProb * 100).toFixed(1) + '%"></i></div></div>' +
-      '</div>' +
-      '<div class="stake">' +
-        '<div class="lbl">Suggested stake</div>' +
-        '<div class="amt">' + money(stake) + '</div>' +
-        '<div class="note">' + (d.kelly * 100).toFixed(2) + '% of your ' + money(state.bank) + ' bankroll. ' +
-          'This is quarter-Kelly &mdash; a sizing rule that risks more when the edge is large and less when it is thin, ' +
-          'deliberately scaled down to survive bad stretches.</div>' +
-      '</div>' +
-    '</div>' +
-  '</div></div></td></tr>';
+  const body = rows.map((b, i) => {
+    const locked = !state.pro && i > 0, bl = locked ? ' blur' : '';
+    return '<tr class="' + (locked ? 'lockrow' : '') + '">' +
+      '<td>' + b.game + '</td><td class="mono faint">' + b.market + '</td>' +
+      '<td class="' + bl.trim() + '">' + b.sel + '</td><td class="mono dim' + bl + '">' + b.book + '</td>' +
+      '<td class="r mono' + bl + '">' + am(b.odds) + '</td>' +
+      '<td class="r mono' + bl + '">' + pct(b.modelProb) + '</td>' +
+      '<td class="r mono dim' + bl + '">' + pct(b.implied) + '</td>' +
+      '<td class="r mono dim' + bl + '">' + spct(b.edge, 1) + '</td>' +
+      '<td class="r">' + (locked ? '<span class="faint">&#128274;</span>' :
+        '<div class="evc"><div class="evbar"><i style="width:' + Math.max(0, Math.round(b.ev / maxEv * 100)) + '%"></i></div>' +
+        '<span class="mono pos" style="font-weight:600">' + spct(b.ev) + '</span></div>') + '</td>' +
+      '<td class="r mono dim' + bl + '">' + money(b.kelly * state.bank) + '</td></tr>';
+  }).join('');
+
+  return '<div class="boardwrap"><table><thead><tr>' + head + '</tr></thead><tbody>' + body + '</tbody></table></div>';
 }
 
 /* ---------- render ---------- */
 function render() {
-  const rows = visible();
-  const body = document.getElementById('rows');
-  document.getElementById('explainBar').style.display = state.guided ? '' : 'none';
+  renderHead();
+  const view = document.getElementById('view');
 
-  if (!rows.length) {
-    body.innerHTML = '<tr><td colspan="' + COLS.length + '"><div class="empty">' +
-      (state.guided ? 'No opportunities match your filters right now.' : 'NO EDGES MATCH CURRENT FILTERS') + '</div></td></tr>';
-    return;
-  }
+  if (state.view === 'board') { view.innerHTML = renderBoard(); wireBoard(); return; }
 
-  const maxEv = Math.max(...rows.map(r => r.ev));
-  let html = '';
+  const gs = games();
+  if (!gs.length) { view.innerHTML = '<div class="empty">No games match the current filters.</div>'; return; }
 
-  rows.forEach((d, i) => {
-    const locked = !state.pro && i > 0;      // free tier: top edge only
-    const b = locked ? ' blur' : '';
-    const isOpen = state.open === d.id && !locked;
+  // Free tier: the single best pick on the slate is visible; the rest are gated.
+  // "No bet" verdicts are never gated — telling you to sit out is free.
+  let shown = 0;
+  view.innerHTML = '<div class="slate">' + gs.map(g => {
+    const locked = !state.pro && !!g.conf && shown++ > 0;
+    return card(g, locked);
+  }).join('') + '</div>';
+  wireSlate();
+}
 
-    html +=
-      '<tr class="edge ' + (locked ? 'locked ' : '') + (isOpen ? 'open' : '') + '" data-id="' + d.id + '">' +
-        '<td><div class="ev-event">' + (locked ? '' : '<span class="caret">▶</span>') + d.event + '</div>' +
-          '<div class="ev-time"><span class="lg">' + d.lg + '</span>' + d.time + '</div></td>' +
-        '<td><span class="mkt">' + d.market + '</span></td>' +
-        '<td><span class="sel' + b + '">' + (state.guided ? d.plain : d.sel) + '</span></td>' +
-        '<td><span class="book' + b + '">' + d.book + '</span></td>' +
-        '<td class="r num' + b + '">' + am(d.odds) + '</td>' +
-        '<td class="r num' + b + '">' + pct(d.modelProb) + '</td>' +
-        '<td class="r num' + b + '" style="color:var(--txt-dim)">' + pct(d.implied) + '</td>' +
-        '<td class="r num' + b + '" style="color:var(--txt-dim)">' + spct(d.edge, 1) + '</td>' +
-        '<td class="r">' + (locked ? '<span class="lockicon">&#128274;</span>' :
-          '<div class="ev"><div class="evbar"><i style="width:' + Math.round((d.ev / maxEv) * 100) + '%"></i></div>' +
-          '<span class="evnum ' + (d.ev >= 0 ? 'pos' : 'neg') + '">' + spct(d.ev) + '</span></div>') + '</td>' +
-        '<td class="r num' + b + '" style="color:var(--txt-dim)">' +
-          (state.guided ? money(d.kelly * state.bank) : (d.kelly * 100).toFixed(2) + 'u') + '</td>' +
-        '<td class="r">' + (locked ? '' : (d.alert ? '<span class="alert">ALERT</span> ' : '') + sparkline(d.ticks)) + '</td>' +
-      '</tr>';
-
-    if (isOpen) html += detailRow(d);
-
-    if (locked && i === 1) {
-      html += '<tr class="gate"><td colspan="' + COLS.length + '">' +
-        '<h4>' + (rows.length - 1) + ' more opportunities on QuantLine Pro</h4>' +
-        '<p>The free tier shows the single best opportunity per sweep. Pro unlocks the full board, stake sizing, and price history.</p>' +
-        '<button class="btn-a" id="unlock">SHOW ME THE FULL BOARD</button></td></tr>';
-    }
-  });
-
-  body.innerHTML = html;
-
-  document.querySelectorAll('#rows tr.edge').forEach(tr =>
-    tr.onclick = () => {
-      if (tr.classList.contains('locked')) { setTier(true); return; }
-      state.open = state.open === tr.dataset.id ? null : tr.dataset.id;
+function wireSlate() {
+  document.querySelectorAll('.mathbtn').forEach(btn =>
+    btn.onclick = () => {
+      const id = btn.closest('.card').dataset.id;
+      state.open.has(id) ? state.open.delete(id) : state.open.add(id);
       render();
     });
+  document.querySelectorAll('.unlock').forEach(b => b.onclick = () => setTier(true));
+}
 
-  const u = document.getElementById('unlock');
-  if (u) u.onclick = e => { e.stopPropagation(); setTier(true); };
+function wireBoard() {
+  document.querySelectorAll('thead th[data-sort]').forEach(th =>
+    th.onclick = () => {
+      const k = th.dataset.sort;
+      state.dir = state.sort === k ? -state.dir : -1;
+      state.sort = k; render();
+    });
 }
 
 /* ---------- walkthrough ---------- */
 const STEPS = [
-  {
-    t:'Sportsbooks are guessing too',
-    h:'Every price is really a probability',
-    b:'<p>When a sportsbook posts odds, it is stating an opinion about how likely something is. ' +
-      '<b>+142</b> and <b>-190</b> look like jargon, but each converts to a plain percentage.</p>' +
-      '<div class="ex"><b>+142</b> means: risk $100 to win $142. For that to break even, the thing has to happen about ' +
-      '<b>41 times out of 100</b>. That 41% is the book&rsquo;s opinion.</div>' +
-      '<p>QuantLine converts every price on every board into that percentage for you. You never have to read odds again ' +
-      'if you do not want to.</p>'
-  },
-  {
-    t:'Where the opportunity comes from',
-    h:'We estimate the same thing, independently',
-    b:'<p>Our model works out its own probability from the underlying data. Most of the time the two numbers agree ' +
-      'and there is nothing to do. Occasionally they do not.</p>' +
-      '<div class="ex">Book says <b>41%</b>. We say <b class="g">44%</b>. That <b>3-point gap</b> is an <b>edge</b> &mdash; ' +
-      'you are being offered a better price than the true odds justify.</div>' +
-      '<p>Everything on the board is sorted by how large that gap is, converted into ' +
-      '<b>expected return</b>: what you would earn per dollar if the same situation repeated many times.</p>'
-  },
-  {
-    t:'How to size a position',
-    h:'The stake matters as much as the pick',
-    b:'<p>Finding an edge is only half of it. Bet too much and a normal losing streak wipes you out before the math ' +
-      'has a chance to work.</p>' +
-      '<div class="ex">QuantLine sizes every position with <b>quarter Kelly</b> &mdash; a formula that risks more when the ' +
-      'edge is big and less when it is thin, then cuts that result to a quarter for safety. Set your bankroll at the top ' +
-      'and every suggested stake becomes a real dollar figure.</div>' +
-      '<p>A <b>+7% edge on a $500 bankroll</b> is usually a stake of a few dollars &mdash; not a few hundred. ' +
-      'That is the whole discipline.</p>'
-  },
-  {
-    t:'Read this part carefully',
-    h:'This is math, not a crystal ball',
-    b:'<p>An edge does not mean the bet wins. A bet we rate at 44% <b>loses 56 times out of 100</b>, and it is still a ' +
-      'good bet at the right price. Long losing runs are normal and expected.</p>' +
-      '<p>Expected value only shows up across <b>hundreds</b> of positions, which is why stake discipline is the entire ' +
-      'game. Anyone promising you locks is selling something else.</p>' +
-      '<div class="ex">QuantLine is <b>tracking and analysis software</b>. We do not accept bets, hold money, or place ' +
-      'anything for you. Every figure here is an estimate, and the data on this preview page is <b>simulated</b>.</div>'
-  },
+  {t:'Start here', h:'We read every game so you do not have to',
+   b:'<p>Each card below is one of today’s games. QuantLine compares what the sportsbooks are charging against what our model thinks should happen, then tells you one of two things:</p>' +
+     '<div class="ex"><b class="g">&#10003; RECOMMENDED BET</b> &mdash; there is a real advantage here. We name the exact bet, the best price, which sportsbook has it, and how much to put on it.<br><br>' +
+     '<b>&times; NO BET</b> &mdash; the price is fair. There is nothing to win by betting it. Skip the game.</div>' +
+     '<p>Most games are a <b>no bet</b>, and that is the point. The discipline is in what you do not bet.</p>'},
+  {t:'What the confidence tag means', h:'Strong, solid, lean',
+   b:'<p>Every recommendation carries a tag telling you how large the advantage is. It is a plain-English translation of a number called expected value.</p>' +
+     '<div class="ex"><b class="g">STRONG</b> &mdash; a big pricing mistake. These are rare.<br>' +
+     '<b>SOLID</b> &mdash; a clear advantage. This is what most good bets look like.<br>' +
+     '<b>LEAN</b> &mdash; a small edge. Real, but thin.</div>' +
+     '<p>A stronger tag does not mean the bet is more likely to win. It means you are getting paid better relative to the real odds.</p>'},
+  {t:'How much to bet', h:'The stake matters as much as the pick',
+   b:'<p>Bet too much and one normal cold streak wipes you out before the math has a chance to work. So we do the sizing for you.</p>' +
+     '<div class="ex">Enter your <b>bankroll</b> at the top &mdash; the total you have set aside for this. Every recommendation then shows a real dollar figure, usually a small one.<br><br>' +
+     'On a <b>$500 bankroll</b>, even our strongest pick today is about a <b>$6 bet</b>. That is not us being timid. That is the math.</div>'},
+  {t:'Read this part carefully', h:'This is math, not a crystal ball',
+   b:'<p>A recommended bet still loses, often. Our strongest pick today wins about <b>44 times out of 100</b> &mdash; meaning it <b>loses 56</b>. It is still a good bet, because the price pays more than those odds deserve.</p>' +
+     '<p>The advantage only shows up across <b>hundreds</b> of bets. Anyone promising you locks is selling something else.</p>' +
+     '<div class="ex">QuantLine is <b>tracking and analysis software</b>. We do not accept bets, hold money, or place anything for you. Every number here is an estimate, and all data on this preview page is <b>simulated</b>.</div>'},
 ];
 
 const GLOSSARY = [
-  ['Edge','the gap','How much our probability estimate differs from the sportsbook&rsquo;s, in percentage points. A 3-point edge means we think something happens 44% of the time while the book prices it at 41%.'],
-  ['Expected value (EV)','expected return','Average profit per dollar staked if the same situation repeated many times. <span class="ex">+5.00% EV means about $5 profit per $100 staked, on average, over the long run — not on any single bet.</span>'],
-  ['Implied probability','the book&rsquo;s estimate','The odds converted into a percentage. It is what the sportsbook&rsquo;s price says about how likely an outcome is.'],
+  ['Recommended bet','the pick','A game where our model thinks the sportsbook has mispriced something by enough to be worth betting. We show the exact bet, the best available price, and the stake.'],
+  ['No bet','the skip','Our model and the market agree, so there is no advantage. Most games land here. Skipping them is the whole discipline.'],
+  ['Strong / Solid / Lean','confidence','How big the pricing advantage is. <span class="ex2">Strong is a rare, large mistake. Solid is a clear edge. Lean is thin but real. None of these describe how likely the bet is to win — only how well it pays relative to the true odds.</span>'],
+  ['Expected return','what you make long-run','Average profit per dollar staked if the same situation repeated many times. <span class="ex2">+5.00% means about $5 per $100 staked, on average, across many bets — never on any single one.</span>'],
+  ['Bankroll','your budget','The total set aside for this. Every stake we suggest is a small percentage of it, never a fixed sum.'],
   ['American odds','the price','Positive numbers show profit on a $100 risk (+142 wins $142). Negative numbers show what you must risk to win $100 (-190 risks $190 to win $100).'],
-  ['Kelly criterion','stake sizing','A formula for how much of your bankroll to risk, scaled to the size of your edge. <span class="ex">We show quarter Kelly — the formula&rsquo;s answer divided by four — because full Kelly swings far too hard for most people to stomach.</span>'],
-  ['Bankroll','your budget','The total amount set aside for this activity. Every suggested stake is a percentage of it, never a fixed sum.'],
-  ['Moneyline','who wins','A bet on which team wins outright, with no point adjustment.'],
+  ['Kelly criterion','stake sizing','The formula behind our suggested stake. It risks more when the edge is large, less when it is thin. <span class="ex2">We show quarter Kelly — the formula’s answer divided by four — because the full version swings far too hard for most people.</span>'],
+  ['Moneyline','who wins','A bet on which team wins outright, with no adjustment for margin.'],
   ['Spread / run line','margin of victory','A bet on the winning margin. &ldquo;Detroit -3.5&rdquo; needs Detroit to win by 4 or more.'],
-  ['Total (over/under)','combined score','A bet on both teams&rsquo; combined score. &ldquo;Under 8.5&rdquo; needs 8 or fewer total runs.'],
-  ['Player prop','one player&rsquo;s stat line','A bet on an individual&rsquo;s performance rather than the game result, like strikeouts or rebounds.'],
+  ['Total (over/under)','combined score','A bet on both teams’ combined score. &ldquo;Under 8.5&rdquo; needs 8 or fewer total runs.'],
+  ['Player prop','one player’s stat line','A bet on an individual’s performance rather than the result of the game.'],
 ];
 
 let step = 0;
-
 function openWalk(i) {
   step = i;
   const s = STEPS[step];
   document.getElementById('modal').innerHTML =
     '<div class="mhead"><div class="step">' + s.t.toUpperCase() + ' &middot; ' + (step + 1) + ' OF ' + STEPS.length + '</div>' +
     '<h2>' + s.h + '</h2></div><div class="mbody">' + s.b + '</div>' +
-    '<div class="mfoot"><div class="dots">' +
-      STEPS.map((_, j) => '<i class="' + (j === step ? 'on' : '') + '"></i>').join('') +
+    '<div class="mfoot"><div class="dots">' + STEPS.map((_, j) => '<i class="' + (j === step ? 'on' : '') + '"></i>').join('') +
     '</div><div class="r">' +
       (step > 0 ? '<button class="btn-g" id="wBack">Back</button>' : '<button class="btn-g" id="wSkip">Skip</button>') +
-      '<button class="btn-a" id="wNext">' + (step === STEPS.length - 1 ? 'START EXPLORING' : 'Next') + '</button>' +
+      '<button class="btn-a" id="wNext">' + (step === STEPS.length - 1 ? 'SHOW ME TODAY’S GAMES' : 'Next') + '</button>' +
     '</div></div>';
   document.getElementById('scrim').hidden = false;
-
-  const next = document.getElementById('modal').querySelector('#wNext');
-  next.onclick = () => step === STEPS.length - 1 ? finishWalk() : openWalk(step + 1);
-  const back = document.getElementById('modal').querySelector('#wBack');
-  if (back) back.onclick = () => openWalk(step - 1);
-  const skip = document.getElementById('modal').querySelector('#wSkip');
-  if (skip) skip.onclick = closeModal;
-}
-
-/* Ending the walkthrough opens the top row, so the first thing a
-   newcomer sees is a worked example rather than a wall of numbers. */
-function finishWalk() {
-  closeModal();
-  const first = visible()[0];
-  if (first) { state.open = first.id; render(); }
+  const m = document.getElementById('modal');
+  m.querySelector('#wNext').onclick = () => step === STEPS.length - 1 ? closeModal() : openWalk(step + 1);
+  const back = m.querySelector('#wBack'); if (back) back.onclick = () => openWalk(step - 1);
+  const skip = m.querySelector('#wSkip'); if (skip) skip.onclick = closeModal;
 }
 
 function openGloss() {
   document.getElementById('modal').innerHTML =
     '<div class="mhead"><div class="step">REFERENCE</div><h2>Every term on this page, in plain English</h2></div>' +
-    '<dl class="gloss">' + GLOSSARY.map(g =>
-      '<div><dt>' + g[0] + '<span>' + g[1] + '</span></dt><dd>' + g[2] + '</dd></div>').join('') + '</dl>' +
-    '<div class="mfoot"><div class="dots"></div><div class="r"><button class="btn-a" id="gClose">DONE</button></div></div>';
+    '<dl class="gloss">' + GLOSSARY.map(g => '<div><dt>' + g[0] + '<span>' + g[1] + '</span></dt><dd>' + g[2] + '</dd></div>').join('') +
+    '</dl><div class="mfoot"><div class="dots"></div><div class="r"><button class="btn-a" id="gClose">DONE</button></div></div>';
   document.getElementById('scrim').hidden = false;
   document.getElementById('modal').querySelector('#gClose').onclick = closeModal;
 }
@@ -718,39 +750,40 @@ function setTier(pro) {
   document.getElementById('tFree').classList.toggle('on', !pro);
   render();
 }
-function setMode(guided) {
-  state.guided = guided;
-  document.getElementById('mGuided').classList.toggle('on', guided);
-  document.getElementById('mTerminal').classList.toggle('on', !guided);
-  document.getElementById('minEvLabel').textContent = guided ? 'Min return' : 'MIN EV';
-  buildHead(); buildKpis(); render();
+function setView(v) {
+  state.view = v;
+  document.getElementById('vSlate').classList.toggle('on', v === 'slate');
+  document.getElementById('vBoard').classList.toggle('on', v === 'board');
+  render();
+}
+function buildTabs() {
+  document.getElementById('tabs').innerHTML = SPORTS.map(s =>
+    '<button data-sport="' + s + '" class="' + (s === state.sport ? 'on' : '') + '">' + s + '</button>').join('');
+  document.querySelectorAll('#tabs button').forEach(b =>
+    b.onclick = () => { state.sport = b.dataset.sport; buildTabs(); render(); });
 }
 
-document.getElementById('tPro').onclick      = () => setTier(true);
-document.getElementById('tFree').onclick     = () => setTier(false);
-document.getElementById('mGuided').onclick   = () => setMode(true);
-document.getElementById('mTerminal').onclick = () => setMode(false);
-document.getElementById('btnHelp').onclick   = () => openWalk(0);
-document.getElementById('openHelp').onclick  = () => openWalk(0);
-document.getElementById('btnGloss').onclick  = openGloss;
-document.getElementById('scrim').onclick     = e => { if (e.target.id === 'scrim') closeModal(); };
+document.getElementById('tPro').onclick   = () => setTier(true);
+document.getElementById('tFree').onclick  = () => setTier(false);
+document.getElementById('vSlate').onclick = () => setView('slate');
+document.getElementById('vBoard').onclick = () => setView('board');
+document.getElementById('btnHelp').onclick = () => openWalk(0);
+document.getElementById('btnGloss').onclick = openGloss;
+document.getElementById('scrim').onclick = e => { if (e.target.id === 'scrim') closeModal(); };
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-document.getElementById('minEv').oninput = e => {
-  state.minEv = parseFloat(e.target.value) / 100;
-  document.getElementById('minEvVal').textContent = parseFloat(e.target.value).toFixed(2) + '%';
-  state.open = null; render();
-};
 document.getElementById('bank').oninput = e => {
   const v = parseFloat(e.target.value);
   state.bank = isFinite(v) && v > 0 ? v : 0;
   render();
 };
-document.getElementById('q').oninput = e => { state.q = e.target.value; state.open = null; render(); };
+document.getElementById('onlyRec').onclick = () => {
+  state.onlyRec = !state.onlyRec;
+  document.getElementById('onlyRec').classList.toggle('on', state.onlyRec);
+  render();
+};
 
-buildHead(); buildKpis(); buildTabs(); buildBooks(); render();
+buildTabs(); render();
 
-/* First-time visitors get the walkthrough automatically. */
 let seen = false;
 try { seen = localStorage.getItem('ql_seen') === '1'; } catch (e) {}
 if (!seen) openWalk(0);

@@ -1,50 +1,74 @@
-# QuantLine — Terminal Preview
+# QuantLine — Today's Slate
 
-Static, single-file preview of the QuantLine terminal dashboard (Component #1).
+Static, single-file preview of the QuantLine app (Component #1).
 No build step, no dependencies, no network calls. `index.html` is the whole site.
+
+**Live:** https://eellsworth1234.github.io/quantline-web/
 
 ## What this is
 
 A visual and interaction reference for the production Next.js build. It exists to
-lock the layout, density, color language, onboarding, and paywall behavior before
+lock the information architecture, copy, onboarding, and paywall behavior before
 any of it is rebuilt as React components.
 
 ## The core design rule
 
-**Someone who has never placed a bet must be able to land here cold and understand
-what they are looking at, without being told.**
+**Someone who has never placed a bet must be able to land here cold, understand
+what they are looking at, and know what to do — without being told.**
 
-That rule drives every decision in this file, and it inverts the obvious default:
+That rule produced the central decision in v0.2: **the data board is not the
+product.** The product is a slate of today's games where each card answers one
+question — *should I bet this, and if so, what exactly?*
 
-- **Plain English is the default view. Terminal density is the opt-in.** A Bloomberg
-  grid is the reward for understanding, not the on-ramp. The toggle is in the header.
-- **Same data in both modes — only the words change.** Plain mode never hides a
-  column or rounds differently. `SELECTION → "THE BET"`, `EV → "EXPECTED RETURN"`,
-  and each header carries a one-line subtitle answering "what is this column?"
-- **Every row translates to a sentence.** Click any row to expand a plain-English
-  breakdown: what the book's price implies, what the model says, what the gap is
-  worth per $100, and what to stake. This is the feature that makes the board
-  legible to a newcomer.
-- **Probabilities are stated as "44 out of 100," not just "44.3%."** Frequencies are
-  measurably easier to reason about than percentages.
-- **Bankroll is an input, not a concept.** Enter a real number and every suggested
-  stake becomes a dollar figure instead of an abstract "unit."
-- **The downside is stated as loudly as the upside.** Every expanded row says how
-  often the bet is expected to *lose*, and that losing runs are normal. This is both
-  the honest framing and the one that keeps users from blowing up and churning.
+Every game resolves to one of two verdicts:
 
-A four-step walkthrough opens automatically on first visit (tracked in
-`localStorage`, key `ql_seen`) and is re-openable from the header. Finishing it
-auto-expands the top row, so the first thing a newcomer sees is a worked example
-rather than a wall of numbers. A full glossary lives behind the footer link.
+- **✓ RECOMMENDED BET** — the exact bet in plain words ("Cubs to win"), the best
+  price across six books, which book has it, a written reason, a confidence tag,
+  and a dollar stake sized to the user's bankroll.
+- **× NO BET** — the price is fair, there is nothing to win, skip the game.
 
-**All odds data in this file is simulated.** Team abbreviations are real; player
-names are fictional; every price is invented. The page is labeled as such in the
-header. Do not present it as a live feed.
+The dense terminal grid still exists behind the **DATA BOARD** toggle, for users
+who want raw numbers. It is the opt-in, not the default.
+
+### Supporting decisions
+
+- **Confidence tags translate expected value.** Nobody new knows what "+4.2% EV"
+  feels like; everybody knows STRONG vs SOLID vs LEAN. The tag describes how well
+  the bet *pays*, not how likely it is to *win* — the walkthrough says so explicitly.
+- **"No bet" is a first-class result, never a gap.** Most games should be skips,
+  and the UI says so out loud: *"Most games are a no bet, and that is the point."*
+- **"No bet" verdicts are never paywalled.** Telling someone to sit out is free;
+  only the picks are gated. Gating the skips would invert the product's ethics.
+- **Probabilities are frequencies.** "44 chances in 100," not "44.3%." Measurably
+  easier to reason about.
+- **Bankroll is an input, not a concept.** Real dollars, never abstract "units."
+  A $500 bankroll makes even the strongest pick a ~$6 bet — that lesson lands far
+  harder as a number on screen than as a paragraph.
+- **The downside is stated as loudly as the upside.** Every expanded card says how
+  often the bet is expected to *lose* and that losing runs are normal. Honest, and
+  it keeps users from blowing up in week one and churning.
+
+A four-step walkthrough opens on first visit (`localStorage` key `ql_seen`) and is
+re-openable from the header. A full glossary sits behind the footer link.
+
+## Positioning caveat
+
+Recommendation language ("recommended bet," confidence tags) reads closer to a
+picks service than to a pure analytics utility. That is a deliberate product
+choice for comprehension, but it is the thing most likely to attract scrutiny
+from ad networks and app-store review. The mitigations in place:
+
+- The reasoning and the underlying math are always one tap away — this is analysis
+  shown transparently, not a tip handed down.
+- The compliance disclaimer and 1-800-GAMBLER are in the footer on every view.
+- Nothing accepts wagers, holds funds, or links out to a sportsbook.
+
+Keep UI copy on the analytics side of the line: "edge," "expected return," "model
+probability." Never "lock," "guaranteed," or "can't lose."
 
 ## The math is real
 
-Only `modelProb` is assumed per row. Everything else is computed in-browser from
+Only `modelProb` is assumed per bet. Everything else is computed in-browser from
 `(americanOdds, modelProb)`:
 
 | Output | Formula |
@@ -53,13 +77,21 @@ Only `modelProb` is assumed per row. Everything else is computed in-browser from
 | Implied probability | `a > 0 ? 100/(a+100) : -a/(-a+100)` |
 | Expected value per unit | `p × decimal − 1` |
 | Full Kelly | `(p·b − q) / b`, where `b = decimal − 1`, `q = 1 − p` |
-| Displayed stake | quarter Kelly (`full / 4`) |
+| Displayed stake | quarter Kelly (`full / 4`) × bankroll |
 
 These are the reference implementations for Component #2 (the calc engine). If the
 engine and this page ever disagree, the engine is wrong until proven otherwise.
 
-`ALERT_THRESHOLD = 0.035` matches the ≥3.5% sweep that Component #3 (the Discord
-alert bot) will push.
+Thresholds:
+
+- `BET_FLOOR = 0.015` — below this the card returns **NO BET**.
+- `ALERT_THRESHOLD = 0.035` — matches the sweep Component #3 (the Discord bot) pushes.
+
+## Data
+
+**All odds data is simulated.** Team names and venues are real; player names,
+records, prices and reasoning are invented. The header carries a permanent
+`SIMULATED FEED · NOT LIVE ODDS` badge. Do not present it as a live feed.
 
 ## Run locally
 
@@ -67,22 +99,9 @@ alert bot) will push.
 python3 -m http.server 4173
 ```
 
-Then open http://localhost:4173
+Then open http://localhost:4173 — or just open `index.html` directly.
 
-Opening `index.html` directly via `file://` also works.
+## Deploying
 
-## Deploying to GitHub Pages
-
-Push to the default branch, then Settings → Pages → Source: *Deploy from a branch*
-→ `main` / `root`. Pages serves `index.html` at the repo root as-is.
-
-Note: GitHub Pages sites are publicly readable regardless of repository visibility
-settings on free accounts.
-
-## Compliance
-
-The footer disclaimer is load-bearing, not decoration. It establishes that
-QuantLine is educational tracking software that does not accept wagers or handle
-funds — which is what keeps the product reviewable by ad networks and app stores.
-Do not trim it, and keep all UI copy on the analytics side of the line: "edge,"
-"expected value," "model probability" — never "lock," "pick," or "guaranteed."
+Pages serves `index.html` from `main` at the repo root. Push and it redeploys.
+GitHub Pages sites are publicly readable regardless of repository visibility.
