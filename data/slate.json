@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-08-31T00:56:48Z",
+ "generated_at": "2026-08-31T19:18:41Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "318",
-  "remaining": "182"
+  "used": "324",
+  "remaining": "176"
  },
  "config": {
   "sports": [
@@ -27,17 +27,131 @@
  },
  "games": [
   {
+   "id": "ba3a4cc7ae5fe8f253de4da50e16ef96",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-01T23:41:00Z",
+   "home": {
+    "name": "Minnesota Twins",
+    "price": 104
+   },
+   "away": {
+    "name": "Detroit Tigers",
+    "price": -115
+   },
+   "book_count": 4,
+   "bets": [
+    {
+     "market": "totals",
+     "market_label": "Total 8.5",
+     "kind": "Combined score",
+     "selection": "Under",
+     "point": 8.5,
+     "plain": "Fewer than 8.5 combined runs",
+     "book": "FanDuel",
+     "odds": 100,
+     "consensus_prob": 0.513,
+     "consensus_odds": -105,
+     "implied": 0.5,
+     "edge": 0.013,
+     "ev": 0.026,
+     "kelly": 0.0065,
+     "n_books": 4,
+     "why": "FanDuel is posting +100. Stripping the vig out of the other 3 books pricing this same outcome puts the consensus at 51.3%, which is a fair price of about -105. FanDuel is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "totals",
+    "market_label": "Total 8.5",
+    "kind": "Combined score",
+    "selection": "Under",
+    "point": 8.5,
+    "plain": "Fewer than 8.5 combined runs",
+    "book": "FanDuel",
+    "odds": 100,
+    "consensus_prob": 0.513,
+    "consensus_odds": -105,
+    "implied": 0.5,
+    "edge": 0.013,
+    "ev": 0.026,
+    "kelly": 0.0065,
+    "n_books": 4,
+    "why": "FanDuel is posting +100. Stripping the vig out of the other 3 books pricing this same outcome puts the consensus at 51.3%, which is a fair price of about -105. FanDuel is paying better than the market's own average."
+   },
+   "confidence": {
+    "k": "SOLID",
+    "c": "m"
+   }
+  },
+  {
    "id": "181d022629a9f3260d9dac6c16488626",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
    "commence_time": "2026-08-31T22:41:00Z",
    "home": {
     "name": "Tampa Bay Rays",
-    "price": -152
+    "price": -171
    },
    "away": {
     "name": "New York Mets",
-    "price": 152
+    "price": 170
+   },
+   "book_count": 9,
+   "bets": [
+    {
+     "market": "h2h",
+     "market_label": "Moneyline",
+     "kind": "Who wins the game",
+     "selection": "New York Mets",
+     "point": null,
+     "plain": "New York Mets to win",
+     "book": "FanDuel",
+     "odds": 170,
+     "consensus_prob": 0.3774,
+     "consensus_odds": 165,
+     "implied": 0.3704,
+     "edge": 0.007,
+     "ev": 0.019,
+     "kelly": 0.00279,
+     "n_books": 9,
+     "why": "FanDuel is posting +170. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 37.7%, which is a fair price of about +165. FanDuel is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "h2h",
+    "market_label": "Moneyline",
+    "kind": "Who wins the game",
+    "selection": "New York Mets",
+    "point": null,
+    "plain": "New York Mets to win",
+    "book": "FanDuel",
+    "odds": 170,
+    "consensus_prob": 0.3774,
+    "consensus_odds": 165,
+    "implied": 0.3704,
+    "edge": 0.007,
+    "ev": 0.019,
+    "kelly": 0.00279,
+    "n_books": 9,
+    "why": "FanDuel is posting +170. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 37.7%, which is a fair price of about +165. FanDuel is paying better than the market's own average."
+   },
+   "confidence": {
+    "k": "LEAN",
+    "c": "l"
+   }
+  },
+  {
+   "id": "d119b7382bfaef2bf17260cdd10bc93f",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-08-31T22:46:00Z",
+   "home": {
+    "name": "Washington Nationals",
+    "price": 101
+   },
+   "away": {
+    "name": "Miami Marlins",
+    "price": -106
    },
    "book_count": 9,
    "bets": [
@@ -45,61 +159,43 @@
      "market": "spreads",
      "market_label": "Spread -1.5",
      "kind": "Margin of victory",
-     "selection": "Tampa Bay Rays",
+     "selection": "Miami Marlins",
      "point": -1.5,
-     "plain": "Tampa Bay Rays to win by more than 1.5",
-     "book": "Bovada",
-     "odds": 140,
-     "consensus_prob": 0.4322,
-     "consensus_odds": 131,
-     "implied": 0.4167,
-     "edge": 0.0155,
-     "ev": 0.0373,
-     "kelly": 0.00666,
+     "plain": "Miami Marlins to win by more than 1.5",
+     "book": "FanDuel",
+     "odds": 158,
+     "consensus_prob": 0.3941,
+     "consensus_odds": 154,
+     "implied": 0.3876,
+     "edge": 0.0065,
+     "ev": 0.0169,
+     "kelly": 0.00267,
      "n_books": 9,
-     "why": "Bovada is posting +140. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 43.2%, which is a fair price of about +131. Bovada is paying better than the market's own average."
+     "why": "FanDuel is posting +158. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 39.4%, which is a fair price of about +154. FanDuel is paying better than the market's own average."
     }
    ],
    "best": {
     "market": "spreads",
     "market_label": "Spread -1.5",
     "kind": "Margin of victory",
-    "selection": "Tampa Bay Rays",
+    "selection": "Miami Marlins",
     "point": -1.5,
-    "plain": "Tampa Bay Rays to win by more than 1.5",
-    "book": "Bovada",
-    "odds": 140,
-    "consensus_prob": 0.4322,
-    "consensus_odds": 131,
-    "implied": 0.4167,
-    "edge": 0.0155,
-    "ev": 0.0373,
-    "kelly": 0.00666,
+    "plain": "Miami Marlins to win by more than 1.5",
+    "book": "FanDuel",
+    "odds": 158,
+    "consensus_prob": 0.3941,
+    "consensus_odds": 154,
+    "implied": 0.3876,
+    "edge": 0.0065,
+    "ev": 0.0169,
+    "kelly": 0.00267,
     "n_books": 9,
-    "why": "Bovada is posting +140. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 43.2%, which is a fair price of about +131. Bovada is paying better than the market's own average."
+    "why": "FanDuel is posting +158. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 39.4%, which is a fair price of about +154. FanDuel is paying better than the market's own average."
    },
    "confidence": {
-    "k": "STRONG",
-    "c": "s"
+    "k": "LEAN",
+    "c": "l"
    }
-  },
-  {
-   "id": "07d39d9ad653030c4c89d9a08c4071f5",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-08-31T22:06:00Z",
-   "home": {
-    "name": "Atlanta Braves",
-    "price": -146
-   },
-   "away": {
-    "name": "San Francisco Giants",
-    "price": 132
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
   },
   {
    "id": "e1f7344d0c058a992d4c4757aee4a30e",
@@ -108,13 +204,127 @@
    "commence_time": "2026-08-31T22:41:00Z",
    "home": {
     "name": "Cincinnati Reds",
-    "price": 126
+    "price": 131
    },
    "away": {
     "name": "San Diego Padres",
-    "price": -137
+    "price": -140
    },
-   "book_count": 8,
+   "book_count": 9,
+   "bets": [
+    {
+     "market": "spreads",
+     "market_label": "Spread -1.5",
+     "kind": "Margin of victory",
+     "selection": "San Diego Padres",
+     "point": -1.5,
+     "plain": "San Diego Padres to win by more than 1.5",
+     "book": "BetRivers",
+     "odds": 117,
+     "consensus_prob": 0.4671,
+     "consensus_odds": 114,
+     "implied": 0.4608,
+     "edge": 0.0062,
+     "ev": 0.0136,
+     "kelly": 0.0029,
+     "n_books": 9,
+     "why": "BetRivers is posting +117. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 46.7%, which is a fair price of about +114. BetRivers is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "spreads",
+    "market_label": "Spread -1.5",
+    "kind": "Margin of victory",
+    "selection": "San Diego Padres",
+    "point": -1.5,
+    "plain": "San Diego Padres to win by more than 1.5",
+    "book": "BetRivers",
+    "odds": 117,
+    "consensus_prob": 0.4671,
+    "consensus_odds": 114,
+    "implied": 0.4608,
+    "edge": 0.0062,
+    "ev": 0.0136,
+    "kelly": 0.0029,
+    "n_books": 9,
+    "why": "BetRivers is posting +117. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 46.7%, which is a fair price of about +114. BetRivers is paying better than the market's own average."
+   },
+   "confidence": {
+    "k": "LEAN",
+    "c": "l"
+   }
+  },
+  {
+   "id": "c2d8843514360ba23db4493a00f3a91d",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-02T00:06:00Z",
+   "home": {
+    "name": "Texas Rangers",
+    "price": -170
+   },
+   "away": {
+    "name": "Athletics",
+    "price": 160
+   },
+   "book_count": 4,
+   "bets": [
+    {
+     "market": "totals",
+     "market_label": "Total 7.5",
+     "kind": "Combined score",
+     "selection": "Over",
+     "point": 7.5,
+     "plain": "More than 7.5 combined runs",
+     "book": "FanDuel",
+     "odds": 102,
+     "consensus_prob": 0.5,
+     "consensus_odds": 100,
+     "implied": 0.495,
+     "edge": 0.005,
+     "ev": 0.01,
+     "kelly": 0.00245,
+     "n_books": 4,
+     "why": "FanDuel is posting +102. Stripping the vig out of the other 3 books pricing this same outcome puts the consensus at 50.0%, which is a fair price of about +100. FanDuel is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "totals",
+    "market_label": "Total 7.5",
+    "kind": "Combined score",
+    "selection": "Over",
+    "point": 7.5,
+    "plain": "More than 7.5 combined runs",
+    "book": "FanDuel",
+    "odds": 102,
+    "consensus_prob": 0.5,
+    "consensus_odds": 100,
+    "implied": 0.495,
+    "edge": 0.005,
+    "ev": 0.01,
+    "kelly": 0.00245,
+    "n_books": 4,
+    "why": "FanDuel is posting +102. Stripping the vig out of the other 3 books pricing this same outcome puts the consensus at 50.0%, which is a fair price of about +100. FanDuel is paying better than the market's own average."
+   },
+   "confidence": {
+    "k": "LEAN",
+    "c": "l"
+   }
+  },
+  {
+   "id": "07d39d9ad653030c4c89d9a08c4071f5",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-08-31T22:05:00Z",
+   "home": {
+    "name": "Atlanta Braves",
+    "price": -190
+   },
+   "away": {
+    "name": "San Francisco Giants",
+    "price": 179
+   },
+   "book_count": 9,
    "bets": [],
    "best": null,
    "confidence": null
@@ -126,31 +336,13 @@
    "commence_time": "2026-08-31T22:46:00Z",
    "home": {
     "name": "Boston Red Sox",
-    "price": -162
+    "price": -154
    },
    "away": {
     "name": "Seattle Mariners",
-    "price": 147
+    "price": 143
    },
-   "book_count": 8,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "d119b7382bfaef2bf17260cdd10bc93f",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-08-31T22:46:00Z",
-   "home": {
-    "name": "Washington Nationals",
-    "price": 107
-   },
-   "away": {
-    "name": "Miami Marlins",
-    "price": -117
-   },
-   "book_count": 7,
+   "book_count": 9,
    "bets": [],
    "best": null,
    "confidence": null
@@ -162,13 +354,13 @@
    "commence_time": "2026-08-31T23:41:00Z",
    "home": {
     "name": "Chicago Cubs",
-    "price": -106
+    "price": -107
    },
    "away": {
     "name": "Milwaukee Brewers",
-    "price": -104
+    "price": 101
    },
-   "book_count": 8,
+   "book_count": 9,
    "bets": [],
    "best": null,
    "confidence": null
@@ -180,11 +372,11 @@
    "commence_time": "2026-08-31T23:41:00Z",
    "home": {
     "name": "Minnesota Twins",
-    "price": -128
+    "price": -116
    },
    "away": {
     "name": "Detroit Tigers",
-    "price": 117
+    "price": 110
    },
    "book_count": 9,
    "bets": [],
@@ -198,11 +390,11 @@
    "commence_time": "2026-09-01T00:06:00Z",
    "home": {
     "name": "Texas Rangers",
-    "price": -212
+    "price": -210
    },
    "away": {
     "name": "Athletics",
-    "price": 193
+    "price": 195
    },
    "book_count": 9,
    "bets": [],
@@ -216,13 +408,13 @@
    "commence_time": "2026-09-01T00:11:00Z",
    "home": {
     "name": "Houston Astros",
-    "price": -122
+    "price": -127
    },
    "away": {
     "name": "Chicago White Sox",
-    "price": 116
+    "price": 120
    },
-   "book_count": 8,
+   "book_count": 9,
    "bets": [],
    "best": null,
    "confidence": null
@@ -234,13 +426,13 @@
    "commence_time": "2026-09-01T00:41:00Z",
    "home": {
     "name": "Colorado Rockies",
-    "price": 119
+    "price": 120
    },
    "away": {
     "name": "Baltimore Orioles",
-    "price": -136
+    "price": -126
    },
-   "book_count": 4,
+   "book_count": 9,
    "bets": [],
    "best": null,
    "confidence": null
@@ -249,16 +441,16 @@
    "id": "1a445560d2b4ababdc8ae392129d42cb",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
-   "commence_time": "2026-09-01T01:39:00Z",
+   "commence_time": "2026-09-01T01:38:00Z",
    "home": {
     "name": "Los Angeles Angels",
-    "price": 123
+    "price": 114
    },
    "away": {
     "name": "New York Yankees",
-    "price": -138
+    "price": -119
    },
-   "book_count": 4,
+   "book_count": 9,
    "bets": [],
    "best": null,
    "confidence": null
@@ -274,9 +466,189 @@
    },
    "away": {
     "name": "Philadelphia Phillies",
-    "price": -118
+    "price": -114
    },
-   "book_count": 8,
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "764521fed86b5329011236a43540951b",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-01T22:41:00Z",
+   "home": {
+    "name": "Cincinnati Reds",
+    "price": 114
+   },
+   "away": {
+    "name": "San Diego Padres",
+    "price": -120
+   },
+   "book_count": 4,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "81a434657f4b4211068ffd662aa0e939",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-01T22:41:00Z",
+   "home": {
+    "name": "Cleveland Guardians",
+    "price": -166
+   },
+   "away": {
+    "name": "Toronto Blue Jays",
+    "price": 152
+   },
+   "book_count": 4,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "59757c299ffa7405f5f856a6f1b86c6f",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-01T22:41:00Z",
+   "home": {
+    "name": "Tampa Bay Rays",
+    "price": -126
+   },
+   "away": {
+    "name": "New York Mets",
+    "price": 116
+   },
+   "book_count": 4,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "0d8e1807210d19a49240ad01d066fb7f",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-01T22:41:00Z",
+   "home": {
+    "name": "Pittsburgh Pirates",
+    "price": -145
+   },
+   "away": {
+    "name": "San Francisco Giants",
+    "price": 132
+   },
+   "book_count": 4,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "cc8fcec1e4ece9bdd8fbe14c96ef1f5e",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-01T22:46:00Z",
+   "home": {
+    "name": "Washington Nationals",
+    "price": 149
+   },
+   "away": {
+    "name": "Atlanta Braves",
+    "price": -164
+   },
+   "book_count": 4,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "6bd83b91a8bb56ff6403609a135f92ba",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-01T23:41:00Z",
+   "home": {
+    "name": "Chicago Cubs",
+    "price": -120
+   },
+   "away": {
+    "name": "Milwaukee Brewers",
+    "price": 109
+   },
+   "book_count": 4,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "2c2bb6cbfb44dc9988fabb21c5bf5cff",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-01T23:41:00Z",
+   "home": {
+    "name": "Kansas City Royals",
+    "price": -108
+   },
+   "away": {
+    "name": "Miami Marlins",
+    "price": 100
+   },
+   "book_count": 4,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "1b131c580c5da54dd5ca7bcb24d0c131",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-02T01:39:00Z",
+   "home": {
+    "name": "Los Angeles Angels",
+    "price": 158
+   },
+   "away": {
+    "name": "New York Yankees",
+    "price": -175
+   },
+   "book_count": 4,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "594a3405f55139e4b9bd00aa0518f4a4",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-02T01:41:00Z",
+   "home": {
+    "name": "Arizona Diamondbacks",
+    "price": 118
+   },
+   "away": {
+    "name": "Philadelphia Phillies",
+    "price": -130
+   },
+   "book_count": 4,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "315bf242d2edacc5912ce11b61b7de41",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-02T02:11:00Z",
+   "home": {
+    "name": "Los Angeles Dodgers",
+    "price": -175
+   },
+   "away": {
+    "name": "St. Louis Cardinals",
+    "price": 158
+   },
+   "book_count": 4,
    "bets": [],
    "best": null,
    "confidence": null
