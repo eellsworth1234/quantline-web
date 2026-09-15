@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-09-14T18:16:16Z",
+ "generated_at": "2026-09-15T01:01:04Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "168",
-  "remaining": "332"
+  "used": "174",
+  "remaining": "326"
  },
  "config": {
   "sports": [
@@ -27,148 +27,118 @@
  },
  "games": [
   {
-   "id": "2a828119814add28306d706ccb802ac3",
+   "id": "a1a608b633419833caf64ad8739781f3",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
-   "commence_time": "2026-09-14T22:41:00Z",
-   "home": {
-    "name": "Cleveland Guardians",
-    "price": -149
-   },
-   "away": {
-    "name": "Chicago White Sox",
-    "price": 135
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "fd0c792d70a4325cb16c03c7af9a089a",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-09-14T22:41:00Z",
-   "home": {
-    "name": "Cincinnati Reds",
-    "price": 189
-   },
-   "away": {
-    "name": "Los Angeles Dodgers",
-    "price": -207
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "b2124bf9ac2a7c068e866541e3d9bebe",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-09-14T23:08:00Z",
-   "home": {
-    "name": "Toronto Blue Jays",
-    "price": -133
-   },
-   "away": {
-    "name": "Detroit Tigers",
-    "price": 122
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "6f154c72fa0631ec5a970f84c1492463",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-09-14T23:11:00Z",
+   "commence_time": "2026-09-15T23:10:00Z",
    "home": {
     "name": "New York Mets",
-    "price": -120
+    "price": -125
    },
    "away": {
     "name": "Baltimore Orioles",
-    "price": 109
+    "price": 114
    },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
+   "book_count": 7,
+   "bets": [
+    {
+     "market": "spreads",
+     "market_label": "Spread -1.5",
+     "kind": "Margin of victory",
+     "selection": "New York Mets",
+     "point": -1.5,
+     "plain": "New York Mets to win by more than 1.5",
+     "book": "FanDuel",
+     "odds": 176,
+     "consensus_prob": 0.3716,
+     "consensus_odds": 169,
+     "implied": 0.3623,
+     "edge": 0.0093,
+     "ev": 0.0257,
+     "kelly": 0.00364,
+     "n_books": 7,
+     "why": "FanDuel is posting +176. Stripping the vig out of the other 6 books pricing this same outcome puts the consensus at 37.2%, which is a fair price of about +169. FanDuel is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "spreads",
+    "market_label": "Spread -1.5",
+    "kind": "Margin of victory",
+    "selection": "New York Mets",
+    "point": -1.5,
+    "plain": "New York Mets to win by more than 1.5",
+    "book": "FanDuel",
+    "odds": 176,
+    "consensus_prob": 0.3716,
+    "consensus_odds": 169,
+    "implied": 0.3623,
+    "edge": 0.0093,
+    "ev": 0.0257,
+    "kelly": 0.00364,
+    "n_books": 7,
+    "why": "FanDuel is posting +176. Stripping the vig out of the other 6 books pricing this same outcome puts the consensus at 37.2%, which is a fair price of about +169. FanDuel is paying better than the market's own average."
+   },
+   "confidence": {
+    "k": "SOLID",
+    "c": "m"
+   }
   },
   {
-   "id": "99d391c2ac7a5942710858c928ac73f8",
+   "id": "baa7f738229bf9855e24037a2a30a2cb",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
-   "commence_time": "2026-09-14T23:41:00Z",
+   "commence_time": "2026-09-15T22:40:00Z",
    "home": {
-    "name": "Chicago Cubs",
-    "price": -130
+    "name": "Cincinnati Reds",
+    "price": 193
    },
    "away": {
-    "name": "Atlanta Braves",
-    "price": 119
+    "name": "Los Angeles Dodgers",
+    "price": -215
    },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "68721959a546157007d97eeca5682379",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-09-14T23:41:00Z",
-   "home": {
-    "name": "Minnesota Twins",
-    "price": 109
+   "book_count": 7,
+   "bets": [
+    {
+     "market": "totals",
+     "market_label": "Total 8.5",
+     "kind": "Combined score",
+     "selection": "Under",
+     "point": 8.5,
+     "plain": "Fewer than 8.5 combined runs",
+     "book": "FanDuel",
+     "odds": 100,
+     "consensus_prob": 0.5108,
+     "consensus_odds": -104,
+     "implied": 0.5,
+     "edge": 0.0108,
+     "ev": 0.0217,
+     "kelly": 0.00542,
+     "n_books": 7,
+     "why": "FanDuel is posting +100. Stripping the vig out of the other 6 books pricing this same outcome puts the consensus at 51.1%, which is a fair price of about -104. FanDuel is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "totals",
+    "market_label": "Total 8.5",
+    "kind": "Combined score",
+    "selection": "Under",
+    "point": 8.5,
+    "plain": "Fewer than 8.5 combined runs",
+    "book": "FanDuel",
+    "odds": 100,
+    "consensus_prob": 0.5108,
+    "consensus_odds": -104,
+    "implied": 0.5,
+    "edge": 0.0108,
+    "ev": 0.0217,
+    "kelly": 0.00542,
+    "n_books": 7,
+    "why": "FanDuel is posting +100. Stripping the vig out of the other 6 books pricing this same outcome puts the consensus at 51.1%, which is a fair price of about -104. FanDuel is paying better than the market's own average."
    },
-   "away": {
-    "name": "New York Yankees",
-    "price": -120
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "0df8abb4425b8b10d8e3a0599974813f",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-09-14T23:46:00Z",
-   "home": {
-    "name": "St. Louis Cardinals",
-    "price": -136
-   },
-   "away": {
-    "name": "San Francisco Giants",
-    "price": 123
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "20dfbbb1031896904e98bed3182f9fc4",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-09-15T00:41:00Z",
-   "home": {
-    "name": "Colorado Rockies",
-    "price": 178
-   },
-   "away": {
-    "name": "San Diego Padres",
-    "price": -195
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
+   "confidence": {
+    "k": "SOLID",
+    "c": "m"
+   }
   },
   {
    "id": "9c0b5b3f819915fa2cd982a14186b77d",
@@ -177,11 +147,11 @@
    "commence_time": "2026-09-15T01:39:00Z",
    "home": {
     "name": "Los Angeles Angels",
-    "price": -102
+    "price": -106
    },
    "away": {
     "name": "Seattle Mariners",
-    "price": -108
+    "price": 100
    },
    "book_count": 9,
    "bets": [],
@@ -195,13 +165,193 @@
    "commence_time": "2026-09-15T01:41:00Z",
    "home": {
     "name": "Arizona Diamondbacks",
-    "price": -127
+    "price": -132
    },
    "away": {
     "name": "Miami Marlins",
-    "price": 116
+    "price": 122
    },
    "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "4ee5706290157d66372729e7e70830e8",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-15T22:40:00Z",
+   "home": {
+    "name": "Tampa Bay Rays",
+    "price": -220
+   },
+   "away": {
+    "name": "Athletics",
+    "price": 197
+   },
+   "book_count": 7,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "2f2faff81101f84158c3cfbd630bcb30",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-15T22:40:00Z",
+   "home": {
+    "name": "Cleveland Guardians",
+    "price": -123
+   },
+   "away": {
+    "name": "Chicago White Sox",
+    "price": 112
+   },
+   "book_count": 7,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "e5ea1bb04bd365a0c15838cfb75266f9",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-15T22:41:00Z",
+   "home": {
+    "name": "Pittsburgh Pirates",
+    "price": 214
+   },
+   "away": {
+    "name": "Milwaukee Brewers",
+    "price": -235
+   },
+   "book_count": 6,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "015394004322ca670004015ae5bd94a3",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-15T22:45:00Z",
+   "home": {
+    "name": "Washington Nationals",
+    "price": 180
+   },
+   "away": {
+    "name": "Philadelphia Phillies",
+    "price": -195
+   },
+   "book_count": 7,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "256d7de8ceb3804256d260a74263d82c",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-15T23:40:00Z",
+   "home": {
+    "name": "Chicago Cubs",
+    "price": -136
+   },
+   "away": {
+    "name": "Atlanta Braves",
+    "price": 126
+   },
+   "book_count": 7,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "f367b112dcb4fea1a4ff67e49ee1f0cd",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-15T23:40:00Z",
+   "home": {
+    "name": "Minnesota Twins",
+    "price": 154
+   },
+   "away": {
+    "name": "New York Yankees",
+    "price": -158
+   },
+   "book_count": 7,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "15c9ca42142414287f11247c92905d9f",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-15T23:45:00Z",
+   "home": {
+    "name": "St. Louis Cardinals",
+    "price": -160
+   },
+   "away": {
+    "name": "San Francisco Giants",
+    "price": 145
+   },
+   "book_count": 7,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "8cac5435079f2d8d51adb91e7950bb26",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-16T00:10:00Z",
+   "home": {
+    "name": "Houston Astros",
+    "price": -158
+   },
+   "away": {
+    "name": "Kansas City Royals",
+    "price": 143
+   },
+   "book_count": 7,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "cce625b7dac12280fdb88a6f44058c93",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-16T01:38:00Z",
+   "home": {
+    "name": "Los Angeles Angels",
+    "price": 144
+   },
+   "away": {
+    "name": "Seattle Mariners",
+    "price": -158
+   },
+   "book_count": 6,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "e9344aee4810e4127e69c73c13c781d7",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-16T01:40:00Z",
+   "home": {
+    "name": "Arizona Diamondbacks",
+    "price": -144
+   },
+   "away": {
+    "name": "Miami Marlins",
+    "price": 131
+   },
+   "book_count": 6,
    "bets": [],
    "best": null,
    "confidence": null
