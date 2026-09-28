@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-09-28T01:14:47Z",
+ "generated_at": "2026-09-28T19:54:44Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "330",
-  "remaining": "170"
+  "used": "336",
+  "remaining": "164"
  },
  "config": {
   "sports": [
@@ -25,5 +25,153 @@
   "strong": 0.03,
   "kelly_fraction": 0.25
  },
- "games": []
+ "games": [
+  {
+   "id": "08d9219713246e3edff39b4f549085d8",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-29T18:00:00Z",
+   "home": {
+    "name": "Atlanta Braves",
+    "price": -187
+   },
+   "away": {
+    "name": "Philadelphia Phillies",
+    "price": 170
+   },
+   "book_count": 9,
+   "bets": [
+    {
+     "market": "spreads",
+     "market_label": "Spread +1.5",
+     "kind": "Margin of victory",
+     "selection": "Philadelphia Phillies",
+     "point": 1.5,
+     "plain": "Philadelphia Phillies to win, or lose by less than 1.5",
+     "book": "BetRivers",
+     "odds": -125,
+     "consensus_prob": 0.562,
+     "consensus_odds": -128,
+     "implied": 0.5556,
+     "edge": 0.0065,
+     "ev": 0.0117,
+     "kelly": 0.00365,
+     "n_books": 9,
+     "why": "BetRivers is posting -125. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 56.2%, which is a fair price of about -128. BetRivers is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "spreads",
+    "market_label": "Spread +1.5",
+    "kind": "Margin of victory",
+    "selection": "Philadelphia Phillies",
+    "point": 1.5,
+    "plain": "Philadelphia Phillies to win, or lose by less than 1.5",
+    "book": "BetRivers",
+    "odds": -125,
+    "consensus_prob": 0.562,
+    "consensus_odds": -128,
+    "implied": 0.5556,
+    "edge": 0.0065,
+    "ev": 0.0117,
+    "kelly": 0.00365,
+    "n_books": 9,
+    "why": "BetRivers is posting -125. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 56.2%, which is a fair price of about -128. BetRivers is paying better than the market's own average."
+   },
+   "confidence": {
+    "k": "LEAN",
+    "c": "l"
+   }
+  },
+  {
+   "id": "3a08d35ecf12b54dc25f5912ccecf222",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-29T21:00:00Z",
+   "home": {
+    "name": "Houston Astros",
+    "price": -123
+   },
+   "away": {
+    "name": "Chicago White Sox",
+    "price": 118
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "4cb76cceb16eb603c683038d132f4642",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-30T00:10:00Z",
+   "home": {
+    "name": "New York Yankees",
+    "price": -132
+   },
+   "away": {
+    "name": "Boston Red Sox",
+    "price": 122
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "98adc841e3aababc93878e3cf743a2d4",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-09-30T02:00:00Z",
+   "home": {
+    "name": "San Diego Padres",
+    "price": -121
+   },
+   "away": {
+    "name": "Chicago Cubs",
+    "price": 113
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "e664a4a91ee3581675f74695e9b7e8e6",
+   "sport_key": "basketball_wnba",
+   "sport": "WNBA",
+   "commence_time": "2026-09-29T22:40:00Z",
+   "home": {
+    "name": "Indiana Fever",
+    "price": -112
+   },
+   "away": {
+    "name": "Las Vegas Aces",
+    "price": -102
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "eca9a911020f3960d13599af0595d164",
+   "sport_key": "basketball_wnba",
+   "sport": "WNBA",
+   "commence_time": "2026-09-30T00:40:00Z",
+   "home": {
+    "name": "New York Liberty",
+    "price": 135
+   },
+   "away": {
+    "name": "Minnesota Lynx",
+    "price": -148
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  }
+ ]
 }
