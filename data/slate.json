@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-09-30T18:12:42Z",
+ "generated_at": "2026-10-01T01:37:58Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "360",
-  "remaining": "140"
+  "used": "6",
+  "remaining": "494"
  },
  "config": {
   "sports": [
@@ -27,71 +27,17 @@
  },
  "games": [
   {
-   "id": "9e23239e0075a017225697fa3bcd88b3",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-09-30T18:16:00Z",
-   "home": {
-    "name": "Atlanta Braves",
-    "price": 101
-   },
-   "away": {
-    "name": "Philadelphia Phillies",
-    "price": -110
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "766096a9312f4528ba2e8b59fe9550fd",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-09-30T21:00:00Z",
-   "home": {
-    "name": "Houston Astros",
-    "price": -146
-   },
-   "away": {
-    "name": "Chicago White Sox",
-    "price": 133
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "110c5c1a6de988c7066e2f291be8d7ff",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-10-01T00:00:00Z",
-   "home": {
-    "name": "New York Yankees",
-    "price": -128
-   },
-   "away": {
-    "name": "Boston Red Sox",
-    "price": 120
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
    "id": "66c0c13a06424600557af241371043fc",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
    "commence_time": "2026-10-01T02:00:00Z",
    "home": {
     "name": "San Diego Padres",
-    "price": -140
+    "price": -136
    },
    "away": {
     "name": "Chicago Cubs",
-    "price": 131
+    "price": 125
    },
    "book_count": 9,
    "bets": [],
@@ -99,37 +45,19 @@
    "confidence": null
   },
   {
-   "id": "2e0dc047f09840084e34e02f5d39b8fb",
-   "sport_key": "basketball_wnba",
-   "sport": "WNBA",
-   "commence_time": "2026-09-30T23:10:00Z",
+   "id": "2b7c78b3c1a232ece3e9752493924b6c",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-10-01T18:00:00Z",
    "home": {
-    "name": "Washington Mystics",
-    "price": 135
+    "name": "Atlanta Braves",
+    "price": 100
    },
    "away": {
-    "name": "Atlanta Dream",
-    "price": -151
+    "name": "Philadelphia Phillies",
+    "price": -108
    },
-   "book_count": 8,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "9c267dad149001fe5eccdf229290ec13",
-   "sport_key": "basketball_wnba",
-   "sport": "WNBA",
-   "commence_time": "2026-10-01T01:00:00Z",
-   "home": {
-    "name": "Dallas Wings",
-    "price": 157
-   },
-   "away": {
-    "name": "Golden State Valkyries",
-    "price": -180
-   },
-   "book_count": 8,
+   "book_count": 9,
    "bets": [],
    "best": null,
    "confidence": null
@@ -141,11 +69,11 @@
    "commence_time": "2026-10-02T01:00:00Z",
    "home": {
     "name": "Las Vegas Aces",
-    "price": -168
+    "price": -170
    },
    "away": {
     "name": "Indiana Fever",
-    "price": 153
+    "price": 161
    },
    "book_count": 9,
    "bets": [],
