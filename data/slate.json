@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-01T18:38:05Z",
+ "generated_at": "2026-10-02T01:50:50Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "12",
-  "remaining": "488"
+  "used": "18",
+  "remaining": "482"
  },
  "config": {
   "sports": [
@@ -27,55 +27,19 @@
  },
  "games": [
   {
-   "id": "5524c44b05e28aa899909c9e001184ec",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-10-02T00:11:00Z",
-   "home": {
-    "name": "Atlanta Braves",
-    "price": -102
-   },
-   "away": {
-    "name": "Philadelphia Phillies",
-    "price": -106
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "ee2b184fd8957e70d5dfe20da80f01c5",
-   "sport_key": "basketball_wnba",
-   "sport": "WNBA",
-   "commence_time": "2026-10-02T01:00:00Z",
-   "home": {
-    "name": "Las Vegas Aces",
-    "price": -188
-   },
-   "away": {
-    "name": "Indiana Fever",
-    "price": 165
-   },
-   "book_count": 8,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
    "id": "d0e97a8dca4d878e7ceb0b32ed20cfa7",
    "sport_key": "basketball_wnba",
    "sport": "WNBA",
    "commence_time": "2026-10-03T01:00:00Z",
    "home": {
     "name": "Golden State Valkyries",
-    "price": -300
+    "price": -320
    },
    "away": {
     "name": "Dallas Wings",
     "price": 280
    },
-   "book_count": 8,
+   "book_count": 9,
    "bets": [],
    "best": null,
    "confidence": null
