@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-05T20:58:02Z",
+ "generated_at": "2026-10-06T02:33:36Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "60",
-  "remaining": "440"
+  "used": "66",
+  "remaining": "434"
  },
  "config": {
   "sports": [
@@ -27,53 +27,17 @@
  },
  "games": [
   {
-   "id": "ccd487a87bb73145e3f12dd3a765ad47",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-10-05T21:10:00Z",
-   "home": {
-    "name": "Cleveland Guardians",
-    "price": -146
-   },
-   "away": {
-    "name": "Chicago White Sox",
-    "price": 135
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "4be245ad03895bcafcdc42d7d926b675",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-10-06T00:00:00Z",
-   "home": {
-    "name": "Tampa Bay Rays",
-    "price": 110
-   },
-   "away": {
-    "name": "New York Yankees",
-    "price": -120
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
    "id": "1bc3bf1d3034010bdfb31d928a71177a",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
    "commence_time": "2026-10-06T22:00:00Z",
    "home": {
     "name": "Atlanta Braves",
-    "price": 100
+    "price": -105
    },
    "away": {
     "name": "Los Angeles Dodgers",
-    "price": -105
+    "price": -104
    },
    "book_count": 9,
    "bets": [],
@@ -87,11 +51,11 @@
    "commence_time": "2026-10-07T01:30:00Z",
    "home": {
     "name": "San Diego Padres",
-    "price": -133
+    "price": -130
    },
    "away": {
     "name": "Milwaukee Brewers",
-    "price": 121
+    "price": 122
    },
    "book_count": 9,
    "bets": [],
