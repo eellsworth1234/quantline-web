@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-06T02:33:36Z",
+ "generated_at": "2026-10-06T18:42:08Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "66",
-  "remaining": "434"
+  "used": "72",
+  "remaining": "428"
  },
  "config": {
   "sports": [
@@ -27,6 +27,63 @@
  },
  "games": [
   {
+   "id": "6608125b38823d94d6eef41f1717d86c",
+   "sport_key": "basketball_wnba",
+   "sport": "WNBA",
+   "commence_time": "2026-10-07T23:30:00Z",
+   "home": {
+    "name": "Atlanta Dream",
+    "price": -125
+   },
+   "away": {
+    "name": "New York Liberty",
+    "price": 125
+   },
+   "book_count": 9,
+   "bets": [
+    {
+     "market": "h2h",
+     "market_label": "Moneyline",
+     "kind": "Who wins the game",
+     "selection": "New York Liberty",
+     "point": null,
+     "plain": "New York Liberty to win",
+     "book": "Bovada",
+     "odds": 125,
+     "consensus_prob": 0.4552,
+     "consensus_odds": 120,
+     "implied": 0.4444,
+     "edge": 0.0108,
+     "ev": 0.0243,
+     "kelly": 0.00486,
+     "n_books": 9,
+     "why": "Bovada is posting +125. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 45.5%, which is a fair price of about +120. Bovada is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "h2h",
+    "market_label": "Moneyline",
+    "kind": "Who wins the game",
+    "selection": "New York Liberty",
+    "point": null,
+    "plain": "New York Liberty to win",
+    "book": "Bovada",
+    "odds": 125,
+    "consensus_prob": 0.4552,
+    "consensus_odds": 120,
+    "implied": 0.4444,
+    "edge": 0.0108,
+    "ev": 0.0243,
+    "kelly": 0.00486,
+    "n_books": 9,
+    "why": "Bovada is posting +125. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 45.5%, which is a fair price of about +120. Bovada is paying better than the market's own average."
+   },
+   "confidence": {
+    "k": "SOLID",
+    "c": "m"
+   }
+  },
+  {
    "id": "1bc3bf1d3034010bdfb31d928a71177a",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
@@ -37,7 +94,7 @@
    },
    "away": {
     "name": "Los Angeles Dodgers",
-    "price": -104
+    "price": -105
    },
    "book_count": 9,
    "bets": [],
@@ -51,11 +108,65 @@
    "commence_time": "2026-10-07T01:30:00Z",
    "home": {
     "name": "San Diego Padres",
-    "price": -130
+    "price": -135
    },
    "away": {
     "name": "Milwaukee Brewers",
-    "price": 122
+    "price": 128
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "cd974d85e2a617152370056d22cd8deb",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-10-07T20:00:00Z",
+   "home": {
+    "name": "Chicago White Sox",
+    "price": -115
+   },
+   "away": {
+    "name": "Cleveland Guardians",
+    "price": 105
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "aa266da6f8d98646bc59d18ddbc5b2de",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-10-08T00:00:00Z",
+   "home": {
+    "name": "New York Yankees",
+    "price": -150
+   },
+   "away": {
+    "name": "Tampa Bay Rays",
+    "price": 140
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "67cfb783c5290b2ff1c47303c87e9cf1",
+   "sport_key": "basketball_wnba",
+   "sport": "WNBA",
+   "commence_time": "2026-10-08T01:30:00Z",
+   "home": {
+    "name": "Golden State Valkyries",
+    "price": -115
+   },
+   "away": {
+    "name": "Las Vegas Aces",
+    "price": 102
    },
    "book_count": 9,
    "bets": [],
