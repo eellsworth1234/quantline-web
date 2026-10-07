@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-07T01:51:44Z",
+ "generated_at": "2026-10-07T19:08:23Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "78",
-  "remaining": "422"
+  "used": "84",
+  "remaining": "416"
  },
  "config": {
   "sports": [
@@ -33,55 +33,16 @@
    "commence_time": "2026-10-07T20:00:00Z",
    "home": {
     "name": "Chicago White Sox",
-    "price": -115
+    "price": -122
    },
    "away": {
     "name": "Cleveland Guardians",
-    "price": 107
+    "price": 112
    },
    "book_count": 9,
-   "bets": [
-    {
-     "market": "spreads",
-     "market_label": "Spread -1.5",
-     "kind": "Margin of victory",
-     "selection": "Chicago White Sox",
-     "point": -1.5,
-     "plain": "Chicago White Sox to win by more than 1.5",
-     "book": "Bovada",
-     "odds": 190,
-     "consensus_prob": 0.3538,
-     "consensus_odds": 183,
-     "implied": 0.3448,
-     "edge": 0.009,
-     "ev": 0.0261,
-     "kelly": 0.00343,
-     "n_books": 5,
-     "why": "Bovada is posting +190. Stripping the vig out of the other 4 books pricing this same outcome puts the consensus at 35.4%, which is a fair price of about +183. Bovada is paying better than the market's own average."
-    }
-   ],
-   "best": {
-    "market": "spreads",
-    "market_label": "Spread -1.5",
-    "kind": "Margin of victory",
-    "selection": "Chicago White Sox",
-    "point": -1.5,
-    "plain": "Chicago White Sox to win by more than 1.5",
-    "book": "Bovada",
-    "odds": 190,
-    "consensus_prob": 0.3538,
-    "consensus_odds": 183,
-    "implied": 0.3448,
-    "edge": 0.009,
-    "ev": 0.0261,
-    "kelly": 0.00343,
-    "n_books": 5,
-    "why": "Bovada is posting +190. Stripping the vig out of the other 4 books pricing this same outcome puts the consensus at 35.4%, which is a fair price of about +183. Bovada is paying better than the market's own average."
-   },
-   "confidence": {
-    "k": "SOLID",
-    "c": "m"
-   }
+   "bets": [],
+   "best": null,
+   "confidence": null
   },
   {
    "id": "2f041c00e4bddc69bd1bbfbd40cc3c09",
@@ -90,13 +51,13 @@
    "commence_time": "2026-10-07T22:10:00Z",
    "home": {
     "name": "Atlanta Braves",
-    "price": 129
+    "price": 135
    },
    "away": {
     "name": "Los Angeles Dodgers",
-    "price": -137
+    "price": -149
    },
-   "book_count": 8,
+   "book_count": 9,
    "bets": [],
    "best": null,
    "confidence": null
@@ -105,14 +66,32 @@
    "id": "aa266da6f8d98646bc59d18ddbc5b2de",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
-   "commence_time": "2026-10-08T00:00:00Z",
+   "commence_time": "2026-10-08T00:08:00Z",
    "home": {
     "name": "New York Yankees",
-    "price": -150
+    "price": -165
    },
    "away": {
     "name": "Tampa Bay Rays",
-    "price": 140
+    "price": 151
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  },
+  {
+   "id": "3c71012ad7a75e6c11575285e6841e14",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-10-08T02:00:00Z",
+   "home": {
+    "name": "San Diego Padres",
+    "price": -108
+   },
+   "away": {
+    "name": "Milwaukee Brewers",
+    "price": 100
    },
    "book_count": 9,
    "bets": [],
@@ -126,11 +105,11 @@
    "commence_time": "2026-10-07T23:30:00Z",
    "home": {
     "name": "Atlanta Dream",
-    "price": -123
+    "price": -129
    },
    "away": {
     "name": "New York Liberty",
-    "price": 108
+    "price": 115
    },
    "book_count": 8,
    "bets": [],
@@ -144,11 +123,11 @@
    "commence_time": "2026-10-08T01:30:00Z",
    "home": {
     "name": "Golden State Valkyries",
-    "price": -115
+    "price": -123
    },
    "away": {
     "name": "Las Vegas Aces",
-    "price": 106
+    "price": 105
    },
    "book_count": 8,
    "bets": [],
