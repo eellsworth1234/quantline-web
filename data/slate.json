@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-09T18:35:15Z",
+ "generated_at": "2026-10-10T01:57:04Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "108",
-  "remaining": "392"
+  "used": "114",
+  "remaining": "386"
  },
  "config": {
   "sports": [
@@ -33,49 +33,13 @@
    "commence_time": "2026-10-11T00:01:00Z",
    "home": {
     "name": "Cleveland Guardians",
-    "price": -131
+    "price": -133
    },
    "away": {
     "name": "Chicago White Sox",
     "price": 121
    },
    "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "52fcce919d102e7494783ae0e74ae5b5",
-   "sport_key": "basketball_wnba",
-   "sport": "WNBA",
-   "commence_time": "2026-10-09T23:30:00Z",
-   "home": {
-    "name": "New York Liberty",
-    "price": -150
-   },
-   "away": {
-    "name": "Atlanta Dream",
-    "price": 135
-   },
-   "book_count": 8,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "3a63e90ff835f691f1c2b4df7d0c9dde",
-   "sport_key": "basketball_wnba",
-   "sport": "WNBA",
-   "commence_time": "2026-10-10T01:30:00Z",
-   "home": {
-    "name": "Las Vegas Aces",
-    "price": -180
-   },
-   "away": {
-    "name": "Golden State Valkyries",
-    "price": 170
-   },
-   "book_count": 8,
    "bets": [],
    "best": null,
    "confidence": null
