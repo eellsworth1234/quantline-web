@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-10T17:32:43Z",
+ "generated_at": "2026-10-11T01:22:01Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "120",
-  "remaining": "380"
+  "used": "126",
+  "remaining": "374"
  },
  "config": {
   "sports": [
@@ -27,40 +27,61 @@
  },
  "games": [
   {
-   "id": "62bf363a77455f7a8b48838e7792f60b",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-10-11T00:01:00Z",
-   "home": {
-    "name": "Cleveland Guardians",
-    "price": -135
-   },
-   "away": {
-    "name": "Chicago White Sox",
-    "price": 123
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
    "id": "c43e98d4effc9181f21e21225fcbd47a",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
    "commence_time": "2026-10-12T00:00:00Z",
    "home": {
     "name": "Milwaukee Brewers",
-    "price": -107
+    "price": -106
    },
    "away": {
     "name": "Los Angeles Dodgers",
     "price": -101
    },
    "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
+   "bets": [
+    {
+     "market": "spreads",
+     "market_label": "Spread -1.5",
+     "kind": "Margin of victory",
+     "selection": "Los Angeles Dodgers",
+     "point": -1.5,
+     "plain": "Los Angeles Dodgers to win by more than 1.5",
+     "book": "MyBookie.ag",
+     "odds": 190,
+     "consensus_prob": 0.3572,
+     "consensus_odds": 180,
+     "implied": 0.3448,
+     "edge": 0.0124,
+     "ev": 0.0359,
+     "kelly": 0.00473,
+     "n_books": 5,
+     "why": "MyBookie.ag is posting +190. Stripping the vig out of the other 4 books pricing this same outcome puts the consensus at 35.7%, which is a fair price of about +180. MyBookie.ag is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "spreads",
+    "market_label": "Spread -1.5",
+    "kind": "Margin of victory",
+    "selection": "Los Angeles Dodgers",
+    "point": -1.5,
+    "plain": "Los Angeles Dodgers to win by more than 1.5",
+    "book": "MyBookie.ag",
+    "odds": 190,
+    "consensus_prob": 0.3572,
+    "consensus_odds": 180,
+    "implied": 0.3448,
+    "edge": 0.0124,
+    "ev": 0.0359,
+    "kelly": 0.00473,
+    "n_books": 5,
+    "why": "MyBookie.ag is posting +190. Stripping the vig out of the other 4 books pricing this same outcome puts the consensus at 35.7%, which is a fair price of about +180. MyBookie.ag is paying better than the market's own average."
+   },
+   "confidence": {
+    "k": "STRONG",
+    "c": "s"
+   }
   }
  ]
 }
