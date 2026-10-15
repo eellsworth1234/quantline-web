@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-15T00:59:51Z",
+ "generated_at": "2026-10-15T17:30:13Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "174",
-  "remaining": "326"
+  "used": "180",
+  "remaining": "320"
  },
  "config": {
   "sports": [
@@ -27,17 +27,17 @@
  },
  "games": [
   {
-   "id": "a681025734060bef9fcce7ea7175674c",
+   "id": "ab3e5655be6b32e0853d683e51a60baa",
    "sport_key": "baseball_mlb",
    "sport": "MLB",
-   "commence_time": "2026-10-15T17:00:00Z",
+   "commence_time": "2026-10-16T00:00:00Z",
    "home": {
-    "name": "Cleveland Guardians",
-    "price": -128
+    "name": "Los Angeles Dodgers",
+    "price": -149
    },
    "away": {
-    "name": "Tampa Bay Rays",
-    "price": 118
+    "name": "Milwaukee Brewers",
+    "price": 135
    },
    "book_count": 9,
    "bets": [],
