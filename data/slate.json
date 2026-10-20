@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-20T01:19:07Z",
+ "generated_at": "2026-10-20T17:38:15Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "234",
-  "remaining": "266"
+  "used": "240",
+  "remaining": "260"
  },
  "config": {
   "sports": [
@@ -25,5 +25,24 @@
   "strong": 0.03,
   "kelly_fraction": 0.25
  },
- "games": []
+ "games": [
+  {
+   "id": "a5450dc8703801dde0f6ec5ca4de904a",
+   "sport_key": "basketball_wnba",
+   "sport": "WNBA",
+   "commence_time": "2026-10-22T00:10:00Z",
+   "home": {
+    "name": "Atlanta Dream",
+    "price": -155
+   },
+   "away": {
+    "name": "Golden State Valkyries",
+    "price": 140
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  }
+ ]
 }
