@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-19T18:54:37Z",
+ "generated_at": "2026-10-20T01:19:07Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "228",
-  "remaining": "272"
+  "used": "234",
+  "remaining": "266"
  },
  "config": {
   "sports": [
@@ -25,42 +25,5 @@
   "strong": 0.03,
   "kelly_fraction": 0.25
  },
- "games": [
-  {
-   "id": "be50f6c59c20efa430eec6f146a0fcb1",
-   "sport_key": "baseball_mlb",
-   "sport": "MLB",
-   "commence_time": "2026-10-20T00:10:00Z",
-   "home": {
-    "name": "Tampa Bay Rays",
-    "price": -148
-   },
-   "away": {
-    "name": "Cleveland Guardians",
-    "price": 136
-   },
-   "book_count": 9,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  },
-  {
-   "id": "9e644e7765968b5d5e3e42384573f6a4",
-   "sport_key": "basketball_wnba",
-   "sport": "WNBA",
-   "commence_time": "2026-10-20T00:10:00Z",
-   "home": {
-    "name": "Golden State Valkyries",
-    "price": -130
-   },
-   "away": {
-    "name": "Atlanta Dream",
-    "price": 118
-   },
-   "book_count": 8,
-   "bets": [],
-   "best": null,
-   "confidence": null
-  }
- ]
+ "games": []
 }
