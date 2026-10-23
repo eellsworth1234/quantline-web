@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-23T01:02:50Z",
+ "generated_at": "2026-10-23T17:36:54Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "270",
-  "remaining": "230"
+  "used": "276",
+  "remaining": "224"
  },
  "config": {
   "sports": [
@@ -33,11 +33,68 @@
    "commence_time": "2026-10-24T00:00:00Z",
    "home": {
     "name": "Milwaukee Brewers",
-    "price": -173
+    "price": -182
    },
    "away": {
     "name": "Tampa Bay Rays",
-    "price": 164
+    "price": 175
+   },
+   "book_count": 9,
+   "bets": [
+    {
+     "market": "h2h",
+     "market_label": "Moneyline",
+     "kind": "Who wins the game",
+     "selection": "Tampa Bay Rays",
+     "point": null,
+     "plain": "Tampa Bay Rays to win",
+     "book": "BetRivers",
+     "odds": 175,
+     "consensus_prob": 0.3685,
+     "consensus_odds": 171,
+     "implied": 0.3636,
+     "edge": 0.0049,
+     "ev": 0.0135,
+     "kelly": 0.00193,
+     "n_books": 9,
+     "why": "BetRivers is posting +175. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 36.9%, which is a fair price of about +171. BetRivers is paying better than the market's own average."
+    }
+   ],
+   "best": {
+    "market": "h2h",
+    "market_label": "Moneyline",
+    "kind": "Who wins the game",
+    "selection": "Tampa Bay Rays",
+    "point": null,
+    "plain": "Tampa Bay Rays to win",
+    "book": "BetRivers",
+    "odds": 175,
+    "consensus_prob": 0.3685,
+    "consensus_odds": 171,
+    "implied": 0.3636,
+    "edge": 0.0049,
+    "ev": 0.0135,
+    "kelly": 0.00193,
+    "n_books": 9,
+    "why": "BetRivers is posting +175. Stripping the vig out of the other 8 books pricing this same outcome puts the consensus at 36.9%, which is a fair price of about +171. BetRivers is paying better than the market's own average."
+   },
+   "confidence": {
+    "k": "LEAN",
+    "c": "l"
+   }
+  },
+  {
+   "id": "ab971f10d27f5492de37bf2f9416819b",
+   "sport_key": "basketball_wnba",
+   "sport": "WNBA",
+   "commence_time": "2026-10-24T17:10:00Z",
+   "home": {
+    "name": "Atlanta Dream",
+    "price": -190
+   },
+   "away": {
+    "name": "Golden State Valkyries",
+    "price": 170
    },
    "book_count": 9,
    "bets": [],
