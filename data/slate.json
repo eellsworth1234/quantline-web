@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-27T01:39:11Z",
+ "generated_at": "2026-10-27T18:28:38Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "318",
-  "remaining": "182"
+  "used": "324",
+  "remaining": "176"
  },
  "config": {
   "sports": [
@@ -25,5 +25,24 @@
   "strong": 0.03,
   "kelly_fraction": 0.25
  },
- "games": []
+ "games": [
+  {
+   "id": "e03ea0f98bdd5fa277a34fbfe1a47efa",
+   "sport_key": "baseball_mlb",
+   "sport": "MLB",
+   "commence_time": "2026-10-28T00:00:00Z",
+   "home": {
+    "name": "Tampa Bay Rays",
+    "price": 106
+   },
+   "away": {
+    "name": "Milwaukee Brewers",
+    "price": -115
+   },
+   "book_count": 9,
+   "bets": [],
+   "best": null,
+   "confidence": null
+  }
+ ]
 }
