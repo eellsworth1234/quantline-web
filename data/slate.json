@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-31T01:53:48Z",
+ "generated_at": "2026-10-31T17:26:32Z",
  "source": "the-odds-api.com",
  "method": "de-vigged median consensus across books, candidate book excluded",
  "credits": {
-  "used": "354",
-  "remaining": "146"
+  "used": "357",
+  "remaining": "143"
  },
  "config": {
   "sports": [
@@ -37,7 +37,7 @@
    },
    "away": {
     "name": "Atlanta Dream",
-    "price": -105
+    "price": -101
    },
    "book_count": 8,
    "bets": [],
